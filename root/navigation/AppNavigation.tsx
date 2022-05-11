@@ -4,6 +4,7 @@ import { AnimatedTabBarNavigator, DotSize, TabElementDisplayOptions } from 'reac
 import Icon from 'react-native-vector-icons/Feather'
 import styled from 'styled-components/native'
 import { Home } from '../pages/Home'
+import { Discover } from '../pages/Discover'
 
 const Tabs = AnimatedTabBarNavigator()
 
@@ -32,25 +33,6 @@ const TabBarIcon = (props: any) => {
 	)
 }
 
-// const Home = (props: any) => (
-// 	<Screen>
-// 		<Logo />
-// 		<Text>Home</Text>
-// 		<TouchableOpacity onPress={() => props.navigation.navigate("Discover")}>
-// 			<Text>Go to Discover</Text>
-// 		</TouchableOpacity>
-// 	</Screen>
-// )
-
-const Discover = (props: any) => (
-	<Screen>
-		<Logo />
-		<Text>Discover</Text>
-		<TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
-			<Text>Go to Home</Text>
-		</TouchableOpacity>
-	</Screen>
-)
 
 const Images = () => (
 	<Screen>

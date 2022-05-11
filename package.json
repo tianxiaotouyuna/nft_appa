@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
+        "postinstall": "yarn rn-nodeify --install buffer,crypto,stream,util,process,vm --hack",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
         "start": "react-native start",
@@ -21,6 +22,7 @@
         "@types/react-native-vector-icons": "^6.4.6",
         "@walletconnect/react-native-dapp": "^1.7.8",
         "buffer": "^4.9.1",
+        "events": "^3.3.0",
         "process": "^0.11.0",
         "react": "16.13.1",
         "react-native": "0.63.4",

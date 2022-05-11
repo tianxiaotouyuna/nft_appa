@@ -4,3 +4,4 @@
 3.yarn add @react-native-async-storage/async-storage            successful
 4. yarn add   react-native-svg            successful
 5.yarn add @walletconnect/react-native-dapp             successful
+6.yarn add events                           successful
