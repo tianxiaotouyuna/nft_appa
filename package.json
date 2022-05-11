@@ -6,10 +6,11 @@
         "postinstall": "yarn rn-nodeify --install buffer,crypto,stream,util,process,vm --hack",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
-        "start": "react-native start",
+        "start": "react-native",
+        "start-clean": "react-native start --reset-cache",
         "test": "jest",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-        "yarn-clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force && npm cache verify && yarn --clean -cache",
+        "yarn-clean-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force && npm cache verify && yarn --clean -cache",
         "pod-clean": "cd ios && pod cache clean --all",
         "pod-install": "cd ios && pod install"
     },
@@ -35,6 +36,7 @@
         "react-native-reanimated": "^1.13.2",
         "react-native-safe-area-context": "^3.1.9",
         "react-native-screens": "^2.16.1",
+        "react-native-svg": "^12.3.0",
         "react-native-vector-icons": "^7.1.0",
         "readable-stream": "1.0.33",
         "rn-nodeify": "^10.3.0",
@@ -91,5 +93,8 @@
         "_stream_passthrough": "readable-stream/passthrough",
         "stream": "stream-browserify",
         "vm": "vm-browserify"
-    }
+    },
+    "resolutions": {
+        "react-native-svg": "^12.3.0"
+      }
 }

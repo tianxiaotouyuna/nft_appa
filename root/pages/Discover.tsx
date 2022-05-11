@@ -1,29 +1,23 @@
-import React, { Component } from "react";
-import { View, Button, Platform } from "react-native";
+import React, { FunctionComponent } from "react";
+import { View, Button, Platform, Alert } from "react-native";
 
-import { useWalletConnect, withWalletConnect } from '@walletconnect/react-native-dapp';
-export const Discover = (props: any) => {
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import WalletConnectProvider from "@walletconnect/react-native-dapp";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+export const Discover: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
-  const renderView=()=>{
-    if (!connector.connected) {
-      /**
-       *  Connect! 🎉
-       */
-      return <Button title="Connect" onPress={() => connector.connect()} />;
-    }
-    return <Button title="Kill Session" onPress={() => connector.killSession()} />;
-  }
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#f2f2f2",
-        paddingHorizontal: 20,
-        justifyContent: "space-between",
-        paddingTop:100
-      }}
-    >
-      {renderView()}
-    </View>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "#f2f2f2",
+          paddingHorizontal: 20,
+          justifyContent: "space-between",
+          paddingTop: 100,
+        }}
+      >
+        <Button title="Connect" onPress={() => connector.connect()} />
+      </View>
   );
 };
