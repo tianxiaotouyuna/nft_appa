@@ -4,7 +4,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import React from "react";
 import { Platform } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { RootRoutes } from "./routes/RootRoutes";
 
 const App = () => {
@@ -24,9 +23,7 @@ const App = () => {
         asyncStorage: AsyncStorage,
       }}
     >
-      <SafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
         <RootRoutes/>
-      </SafeAreaView>
     </WalletConnectProvider>
   );
 };

@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import { AnimatedTabBarNavigator, DotSize } from 'react-native-animated-nav-tab-bar'
 import Icon from 'react-native-vector-icons/Feather'
-import { Home } from '../pages/Home'
-import { Discover } from '../pages/Discover'
 import { NavigationContainer } from '@react-navigation/native'
+import Home from '@/pages/Home/Home'
+import Discover from '@/pages/Discover'
 export const RootRoutes: FunctionComponent = () => {
 
 const Tabs = AnimatedTabBarNavigator()

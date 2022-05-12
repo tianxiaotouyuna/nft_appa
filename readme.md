@@ -9,6 +9,6 @@
 
 
 5.12日
-1.redux 
-2.react-redux
-3.工程目录完善
+1.redux                             successful
+2.react-redux                       successful
+3.工程目录完善                      successful

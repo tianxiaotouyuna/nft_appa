@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ripple from "react-native-material-ripple";
 import { Text } from "react-native-paper";
 
-export const Discover: FunctionComponent = () => {
+ const Discover: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
   const showButton = () => {
 
@@ -45,3 +45,4 @@ export const Discover: FunctionComponent = () => {
     </View>
   );
 };
+export default Discover
