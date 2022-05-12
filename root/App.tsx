@@ -1,12 +1,11 @@
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import AppNavigation from "./root/navigation/AppNavigation";
 import WalletConnectProvider from "@walletconnect/react-native-dapp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import React from "react";
 import { Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { RootRoutes } from "./routes/RootRoutes";
 
 const App = () => {
   return (
@@ -26,9 +25,7 @@ const App = () => {
       }}
     >
       <SafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
-        <NavigationContainer>
-          <AppNavigation />
-        </NavigationContainer>
+        <RootRoutes/>
       </SafeAreaView>
     </WalletConnectProvider>
   );
