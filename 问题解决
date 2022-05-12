@@ -1,3 +1,8 @@
 1.React Native Tried to register two views with the same name XXX
 
 https://www.jianshu.com/p/4b4c13ecec11
+
+2.The linked library 'libPods-MyApp.a' is missing one or more architectures required by this target: x86_64. (in target 'MyApp' from project 'MyApp')
+清rn缓存，清除iOS-devicedata，command+shift+k
+关闭xcode、模拟器
+重启vscode
