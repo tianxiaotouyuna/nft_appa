@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import React from "react";
 import { Platform } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const App = () => {
   return (
@@ -24,9 +25,11 @@ const App = () => {
         asyncStorage: AsyncStorage,
       }}
     >
-      <NavigationContainer>
-        <AppNavigation />
-      </NavigationContainer>
+      <SafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
+        <NavigationContainer>
+          <AppNavigation />
+        </NavigationContainer>
+      </SafeAreaView>
     </WalletConnectProvider>
   );
 };
