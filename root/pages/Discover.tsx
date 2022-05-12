@@ -9,28 +9,39 @@ import { Text } from "react-native-paper";
 
 export const Discover: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
-  return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: "#f2f2f2",
-          paddingHorizontal: 20,
-          justifyContent: "space-between",
-          paddingTop: 100,
-        }}
-      >
+  const showButton = () => {
 
-      <Ripple
+    if (!connector.connected) {
+      /**
+       *  Connect! 🎉
+       */
+      return <Ripple
         style={{
           height: 100,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "#fff",
-        }}
-        onPress={() => connector.connect()} 
-      >
-        <Text>Connect me</Text>
-      </Ripple>
-      </View>
+        }} onPress={() => connector.connect()}><Text>Connect me</Text></Ripple>
+    }
+    else return (<Ripple style={{
+      height: 100,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#fff",
+    }} onPress={() => connector.killSession()}><Text>Kill Session</Text></Ripple>)
+  }
+  return (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#f2f2f2",
+        paddingHorizontal: 20,
+        justifyContent: "space-between",
+        paddingTop: 100,
+      }}
+    >
+      {showButton()}
+
+    </View>
   );
 };
