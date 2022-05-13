@@ -12,7 +12,8 @@
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "yarn-clean-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force && npm cache verify && yarn --clean -cache",
         "pod-clean": "cd ios && pod cache clean --all",
-        "pod-install": "cd ios && pod install"
+        "pod-install": "cd ios && pod install",
+        "gradlew-clean": "cd android && ./gradlew clean"
     },
     "dependencies": {
         "@react-native-async-storage/async-storage": "^1.17.4",
