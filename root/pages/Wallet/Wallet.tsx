@@ -1,16 +1,14 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { View, Button, Platform, Alert } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import WalletConnectProvider from "@walletconnect/react-native-dapp";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ripple from "react-native-material-ripple";
 import { Text } from "react-native-paper";
 
- const Discover: FunctionComponent = () => {
+ const Wallet: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
+  const [walletInfo, setwalletInfo] = useState();
   const showButton = () => {
-
     if (!connector.connected) {
       /**
        *  Connect! 🎉
@@ -30,6 +28,7 @@ import { Text } from "react-native-paper";
       backgroundColor: "#fff",
     }} onPress={() => connector.killSession()}><Text>Kill Session</Text></Ripple>)
   }
+
   return (
     <View
       style={{
@@ -45,4 +44,5 @@ import { Text } from "react-native-paper";
     </View>
   );
 };
-export default Discover
+
+export default Wallet;

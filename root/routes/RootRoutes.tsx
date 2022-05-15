@@ -3,7 +3,7 @@ import { AnimatedTabBarNavigator, DotSize } from 'react-native-animated-nav-tab-
 import Icon from 'react-native-vector-icons/Feather'
 import { NavigationContainer } from '@react-navigation/native'
 import Home from '@/pages/Home/Home'
-import Discover from '@/pages/Discover'
+import Wallet from '@/pages/Wallet/Wallet'
 export const RootRoutes: FunctionComponent = () => {
 
 const Tabs = AnimatedTabBarNavigator()
@@ -48,8 +48,8 @@ const configTabs=()=>{
 			}}
 		/>
 		<Tabs.Screen
-			name="Discover"
-			component={Discover}
+			name="Wallet"
+			component={Wallet}
 			options={{
 				tabBarIcon: ({ focused, color }) => (
 					<TabBarIcon

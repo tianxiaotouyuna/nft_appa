@@ -8,8 +8,14 @@ module.exports = {
                 alias: {
                     //别名的配置
                     '@/pages': './root/pages',
+                    '@/routes': './root/routes',
                     '@/styles': './root/styles',
                     '@/utils': './root/utils',
+                    '@/store': './root/store',
+                    '@/action': './root/action',
+                    '@/constains': './root/constains',
+                    '@/provider': './root/provider',
+                    '@/reducer': './root/reducer'
                 },
             },
         ],
