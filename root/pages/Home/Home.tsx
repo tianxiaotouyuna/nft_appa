@@ -11,6 +11,7 @@ import {
 import styles from '@/styles/pages/home/home'
 import useInitScreen from "@/hooks/useInitScreen";
 import { Navigate } from "@/utils/index";
+import { pxToDp, pxToSp } from "@/utils/system";
 
 
 const Home: FunctionComponent = () => {
@@ -26,7 +27,9 @@ const onChangeSearch=()=>{
         placeholder="搜索"
         onChangeText={onChangeSearch}
         value={searchQuery}
-        icon='@/resources/home/Search.png'
+        icon={require('@/resources/home/Search.png')}
+        style={{ marginVertical:pxToDp(24),borderColor:'#3352DB',borderWidth:pxToDp(1),borderRadius:pxToDp(10000),height:pxToDp(72),alignItems:"center",justifyContent:"center",flexDirection:"row",width:pxToDp(686),alignSelf:"center"}}
+        inputStyle={{marginLeft:-10,fontSize:pxToSp(26),color:'#AAAAAA',textAlignVertical:"center",flex:1,height:pxToDp(100),alignSelf:"center"}}
       />
       <Ripple
         style={styles.ripple}

@@ -1,7 +1,7 @@
 
 import { assign } from 'lodash'
 import React, { useEffect } from 'react'
-import { View, Text, StatusBarProps, StatusBar } from 'react-native'
+import { View, Text, StatusBarProps, StatusBar, Alert } from 'react-native'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import useNavigationListener from './useNavigationListener'
 import { StackNavigationOptions } from '@react-navigation/stack'
@@ -11,8 +11,11 @@ import useStatusBar from './useStatusBar'
 
 type Options = {
     navigationBarColor?: String
+    headerTintColor?: String
+    headerTitleAlign?:String
+    
     statusBar?: StatusBarProps
-    navigationOptions?: StackNavigationOptions
+    navigationOptions: StackNavigationOptions
 }
 
 const useInitScreen = (options: Options = {}) => {
@@ -21,9 +24,13 @@ const useInitScreen = (options: Options = {}) => {
         navigationBarColor = "#ffffff",
     } = options;
 
+    const default_settings={
+        headerTintColor : "#383838",
+        headerTitleAlign:'center'
+    }
+    Object.assign(options.navigationOptions, {'headerTitleAlign':options.navigationOptions?.headerTitleAlign||default_settings.headerTitleAlign})
     const navigationReturns = useNavigationOptions(options.navigationOptions);
     useStatusBar(options.statusBar);
-
     useNavigationListener({
         onFocus: () => {
             initAndroidNavigation();

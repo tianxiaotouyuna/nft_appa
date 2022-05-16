@@ -7,8 +7,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#f2f2f2",
         paddingHorizontal: 20,
-        justifyContent: "space-between",
-        paddingTop:pxToDp(200)
     },
     ripple: {
         height: 100,
