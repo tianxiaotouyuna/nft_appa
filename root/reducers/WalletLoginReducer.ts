@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {LoginIn, LoginOut, LoginError} from '@/constains/WalletStatusType';
+import {LoginIn, LoginOut, LoginError} from '@/constants/WalletStatusType';
 import { Alert } from 'react-native';
 
 // 原始默认state

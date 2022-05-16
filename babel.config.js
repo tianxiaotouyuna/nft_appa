@@ -13,9 +13,9 @@ module.exports = {
                     '@/utils': './root/utils',
                     '@/store': './root/store',
                     '@/action': './root/action',
-                    '@/constains': './root/constains',
+                    '@/constants': './root/constants',
                     '@/provider': './root/provider',
-                    '@/reducer': './root/reducer'
+                    '@/reducers': './root/reducers'
                 },
             },
         ],

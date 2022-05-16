@@ -10,7 +10,6 @@ import { RootRoutes } from "@/routes/RootRoutes";
 const connector = useWalletConnect(); // valid
 
    const showCallBack=(props:RenderQrcodeModalProps)=>{
-     Alert.alert(JSON.stringify(connector.connected))
     //  Alert.alert(JSON.stringify(props))
      
    }

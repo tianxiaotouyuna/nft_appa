@@ -1,4 +1,4 @@
-import {LoginIn, LoginOut, LoginError} from '@/constains/WalletStatusType';
+import {LoginIn, LoginOut, LoginError} from 'constants/WalletStatusType';
 
 const loginIn = () => ({type: LoginIn});
 const loginOut = () => ({type: LoginOut});
