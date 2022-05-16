@@ -1,10 +1,10 @@
-import {createStore, applyMiddleware, compose} from 'redux';
+import {legacy_createStore as createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import WalletLoginReducer from '@/reducers/WalletLoginReducer';
+import user from '@/reducers/user';
 
 const configureStore = (state:any) => {
   return createStore(
-    WalletLoginReducer,
+    user,
     state,
     compose(applyMiddleware(thunk)),
   );
@@ -13,5 +13,6 @@ const configureStore = (state:any) => {
 const store = configureStore();
 
 export default store;
+
 
 

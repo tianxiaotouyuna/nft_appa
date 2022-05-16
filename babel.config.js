@@ -15,7 +15,9 @@ module.exports = {
                     '@/action': './root/action',
                     '@/constants': './root/constants',
                     '@/provider': './root/provider',
-                    '@/reducers': './root/reducers'
+                    '@/reducers': './root/reducers',
+                    '@/hooks': './root/hooks',
+                    '@/resources': './root/resources'
                 },
             },
         ],

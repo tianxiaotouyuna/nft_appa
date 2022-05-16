@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import React, { FunctionComponent } from "react";
 import { Alert, Platform, View } from "react-native";
-import { RootRoutes } from "@/routes/RootRoutes";
+import { Nav } from "@/routes/Nav";
 
  const WalletProvider: any = () => {
 const connector = useWalletConnect(); // valid
@@ -28,10 +28,8 @@ const connector = useWalletConnect(); // valid
     storageOptions={{
       asyncStorage: AsyncStorage,
     }}
-    // renderQrcodeModal={(props:RenderQrcodeModalProps)=>{useDispatch({'type':'loginIn'})}}
-    // renderQrcodeModal={props=>{showCallBack(props)}}
   >
-      <RootRoutes/>
+      <Nav/>
   </WalletConnectProvider>
   )
 

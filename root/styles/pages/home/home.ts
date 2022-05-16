@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
     spacing2: {
         marginBottom: 12 
     },
+    tab_right:{
+        width:pxToDp(44),
+        height:pxToDp(44),
+        marginHorizontal:pxToDp(32)
+    }
 })
 
 export default styles;

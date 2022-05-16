@@ -1,26 +1,37 @@
-import React, { Component, FunctionComponent } from "react";
-import { View, Text } from "react-native";
+import React, { Component, FunctionComponent, useState } from "react";
+import { View, Text, Image } from "react-native";
 import Ripple from "react-native-material-ripple";
-import { Button, Card, Title } from "react-native-paper";
+import { Button, Card, Searchbar, Title } from "react-native-paper";
 import {
   Placeholder,
   PlaceholderMedia,
   PlaceholderLine,
-  Fade,
-  Loader,
-  Progressive,
-  Shine,
   ShineOverlay,
 } from "rn-placeholder";
 import styles from '@/styles/pages/home/home'
+import useInitScreen from "@/hooks/useInitScreen";
+import { Navigate } from "@/utils/index";
 
- const Home: FunctionComponent = () => {
+
+const Home: FunctionComponent = () => {
+  const [searchQuery, setsearchQuery] = useState('');
+const onChangeSearch=()=>{
+  
+}
   return (
     <View
       style={styles.container}
     >
+      <Searchbar
+        placeholder="搜索"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+        icon='@/resources/home/Search.png'
+      />
       <Ripple
         style={styles.ripple}
+        onPress={() => { Navigate.navigate('Search', {}) }}
+
       >
         <Text>touch me</Text>
       </Ripple>
