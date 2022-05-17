@@ -17,7 +17,8 @@ module.exports = {
                     '@/provider': './root/provider',
                     '@/reducers': './root/reducers',
                     '@/hooks': './root/hooks',
-                    '@/resources': './root/resources'
+                    '@/resources': './root/resources',
+                    '@/components': './root/components'
                 },
             },
         ],

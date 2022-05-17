@@ -1,5 +1,6 @@
 import * as ReduxToken from './redux-token';
 import * as CacheKeys from './cache-keys';
+import * as UIELEMENTS from './ui-elements';
 
 const isReleaseEnvironment = true; // 是否发布环境
 // const isReleaseEnvironment = false; // 是否发布环境
@@ -43,6 +44,7 @@ const doctorPartnerKey = "08f50000a22b00a6";
 
 const BASE_PHP_HOST = `${envParams.PHP_HOST}/app/ewei_shopv2_api.php?i=${UNIACID}`;
 
+/** 商家标识 */
 /**
  * 隐私
  */
@@ -57,7 +59,7 @@ const PROTOCOL = {
  */
 
 
-export { ReduxToken ,CacheKeys};
+export { ReduxToken ,CacheKeys,UIELEMENTS  };
 
 export default {
   ...envParams,
@@ -70,5 +72,5 @@ export default {
   PROTOCOL,
   BASE_PHP_HOST,
   isReleaseEnvironment,
-  doctorPartnerKey
+  doctorPartnerKey,
 };

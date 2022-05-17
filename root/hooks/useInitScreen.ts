@@ -8,6 +8,7 @@ import { StackNavigationOptions } from '@react-navigation/stack'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import useNavigationOptions from './useNavigationOptions'
 import useStatusBar from './useStatusBar'
+import { UIELEMENTS } from '../constants'
 
 type Options = {
     navigationBarColor?: String
@@ -25,10 +26,10 @@ const useInitScreen = (options: Options = {}) => {
     } = options;
 
     const default_settings={
-        headerTintColor : "#383838",
+        headerTintColor : UIELEMENTS.DEFAULT_HEADER_COLOR,
         headerTitleAlign:'center'
     }
-    Object.assign(options.navigationOptions, {'headerTitleAlign':options.navigationOptions?.headerTitleAlign||default_settings.headerTitleAlign})
+    Object.assign(options.navigationOptions, {'headerTitleAlign':options.navigationOptions?.headerTitleAlign||default_settings.headerTitleAlign,'headerTintColor':options.navigationOptions?.headerTintColor||default_settings.headerTintColor})
     const navigationReturns = useNavigationOptions(options.navigationOptions);
     useStatusBar(options.statusBar);
     useNavigationListener({

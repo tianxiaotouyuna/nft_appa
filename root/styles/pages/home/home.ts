@@ -1,3 +1,4 @@
+import { UIELEMENTS } from "@/constants/index";
 import { pxToDp, pxToSp } from "@/utils/system";
 import { StyleSheet } from "react-native";
 import { color } from 'react-native-reanimated';
@@ -5,8 +6,9 @@ import { color } from 'react-native-reanimated';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f2f2f2",
-        paddingHorizontal: 20,
+        backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
+        paddingHorizontal: pxToDp(40),
+        paddingVertical: pxToDp(24),
     },
     ripple: {
         height: 100,
@@ -24,7 +26,15 @@ const styles = StyleSheet.create({
         width:pxToDp(44),
         height:pxToDp(44),
         marginHorizontal:pxToDp(32)
-    }
+    },
+
+    IGO_Warps:{ flexDirection: "row", alignItems: "center",marginTop: pxToDp(25), marginBottom: pxToDp(7),justifyContent:"space-between"},
+    IGO_Warps_Text:{ fontSize: UIELEMENTS.HEADER_SIZE, color: UIELEMENTS.DEFAULT_HEADER_COLOR},
+    IGO_Warps_Image:{ width: pxToDp(34), height: pxToDp(34),marginLeft:pxToDp(20) },
+    IGO_Warps_arrow:{ width: pxToDp(22), height: pxToDp(22),marginLeft:pxToDp(20) },
+  
+    search_wraps:{ borderColor: UIELEMENTS.DEFAULT_SUB_COLOR, borderWidth: pxToDp(0.5), borderRadius: pxToDp(10000), height: pxToDp(72), width: pxToDp(686), shadowOpacity: 0 },
+    search_input:{ marginLeft: -10, fontSize: pxToSp(26), color: UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE, textAlignVertical: "center", flex: 1, height: pxToDp(100), alignSelf: "center" }
 })
 
 export default styles;

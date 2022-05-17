@@ -7,7 +7,7 @@ import {
   PlaceholderLine,
   ShineOverlay,
 } from "rn-placeholder";
-import styles from '@/styles/pages/home/home'
+import styles from '@/styles/pages/home/search/search'
 import useInitScreen from "@/hooks/useInitScreen";
 
  const Search: FunctionComponent = () => { 
