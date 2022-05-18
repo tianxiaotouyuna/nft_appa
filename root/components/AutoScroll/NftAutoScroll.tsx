@@ -23,18 +23,20 @@ type BannerProps = {
   height?: number;
   onDataFinish?: () => void;
   bannerCard?: CardStyle;
+  duration?:number
 };
 
 const NftAutoScroll: FunctionComponent<BannerProps> = (props) => {
   const {
     data = [],
+    duration=5000,
     width = pxToDp(702),
     height = pxToDp(296),
     onDataFinish,
     bannerCard,
   } = props;
   return (
-    <AutoScroll endPaddingWidth={0} duration={500}>
+    <AutoScroll endPaddingWidth={0} duration={duration}>
       <View style={styles.swiper} >
       {data?.map((item: any, index: number) => (
         <Pressable

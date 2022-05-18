@@ -9,11 +9,10 @@ const styles = StyleSheet.create({
         borderWidth:pxToDp(1)
     }, 
     publish_image: {
-        width:pxToDp(540),
         height:pxToDp(310),
     },
     hot_image: {
-        width:pxToDp(320),
+        width:pxToDp(280),
         height:pxToDp(200),
     },
     hot_head: {

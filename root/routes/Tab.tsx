@@ -18,7 +18,7 @@ export const Tab: FunctionComponent = () => {
 	const RootStack = createStackNavigator();
 	useInitScreen({
 		navigationOptions: {
-			title:'首页1',
+			title:'首页',
 			headerRight: () => (
 				<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
 					<Image style={styles.tab_right} source={require('@/resources/home/more.png')} />
