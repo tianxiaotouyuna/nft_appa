@@ -16,28 +16,21 @@ export const Tab: FunctionComponent = () => {
 
 	const Tabs = AnimatedTabBarNavigator()
 	const RootStack = createStackNavigator();
-
-
-	const {options}=useInitScreen_tab()
-	console.log('======'+JSON.stringify(options))
-	// useInitScreen(options||
-	// 	{
-	// 		navigationOptions: {
-	// 			title:'首页',
-	// 			headerRight: () => (
-	// 				<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
-	// 					<Image style={styles.tab_right} source={require('@/resources/home/more.png')} />
-	// 				</Pressable>
-	// 			),
-	// 			headerTitleAlign:'left'
-	// 		},
-	// 		statusBar: {
-	// 			backgroundColor: "transparent",
-	// 			barStyle: "light-content"
-	// 		}
-	// 	}
-	// 	)
-	
+	useInitScreen({
+		navigationOptions: {
+			title:'首页1',
+			headerRight: () => (
+				<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
+					<Image style={styles.tab_right} source={require('@/resources/home/more.png')} />
+				</Pressable>
+			),
+			headerTitleAlign:'left'
+		},
+		statusBar: {
+			backgroundColor: "transparent",
+			barStyle: "light-content"
+		}
+	})
 	const TabBarIcon = (props: any) => {
 		return (
 			<Icon
