@@ -4,6 +4,7 @@ import React, { FunctionComponent } from 'react'
 import { View, Text, Image, StyleProp, ViewStyle, Pressable } from 'react-native'
 import Ripple from 'react-native-material-ripple';
 import { Card } from 'react-native-paper';
+import { UIELEMENTS } from '../constants';
 import { Navigate } from '../utils';
 export enum CardStyle {
     ExMallCard = 1,//兑换确认页面
@@ -28,7 +29,7 @@ const HomeGirdle: FunctionComponent<HomeGirdleProps> = (props) => {
         </View>
     )
     const renderItem = (item: any,index: number) => (
-        <Ripple onPress={() => { Navigate.navigate('Search', {}) }} style={[styles.ripple, { width: itemWidth, height: itemWidth }]} key={`${index}`}>
+    <Ripple rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} onPress={() => { Navigate.navigate('Search', {}) }} style={[styles.ripple, { width: itemWidth, height: itemWidth }]} key={`${index}`}>
             <Image style={{ width: pxToDp(124), height: pxToDp(124) }} source={item?.source} />
             <Text style={styles.text}>{item?.text}</Text>
         </Ripple>

@@ -103,6 +103,7 @@ const Home: FunctionComponent = () => {
         sliderWidth={pxToDp(670)}
         itemWidth={pxToDp(560)}
         inactiveSlideScale={1}
+        inactiveSlideOpacity={1}
         firstItem={0}
 
       />
@@ -124,6 +125,7 @@ const Home: FunctionComponent = () => {
         itemWidth={pxToDp(300)}
         inactiveSlideScale={1}
         initialNumToRender={1}
+        inactiveSlideOpacity={1}
         firstItem={0}
         scrollEndDragDebounceValue={40}
       />

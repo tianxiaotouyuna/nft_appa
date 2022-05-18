@@ -13,6 +13,7 @@ import FastImage from "react-native-fast-image";
 import BaseCard from "../BaseCard/BaseCard";
 import { pxToDp } from "@/utils/system";
 import Ripple from "react-native-material-ripple";
+import { UIELEMENTS } from "@/constants/index";
 export enum CardStyle {
   PUBLISH_STYLE = 1, //发行
   HOTCOLLECTION_STYLE = 2, //热门合集
@@ -27,7 +28,7 @@ type BannerCardProps = {
 const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
   const { data, style, cardStyle, onTap, borderRadius = pxToDp(10) } = props;
   const renderPublish = () => (
-    <Ripple onPress={onTap}>
+    <Ripple onPress={onTap} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}>
     <BaseCard style={[{ borderRadius: borderRadius },{width:pxToDp(560)}]}>
         <FastImage
           style={[styles.publish_image, { borderRadius: borderRadius }]}
@@ -40,7 +41,7 @@ const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
   );
 
   const renderHot = () => (
-    <Ripple onPress={onTap}>
+    <Ripple onPress={onTap} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}>
     <BaseCard style={[{ borderRadius: borderRadius },{padding:0,width:pxToDp(280)}]}>
       <View style={{ alignItems: "center" }}>
         <FastImage

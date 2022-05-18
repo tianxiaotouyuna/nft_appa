@@ -5,7 +5,7 @@ import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import Ripple from "react-native-material-ripple";
 import { Text } from "react-native-paper";
 import useWalletInfo from "@/hooks/useWalletInfo";
-import { ReduxToken } from "@/constants/index";
+import { ReduxToken, UIELEMENTS } from "@/constants/index";
 import { useSelector } from "react-redux";
 import styles from "@/styles/pages/order/order";
 const Order: FunctionComponent = () => {
@@ -31,7 +31,7 @@ const Order: FunctionComponent = () => {
     }
     else  { 
 
-      return (<Ripple style={{
+      return (<Ripple rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} style={{
         height: 100,
         alignItems: "center",
         justifyContent: "center",
