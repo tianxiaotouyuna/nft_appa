@@ -3,7 +3,7 @@ import { View, Button, Platform, Alert, Image } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import Ripple from "react-native-material-ripple";
-import { Searchbar, Text } from "react-native-paper";
+import { ActivityIndicator, Colors, Searchbar, Text } from "react-native-paper";
 import useWalletInfo from "@/hooks/useWalletInfo";
 import { ReduxToken, UIELEMENTS } from "@/constants/index";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,8 @@ import {
   ChineseWithLastDateHeader,
 } from "react-native-spring-scrollview/Customize";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
-import { black } from "react-native-paper/lib/typescript/styles/colors";
+import { NFTActivity_footer } from "@/components/NFTActivity/NFTActivity_footer";
+import { NFTActivity_header } from "@/components/NFTActivity/NFTActivity_header";
 const Market: FunctionComponent = () => {
   const listRef = useRef<LargeList>(null);
   const [open, setOpen] = useState(false);
@@ -49,7 +50,7 @@ const Market: FunctionComponent = () => {
 
   const [data, setdata] = useState([]);
   const [section, setsection] = useState(3);
-  const [rowCount, setrowCount] = useState(3);
+  const [rowCount, setrowCount] = useState(1);
   for (let section = 0; section < 3; ++section) {
     const sContent = { items: [1] };
     for (let row = 0; row < rowCount; ++row) {
@@ -219,19 +220,19 @@ const Market: FunctionComponent = () => {
         // renderSection={renderSection}
         heightForIndexPath={() => 150}
         renderIndexPath={renderIndexPath}
-        // refreshHeader={ChineseNormalHeader}
-        // onRefresh={() => {
-        //   setTimeout(() => {
-        //     listRef.current?.endRefresh();
-        //     // setTimeout(()=>this.setState({prop:"your changed props"}));
-        //   }, 2000);
-        // }}
-        loadingFooter={ChineseNormalFooter}
+        refreshHeader={NFTActivity_header}
+        onRefresh={() => {
+          setTimeout(() => {
+            listRef.current?.endRefresh();
+            // setTimeout(()=>this.setState({prop:"your changed props"}));
+          }, 2000);
+        }}
+        loadingFooter={NFTActivity_footer}
         allLoaded={allLoaded}
         onLoading={() => {
           setTimeout(() => {
             listRef.current?.endLoading();
-            setallLoaded(false);
+            setallLoaded(true);
           }, 2000);
         }}
       />

@@ -11,7 +11,8 @@ import { Alert, Image, Pressable } from 'react-native'
 import styles from '@/styles/pages/home/home';
 import { Navigate } from '../utils';
 import { UIELEMENTS } from '../constants';
-import useInitScreen_tab from '@/hooks/useInitScreen_tab';
+import NtfDetail from '@/pages/Home/NtfDetail';
+ 'src/screens/ArtistScreen';
 export const Tab: FunctionComponent = () => {
 
 	const Tabs = AnimatedTabBarNavigator()
@@ -24,6 +25,7 @@ export const Tab: FunctionComponent = () => {
 					<Image style={styles.tab_right} source={require('@/resources/home/more.png')} />
 				</Pressable>
 			),
+			headerShown:false,
 			headerTitleAlign:'left'
 		},
 		statusBar: {
@@ -96,7 +98,7 @@ export const Tab: FunctionComponent = () => {
 				/>
 				<Tabs.Screen
 					name="资产"
-					component={Asset}
+					component={NtfDetail}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
 							<TabBarIcon

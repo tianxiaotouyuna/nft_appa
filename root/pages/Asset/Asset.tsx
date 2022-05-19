@@ -1,37 +1,60 @@
-import React, { FunctionComponent } from "react";
-import { Pressable, Image,View } from "react-native";
-import {  Card, Title } from "react-native-paper";
-import {
-  Placeholder,
-  PlaceholderMedia,
-  PlaceholderLine,
-  ShineOverlay,
-} from "rn-placeholder";
-import styles from '@/styles/pages/home/search/search'
-import useInitScreen from "@/hooks/useInitScreen";
+import React, { FunctionComponent, useState } from "react";
+import { View, Button, Platform, Alert } from "react-native";
 
- const Asset: FunctionComponent = () => { 
-   useInitScreen({
-    navigationOptions: {
-      title:'搜索',
-  },
-  statusBar: {
-      backgroundColor: "transparent",
-      barStyle: "light-content"
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import Ripple from "react-native-material-ripple";
+import { Text } from "react-native-paper";
+import useWalletInfo from "@/hooks/useWalletInfo";
+import { ReduxToken, UIELEMENTS } from "@/constants/index";
+import { useSelector } from "react-redux";
+import useInitScreen from "@/hooks/useInitScreen";
+const Wallet: FunctionComponent = () => {
+  const connector = useWalletConnect(); // valid
+    const {  walletInfo,sendReduxAction} = useWalletInfo();
+    // const { walletInfo} = useSelector((state: any) => ({ ...state?.user }));
+  const connectThis=()=>{
+      sendReduxAction(ReduxToken.SET_WalletINFO, { walletInfo:{'address':'0x11133323331'} });
+      connector.connect()
+    }
+    useInitScreen({ navigationOptions: { title: '资产' } })
+  const showButton = () => {
+    if (!connector.connected) {
+      /**
+       *  Connect! 🎉
+       */
+      return <Ripple
+        style={{
+          height: 100,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#fff",
+        }} onPress={()=>connectThis()}><Text>Connect me</Text></Ripple>
+    }
+    else  { 
+
+      return (<Ripple  rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} style={{
+        height: 100,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#fff",
+      }} onPress={() => connector.killSession()}><Text>Kill Session</Text><Text>{walletInfo?.address}</Text></Ripple>)
+    }
   }
-})
+
   return (
     <View
-      style={styles.container}
+      style={{
+        flex: 1,
+        backgroundColor: "#f2f2f2",
+        paddingHorizontal: 20,
+        justifyContent: "space-between",
+        paddingTop: 100,
+      }}
     >
-      <Card>
-        <Placeholder Animation={ShineOverlay} Left={PlaceholderMedia} style={styles.spacing1}>
-          <PlaceholderLine width={80} />
-          <PlaceholderLine />
-          <PlaceholderLine width={30} />
-        </Placeholder>
-      </Card>
+      {showButton()}
+
     </View>
   );
 };
-export default Asset
+
+export default Wallet;
