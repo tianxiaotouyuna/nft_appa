@@ -13,6 +13,7 @@ import { pxToDp } from "@/utils/system";
 import { Image } from "react-native-animatable";
 import styles from "@/styles/pages/asset/asset";
 import AssetBtnWraps from "@/pageranges/AssetBtnWraps/AssetBtnWraps";
+import { SafeAreaView } from "react-native-safe-area-context";
 const Wallet: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
   const { walletInfo, sendReduxAction } = useWalletInfo();
@@ -23,7 +24,8 @@ const Wallet: FunctionComponent = () => {
     });
     connector.connect();
   };
-  useInitScreen({ navigationOptions: { title: "资产" } });
+  useInitScreen({ navigationOptions: { title: "资产" }
+  });
   const showButton = () => {
     if (!connector.connected) {
       /**
@@ -62,6 +64,7 @@ const Wallet: FunctionComponent = () => {
   };
 
   return (
+    <SafeAreaView>
     <View style={styles.container}>
       <Image style={styles.btn_icon} source={require("@/resources/fang.png")} />
       <Text style={styles.btn_text}>您还没有链接钱包</Text>
@@ -71,6 +74,7 @@ const Wallet: FunctionComponent = () => {
         onPress_3={ connectThis}
       />
     </View>
+    </SafeAreaView>
   );
 };
 

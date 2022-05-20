@@ -9,12 +9,15 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import useNavigationOptions from './useNavigationOptions'
 import useStatusBar from './useStatusBar'
 import { UIELEMENTS } from '../constants'
+import { Source } from 'react-native-fast-image'
+import { ImageSource } from 'react-native-vector-icons/Icon'
 
 type Options = {
     navigationBarColor?: String
     headerTintColor?: String
     headerTitleAlign?:String
-    
+    headerBackImageSource?:ImageSource
+
     statusBar?: StatusBarProps
     navigationOptions: StackNavigationOptions
 }
@@ -23,11 +26,12 @@ const useInitScreen = (options: Options = {}) => {
 
     const {
         navigationBarColor = "#ffffff",
+        headerBackImageSource
     } = options;
 
     const default_settings={
         headerTintColor : UIELEMENTS.DEFAULT_HEADER_COLOR,
-        headerTitleAlign:'center'
+        headerTitleAlign:'center',
     }
     Object.assign(options.navigationOptions, {'headerTitleAlign':options.navigationOptions?.headerTitleAlign||default_settings.headerTitleAlign,'headerTintColor':options.navigationOptions?.headerTintColor||default_settings.headerTintColor})
     const navigationReturns = useNavigationOptions(options.navigationOptions);

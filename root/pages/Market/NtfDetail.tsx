@@ -1,159 +1,112 @@
-import React, { Component, FunctionComponent, useRef, useState } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity, Pressable } from 'react-native';
-import * as Animatable from 'react-native-animatable';
-
-import { Header } from 'react-native/Libraries/NewAppScreen';
-import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
-import tvShowContent from '../../assets/tvShowContent';
-import useInitScreen from '@/hooks/useInitScreen';
-import { Navigate } from '@/utils/';
-import { useNavigation } from '@react-navigation/native';
-
-const MIN_HEIGHT = 64;
-const MAX_HEIGHT = 250;
-
-
+import { windowHeight, windowWidth } from "@/utils/system";
+import { useNavigation } from "@react-navigation/native";
+import { useHeaderHeight } from "@react-navigation/stack";
+import React, { FunctionComponent, useEffect, useRef, useState } from "react";
+import { View, Button, Platform, Alert, Image, Pressable, Animated, StyleSheet, Text } from "react-native";
+import { Icon } from 'react-native-elements';
 const NtfDetail: FunctionComponent = () => {
-  const [showNavTitle, setshowNavTitle] = useState(false);
+  const yOffset = useRef(new Animated.Value(0)).current;
+  const headerOpacity = yOffset.interpolate({
+    inputRange: [0, 200],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+  const headerOpacity2 = yOffset.interpolate({
+    inputRange: [0, 200],
+    outputRange: [1, 1],
+    extrapolate: "clamp",
+  });
+  const backButtonBackgroundColorAnimation = yOffset.interpolate({
+    inputRange: [0, 130],
+    outputRange: ['rgba(0,0,0,0.4)', 'rgba(0,0,0,0)'], // gray transparent to transparent
+    extrapolate: 'clamp',
+  });
 
-  const navi=useNavigation()
-  navi.setOptions({
-    headerShown:false,
+  const backArrowColorAnimation = yOffset.interpolate({
+    inputRange: [0, 130],
+    outputRange: ['rgb(255,255,255)', 'rgb(0,0,0)'], // white to black
+    extrapolate: 'clamp',
+  });
+  const navigation=useNavigation();
+  useEffect(() => {
+    navigation.setOptions({
+      // headerStyle: {
+      //   opacity: headerOpacity,
+      // },
+      headerLeft: () => (
+        <Animated.View 
+        style={{
+          borderRadius: 500,
+          padding: 5,
+          marginLeft: 10,
+          opacity:headerOpacity2,backgroundColor:'white'
+        }}>
+        <Animated.Image source={require('@/resources/home/return_2.png')}
+       ></Animated.Image>
+        </Animated.View>
+      ),
+      headerBackground: () => (
+        <Animated.View
+          style={{
+            backgroundColor: "white",
+            ...StyleSheet.absoluteFillObject,
+            opacity: headerOpacity,
+          }}
+        />
+      ),
+      headerTransparent: true,
+    });
+  }, [
+    headerOpacity,
+    navigation,
+    backArrowColorAnimation,
+    backButtonBackgroundColorAnimation,]);
 
-		navigationOptions: {
-			title:'首页',
-			headerRight: () => (
-				<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
-					{/* <Image style={styles.tab_right} source={require('@/resources/home/more.png')} /> */}
-				</Pressable>
-			),
-			headerTitleAlign:'left'
-		},
-  })
-  const navTitleViewRef = useRef<Animatable.View>(null);
   return (
-    <View style={{ flex: 1 }}>
-        <HeaderImageScrollView
-          maxHeight={MAX_HEIGHT}
-          minHeight={MIN_HEIGHT}
-          maxOverlayOpacity={0.6}
-          minOverlayOpacity={0.3}
-          fadeOutForeground
-          renderHeader={() => <Image source={tvShowContent.image} style={styles.image} />}
-          renderFixedForeground={() => (
-            <Animatable.View
-              style={styles.navTitleView}
-              ref={navTitleViewRef}
-            >
-              <Text style={styles.navTitle}>
-                {tvShowContent.title}, ({tvShowContent.year})
-              </Text>
-            </Animatable.View>
-          )}
-          renderForeground={() => (
-            <View style={styles.titleContainer}>
-              <Text style={styles.imageTitle}>{tvShowContent.title}</Text>
-            </View>
-          )}
-        >
-          <TriggeringView
-            style={styles.section}
-            onHide={() => navTitleViewRef.current?.fadeInUp(200)}
-            onDisplay={() => navTitleViewRef.current?.fadeOut(100)}
-          >
-            <Text style={styles.title}>
-              <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})
-            </Text>
-          </TriggeringView>
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Overview</Text>
-            <Text style={styles.sectionContent}>{tvShowContent.overview}</Text>
-          </View>
-          <View style={[styles.section, styles.sectionLarge]}>
-            <Text style={styles.sectionTitle}>Keywords</Text>
-            <View style={styles.keywords}>
-              {tvShowContent.keywords.map(keyword => (
-                <View style={styles.keywordContainer} key={keyword}>
-                  <Text style={styles.keyword}>{keyword}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
-        </HeaderImageScrollView>
+    <View style={[styles.container]}>
+      <Animated.ScrollView
+        contentContainerStyle={{ paddingTop: 0 }}
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: {
+                contentOffset: {
+                  y: yOffset,
+                },
+              },
+            },
+          ],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={16}
+      >
+					<Image style={styles.image} source={require('@/resources/nz.jpg')} />
+        <Text style={styles.paragraph}>Some random stuff why</Text>
+          <View style={{height:1000,backgroundColor:'yellow'}}></View>
+          <Text>assssss</Text>
+      </Animated.ScrollView>
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#ecf0f1",
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  image: {
+    width:windowWidth,
+    height:windowWidth
+  },
+});
+
 
 export default NtfDetail;
 
-
-const styles = StyleSheet.create({
-  image: {
-    height: MAX_HEIGHT,
-    width: Dimensions.get('window').width,
-    alignSelf: 'stretch',
-    resizeMode: 'cover',
-  },
-  title: {
-    fontSize: 20,
-  },
-  name: {
-    fontWeight: 'bold',
-  },
-  section: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
-    backgroundColor: 'white',
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  sectionContent: {
-    fontSize: 16,
-    textAlign: 'justify',
-  },
-  keywords: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexWrap: 'wrap',
-  },
-  keywordContainer: {
-    backgroundColor: '#999999',
-    borderRadius: 10,
-    margin: 10,
-    padding: 10,
-  },
-  keyword: {
-    fontSize: 16,
-    color: 'white',
-  },
-  titleContainer: {
-    flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imageTitle: {
-    color: 'white',
-    backgroundColor: 'transparent',
-    fontSize: 24,
-  },
-  navTitleView: {
-    height: MIN_HEIGHT,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 16,
-    opacity: 0,
-  },
-  navTitle: {
-    color: 'white',
-    fontSize: 18,
-    backgroundColor: 'transparent',
-  },
-  sectionLarge: {
-    height: 600,
-  },
-});
