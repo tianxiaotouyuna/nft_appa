@@ -1,19 +1,14 @@
 import "react-native-gesture-handler";
 import WalletConnectProvider, { RenderQrcodeModalProps, useWalletConnect } from "@walletconnect/react-native-dapp";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import React, { FunctionComponent } from "react";
 import { Alert, Platform, View } from "react-native";
 import { Nav } from "@/routes/Nav";
-import Asset from '@/pages/Asset/Asset'
+const { default: AsyncStorage } = require('@react-native-async-storage/async-storage');
 
- const WalletProvider: any = () => {
-const connector = useWalletConnect(); // valid
+ const WalletProvider: any = (options:any) => {
 
-   const showCallBack=(props:RenderQrcodeModalProps)=>{
-    //  Alert.alert(JSON.stringify(props))
-     
-   }
+  Alert.alert(JSON.stringify(options))
   return(
     <WalletConnectProvider
     bridge="https://bridge.walletconnect.org"
@@ -21,16 +16,16 @@ const connector = useWalletConnect(); // valid
       description: "Connect with WalletConnect",
       url: "https://walletconnect.org",
       icons: ["https://walletconnect.org/walletconnect-logo.png"],
-      name: "WalletConnect",
+      name: "Nft_APP",
     }}
     redirectUrl={
       Platform.OS === "web" ? "window.location.origin" : "nftxm://"
     }
-    storageOptions={{ 
+    storageOptions={{
       asyncStorage: AsyncStorage,
     }}
   >
-    <Asset />
+      <Nav/>
   </WalletConnectProvider>
   )
 

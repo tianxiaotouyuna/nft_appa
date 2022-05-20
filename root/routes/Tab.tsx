@@ -14,7 +14,6 @@ import { UIELEMENTS } from '../constants';
 import NtfDetail from '@/pages/Market/NtfDetail';
 import { title } from 'process';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import WalletProvider from '@/provider/WalletProvider';
  'src/screens/ArtistScreen';
 export const Tab: FunctionComponent = ({ navigation, route }) => {
 	const [a, seta] = useState();
@@ -118,7 +117,7 @@ export const Tab: FunctionComponent = ({ navigation, route }) => {
 				/>
 				<Tabs.Screen
 					name="资产"
-					component={WalletProvider}
+					component={Asset}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
 							<TabBarIcon

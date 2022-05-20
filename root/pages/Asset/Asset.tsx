@@ -16,15 +16,28 @@ import AssetBtnWraps from "@/pageranges/AssetBtnWraps/AssetBtnWraps";
 const Wallet: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
   const { walletInfo, sendReduxAction } = useWalletInfo();
-  // const { walletInfo} = useSelector((state: any) => ({ ...state?.user }));
-  const connectThis = () => {
+
+  const callBack = React.useCallback(() => {
+    return connector.connect();
+  }, [connector]);
+  const connectThis = async () => {
+    Alert.alert(JSON.stringify(callBack()))
+    return
     sendReduxAction(ReduxToken.SET_WalletINFO, {
       walletInfo: { address: "0x11133323331" },
     });
 
-    Alert.alert(JSON.stringify(1))
+  connector.connect((error: any, payload: any) => {
+    console.log(`connector.on("connect")`);
+    Alert.alert(JSON.stringify(payload))
 
-    connector.connect();
+    if (error) {
+      throw error;
+    }
+
+  });
+
+    // connector.connect();
   };
   useInitScreen({ navigationOptions: { title: "资产" } });
   const showButton = () => {
@@ -91,3 +104,4 @@ const Wallet: FunctionComponent = () => {
 };
 
 export default Wallet;
+
