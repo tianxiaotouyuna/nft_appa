@@ -21,6 +21,9 @@ const Wallet: FunctionComponent = () => {
     sendReduxAction(ReduxToken.SET_WalletINFO, {
       walletInfo: { address: "0x11133323331" },
     });
+
+    Alert.alert(JSON.stringify(1))
+
     connector.connect();
   };
   useInitScreen({ navigationOptions: { title: "资产" } });
@@ -30,17 +33,16 @@ const Wallet: FunctionComponent = () => {
        *  Connect! 🎉
        */
       return (
-        <Ripple
-          style={{
-            height: 100,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#fff",
-          }}
-          onPress={() => connectThis()}
-        >
-          <Text>Connect me</Text>
-        </Ripple>
+    <View style={styles.container}>
+
+      <Image style={styles.btn_icon} source={require("@/resources/nolinkedwallet.png")} />
+      <Text style={styles.btn_text}>您还没有链接钱包</Text>
+      <AssetBtnWraps
+        onPress_1={connectThis}
+        onPress_2={ connectThis}
+        onPress_3={ connectThis}
+      />
+        </View>
       );
     } else {
       return (
@@ -61,15 +63,29 @@ const Wallet: FunctionComponent = () => {
     }
   };
 
+  const killView=()=>(
+
+    <View style={styles.container}>
+    <Ripple
+    rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}
+    style={{
+      height: 100,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#fff",
+    }}
+    onPress={() => connector.killSession()}
+  >
+    <Text>Kill Session</Text>
+    <Text>{walletInfo?.address}</Text>
+  </Ripple>
+  </View>
+
+  )
   return (
     <View style={styles.container}>
-      <Image style={styles.btn_icon} source={require("@/resources/fang.png")} />
-      <Text style={styles.btn_text}>您还没有链接钱包</Text>
-      <AssetBtnWraps
-        onPress_1={connectThis}
-        onPress_2={ connectThis}
-        onPress_3={ connectThis}
-      />
+      {showButton()}
+      {/* {killView()} */}
     </View>
   );
 };

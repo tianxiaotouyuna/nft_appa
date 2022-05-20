@@ -20,7 +20,7 @@ const AssetBtnWraps: FunctionComponent<AssetBtnWrapsProps> = (props) => {
         heigh={pxToDp(100)}
         onPress={ onPress_1}
         text={"Metamask"}
-        imageSource={require("@/resources/fang.png")}
+        imageSource={require("@/resources/位图1.png")}
         borderRadius={pxToDp(12)}
       />
 
@@ -29,7 +29,7 @@ const AssetBtnWraps: FunctionComponent<AssetBtnWrapsProps> = (props) => {
         heigh={pxToDp(100)}
         onPress={ onPress_2}
         text={"imToken"}
-        imageSource={require("@/resources/fang.png")}
+        imageSource={require("@/resources/位图2.png")}
         borderRadius={pxToDp(12)}
       />
 
@@ -38,7 +38,7 @@ const AssetBtnWraps: FunctionComponent<AssetBtnWrapsProps> = (props) => {
         heigh={pxToDp(100)}
         onPress={onPress_3}
         text={"TokenPocket"}
-        imageSource={require("@/resources/fang.png")}
+        imageSource={require("@/resources/位图3.png")}
         borderRadius={pxToDp(12)}
       />
     </View>

@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { FunctionComponent } from "react";
 import { Alert, Platform, View } from "react-native";
 import { Nav } from "@/routes/Nav";
+import Asset from '@/pages/Asset/Asset'
 
  const WalletProvider: any = () => {
 const connector = useWalletConnect(); // valid
@@ -25,11 +26,11 @@ const connector = useWalletConnect(); // valid
     redirectUrl={
       Platform.OS === "web" ? "window.location.origin" : "nftxm://"
     }
-    storageOptions={{
+    storageOptions={{ 
       asyncStorage: AsyncStorage,
     }}
   >
-      <Nav/>
+    <Asset />
   </WalletConnectProvider>
   )
 
