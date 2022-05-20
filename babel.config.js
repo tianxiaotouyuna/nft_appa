@@ -18,7 +18,9 @@ module.exports = {
                     '@/reducers': './root/reducers',
                     '@/hooks': './root/hooks',
                     '@/resources': './root/resources',
-                    '@/components': './root/components'
+                    '@/components': './root/components',
+                    '@/pageranges': './root/pageranges'
+
                 },
             },
         ],

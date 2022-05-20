@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react'
+import React, { Fragment, FunctionComponent, useEffect, useState } from 'react'
 import { AnimatedTabBarNavigator, DotSize } from 'react-native-animated-nav-tab-bar'
 import Icon from 'react-native-vector-icons/Feather'
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,21 +11,39 @@ import { Alert, Image, Pressable } from 'react-native'
 import styles from '@/styles/pages/home/home';
 import { Navigate } from '../utils';
 import { UIELEMENTS } from '../constants';
-import NtfDetail from '@/pages/Home/NtfDetail';
+import NtfDetail from '@/pages/Market/NtfDetail';
+import { title } from 'process';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
  'src/screens/ArtistScreen';
-export const Tab: FunctionComponent = () => {
-
+export const Tab: FunctionComponent = ({ navigation, route }) => {
+	const [a, seta] = useState();
+	// React.useLayoutEffect(() => {
+	// 	const name=getFocusedRouteNameFromRoute(route)  ;
+	// 	navigation.setOptions({ headerTitle: name  });
+	//   }, [navigation, route]);
 	const Tabs = AnimatedTabBarNavigator()
-	const RootStack = createStackNavigator();
+	// useEffect(() => {
+	// 	navigation.setOptions({ headerTitleAlign: 'left' ,
+	// 	headerRight: () => (
+	// 		<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
+	// 			<Image style={styles.tab_right} source={require('@/resources/home/more.png')} />
+	// 		</Pressable>
+	// 	) ,
+	// 	statusBar: {
+	// 		backgroundColor: "transparent",
+	// 		barStyle: "light-content"
+	// 	}
+	// });
+
+	// }, [a])
 	useInitScreen({
 		navigationOptions: {
-			title:'首页',
+			title:getFocusedRouteNameFromRoute(route),
 			headerRight: () => (
 				<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
 					<Image style={styles.tab_right} source={require('@/resources/home/more.png')} />
 				</Pressable>
 			),
-			headerShown:false,
 			headerTitleAlign:'left'
 		},
 		statusBar: {
@@ -33,6 +51,7 @@ export const Tab: FunctionComponent = () => {
 			barStyle: "light-content"
 		}
 	})
+
 	const TabBarIcon = (props: any) => {
 		return (
 			<Icon
@@ -98,7 +117,7 @@ export const Tab: FunctionComponent = () => {
 				/>
 				<Tabs.Screen
 					name="资产"
-					component={NtfDetail}
+					component={Asset}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
 							<TabBarIcon

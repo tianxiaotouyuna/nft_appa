@@ -1,18 +1,35 @@
 import React, { Component, FunctionComponent, useRef, useState } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, StatusBar, TouchableOpacity, Pressable } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 import { Header } from 'react-native/Libraries/NewAppScreen';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import tvShowContent from '../../assets/tvShowContent';
+import useInitScreen from '@/hooks/useInitScreen';
+import { Navigate } from '@/utils/';
+import { useNavigation } from '@react-navigation/native';
 
 const MIN_HEIGHT = 64;
 const MAX_HEIGHT = 250;
 
 
-const NtfDetail: React.FC<PrivateRouteProps> = () => {
+const NtfDetail: FunctionComponent = () => {
   const [showNavTitle, setshowNavTitle] = useState(false);
 
+  const navi=useNavigation()
+  navi.setOptions({
+    headerShown:false,
+
+		navigationOptions: {
+			title:'首页',
+			headerRight: () => (
+				<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
+					{/* <Image style={styles.tab_right} source={require('@/resources/home/more.png')} /> */}
+				</Pressable>
+			),
+			headerTitleAlign:'left'
+		},
+  })
   const navTitleViewRef = useRef<Animatable.View>(null);
   return (
     <View style={{ flex: 1 }}>
@@ -41,8 +58,8 @@ const NtfDetail: React.FC<PrivateRouteProps> = () => {
         >
           <TriggeringView
             style={styles.section}
-            onHide={() => navTitleViewRef.fadeInUp(200)}
-            onDisplay={() => navTitleViewRef.fadeOut(100)}
+            onHide={() => navTitleViewRef.current?.fadeInUp(200)}
+            onDisplay={() => navTitleViewRef.current?.fadeOut(100)}
           >
             <Text style={styles.title}>
               <Text style={styles.name}>{tvShowContent.title}</Text>, ({tvShowContent.year})

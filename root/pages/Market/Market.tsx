@@ -113,6 +113,7 @@ const Market: FunctionComponent = () => {
   const renderIndexPath = () => {
     return (
       <BannerCard
+      onTap={() => { Navigate.navigate('NtfDetail', {}) }}
         data={{
           thumb:
             "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.11467.com%2F2021%2F09-04%2F3477865343.jpg&refer=http%3A%2F%2Fimg.11467.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=5185900885f6af72df52c17a32aa9e2c",

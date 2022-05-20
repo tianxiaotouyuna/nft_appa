@@ -1,5 +1,5 @@
 import React, { Component, FunctionComponent, useState } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import Ripple from "react-native-material-ripple";
 import { Button, Card, Searchbar, Title } from "react-native-paper";
 import {
@@ -23,6 +23,8 @@ import HotNFtCard from "@/components/HotNFtCard/HotNFtCard";
 import Carousel from 'react-native-snap-carousel'
 
 const Home: FunctionComponent = () => {
+
+
   const [inputValue, setinputValue] = useState('');
   const [publishData, setpublishData] = useState([
     { 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-6251efa3014f2d0f7ce0d1accc95ff21_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=8faa71fc0de2752a60dcae21ea1a2c6a', 'name': 'NFT藏品' },
