@@ -13,11 +13,11 @@ import NtfButton from "@/components/NtfButton/NtfButton";
 import { walletActions } from "@/action/walletActions";
 import PopBtn from "@/components/LoginOutBtn/PopBtn";
 import { useNavigation } from "@react-navigation/native";
-import { Navigate } from "@/utils/";
+import { Navigate } from "@/utils/index";
 const Asset: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
-  const [ntfData, setntfData] = useState([]);
   const [showLoginout, setshowLoginout] = useState(false);
+  const [ntfData, setntfData] = useState([]);
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(walletActions.disconnect(connector));
@@ -26,39 +26,44 @@ const Asset: FunctionComponent = () => {
   const rightBtnClick = () => {setshowLoginout(true)};
 
   const nav=useNavigation()
-  useEffect(() => {
-    if(connector.connected){
-      nav.setOptions(
-        {
-          title: "资产",
-          headerTitleAlign: "left",
-          headerRight: () => (
-              <Pressable
-                onPress={() => {
-                  rightBtnClick();
-                }}
-              >
-                <Image
-                  style={styles.tab_right}
-                  source={require("@/resources/exit.png")}
-                />
-              </Pressable>
-            ),
-        }
-      )
-    }
-    else {
-      nav.setOptions(
-        {
-          title: "资产",
-          headerTitleAlign: "left",
-          headerRight:null
-        }
-      )
-    }
 
-  }, [connector])
+  const refreshHeaderData= ()=>{
+
+    if(connector.connected){
+        nav.setOptions(
+          {
+            title: "资产",
+            headerTitleAlign: "left",
+            headerRight: () => (
+                <Pressable
+                  onPress={() => {
+                    rightBtnClick();
+                  }}
+                >
+                  <Image
+                    style={styles.tab_right}
+                    source={require("@/resources/exit.png")}
+                  />
+                </Pressable>
+              ),
+          }
+        )
+      }
+      else {
+        nav.setOptions(
+          {
+            title: "资产",
+            headerTitleAlign: "left",
+            headerRight:null
+          }
+        )
+      }
+
+  }
   
+  useEffect(() => {
+    refreshHeaderData();
+}, [connector])
   
   const showButton = () => {
     if (connector.connected == false) {
@@ -116,11 +121,6 @@ const Asset: FunctionComponent = () => {
     }
   };
 
-  const _renderModalContent = () => (
-    <View style={styles.modalContent}>
-      <Text>Hello!</Text>
-    </View>
-  );
   return (
     <View style={styles.container}>
       {showButton()}

@@ -1,5 +1,8 @@
+import { CacheKeys } from "@/constants/";
+import { Storage } from "@/utils/";
 import { pxToDp, pxToSp } from "@/utils/system";
-import React, { FunctionComponent, useState } from "react";
+import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,7 +15,18 @@ import { white } from "react-native-paper/lib/typescript/styles/colors";
 import { useSelector } from "react-redux";
 import styles from "./asset-style";
 const AssetTopBg: FunctionComponent = (props) => {
-  const wallet = useSelector((state: any) => state);
+  const [wallet, setwallet] = useState();
+  // const getWalletInfo = useSelector((state: any) => state);
+  const connector = useWalletConnect(); // valid
+  
+  const get_storageInfo =async ()=>{
+   let info = await Storage.load(CacheKeys.WALLETINFO);
+   setwallet(info)
+  }
+  useEffect(() => {
+    get_storageInfo()
+  }, [connector])
+  
 
   return (
     <View style={styles.container}>

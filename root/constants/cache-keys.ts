@@ -2,6 +2,8 @@ export const NAVIGATION_STATE = "NAVIGATIONSTATE";
 
 export const USERINFO = "USERINFO";
 
+export const WALLETINFO = "WALLETINFO";
+
 export const HISTORT_LIST = "historyList";
 
 export const COUPON_GOODS_INFO = "couponGoodsInfo";

@@ -1,4 +1,6 @@
 import { walletConstants } from "@/constants/walletConstants";
+import { CacheKeys } from "../constants";
+import { Storage } from "../utils";
 
 /*
  The export statement is used to export the only function in the file so that the function can be called using `walletsActions.connect()`
@@ -18,9 +20,11 @@ function connect(connector) {
     let asyncConnect = () =>
       connector
         .connect()
-        .then(function (result: any) {
+        .then(async function (result: any) {
           console.log("成功：" + JSON.stringify(result));
           dispatch(success(result));
+          await Storage.save(CacheKeys.WALLETINFO, result);
+
         })
         .catch(function (error: any) {
           console.log("失败：" + error);
@@ -44,11 +48,12 @@ function failure(error: any) {
 }
 
 function disconnect(connector) {
-  return (dispatch: any) => {
+  return async (dispatch: any) => {
     // This dispatch calls a function that is declared later on in the code.
     let asyncDisconnect = async () => {
       await connector.killSession();
     };
+    await Storage.remove(CacheKeys.WALLETINFO);
     dispatch(requestDisconnect("Disconnecting from wallet"));
     asyncDisconnect();
   };

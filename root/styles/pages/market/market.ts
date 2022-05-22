@@ -1,5 +1,6 @@
 import { UIELEMENTS } from "@/constants/index";
-import { pxToDp, pxToSp } from "@/utils/system";
+import { paddingBottom_, pxToDp, pxToSp } from "@/utils/system";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
         paddingHorizontal: pxToDp(40),
-        paddingBottom: pxToDp(140),
+
     },
     tab_right:{
         width:pxToDp(44),

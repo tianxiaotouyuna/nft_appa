@@ -22,6 +22,7 @@ const init = () => {
         });
 
         storage.sync = {
+            [CacheKeys.WALLETINFO]: () => null,
             [CacheKeys.NAVIGATION_STATE]: () => undefined,
             [CacheKeys.HISTORT_LIST]: () => undefined,
             [CacheKeys.USERINFO]: () => ({}),

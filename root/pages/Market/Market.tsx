@@ -16,7 +16,9 @@ import { LargeList } from "react-native-largelist";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
 import { NFTActivity_footer } from "@/components/NFTActivity/NFTActivity_footer";
 import { NFTActivity_header } from "@/components/NFTActivity/NFTActivity_header";
-const Market: FunctionComponent = () => {
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+const Market: FunctionComponent = (navigation,route,) => {
+  Alert.alert(JSON.stringify(navigation.route.params))
   const listRef = useRef<LargeList>(null);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -160,7 +162,7 @@ useInitScreen({
   //   );
   // };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{paddingBottom:useSafeAreaInsets().bottom}]}>
       {/* <View style={styles.header_wraps}>
         <View style={styles.search_wraps2}>
           <Searchbar
@@ -259,10 +261,3 @@ useInitScreen({
 
 export default Market;
 
-function payload(
-  SET_TABNAVCHANGE: string,
-  payload: any,
-  arg2: { title: string; headerTitleAlign: string }
-) {
-  throw new Error("Function not implemented.");
-}
