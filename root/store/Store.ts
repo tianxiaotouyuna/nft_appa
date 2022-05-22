@@ -1,19 +1,10 @@
-import {legacy_createStore as createStore, applyMiddleware, compose} from 'redux';
-import thunk from 'redux-thunk';
-import user from '@/reducers/user';
-import tab from '@/reducers/tab';
-
-const configureStore = (state:any) => {
-  return createStore(
-    tab,
-    state,
-    compose(applyMiddleware(thunk)),
-  );
-};
-
-const store = configureStore();
-
-export default store;
+// This is where the store is setup. This is where redux updates the state of the store based on the user actions.
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import { wallet } from '@/reducers/walletReducer';
 
 
+const loggerMiddleware = createLogger();
 
+export const store = createStore(wallet, applyMiddleware(thunkMiddleware, loggerMiddleware));

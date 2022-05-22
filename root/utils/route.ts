@@ -1,18 +1,27 @@
 import { ComponentType } from "react";
 
 export const SCREEN = {
+    Screen:'Screen',
     Tab: "Tab",
     Home:"Home",
+    Market:"Market",
+    Asset:"Asset",
+    Order:"Order",
+    LoginOut:"LoginOut",
     Search:"Search",
-    Wallet:"Wallet"
 }
 
 /**
  * 需要登录授权的路由页面
  */
 export const authRoutes = [
+    SCREEN.Screen,
     SCREEN.Tab,
     SCREEN.Home,
+    SCREEN.Market,
+    SCREEN.Order,
+    SCREEN.Asset,
+    SCREEN.Market,
     SCREEN.Search,
-    SCREEN.Wallet,
+    SCREEN.LoginOut,
 ]

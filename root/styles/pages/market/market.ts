@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: pxToDp(40),
         paddingBottom: pxToDp(140),
     },
+    tab_right:{
+        width:pxToDp(44),
+        height:pxToDp(44),
+        marginHorizontal:pxToDp(32)
+    },
     list: {
       flex: 1,
       zIndex:-1,

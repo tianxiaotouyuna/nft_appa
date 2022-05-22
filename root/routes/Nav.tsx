@@ -9,6 +9,9 @@ import { Tab } from "./Tab";
 import Search from "@/pages/Home/Search";
 import { Alert } from "react-native";
 import NtfDetail from "@/pages/Market/NtfDetail";
+import LoginOut from "@/pages/Asset/LoginOut";
+import ScreenRoutes from "@/routes/Screen";
+import Screen from "@/routes/Screen";
 export const Nav: FunctionComponent = () => {
   const RootStack = createStackNavigator();
 
@@ -16,17 +19,11 @@ export const Nav: FunctionComponent = () => {
     return (
       <NavigationContainer ref={Navigate.navigationRef}>
         <RootStack.Navigator>
-          <Fragment>
-            <RootStack.Screen
-              name="首页"
-              component={Tab}
-              options={({ route }) => ({
-                headerTitle: getFocusedRouteNameFromRoute(route),
-              })}
-            />
-            <RootStack.Screen name="Search" component={Search} />
-            <RootStack.Screen name="NtfDetail" component={NtfDetail} />
-          </Fragment>
+          <RootStack.Screen
+            name="Screen"
+            component={Screen}
+            options={{ headerShown: false }}
+          />
         </RootStack.Navigator>
       </NavigationContainer>
     );

@@ -1,4 +1,4 @@
-import { getFocusedRouteNameFromRoute, NavigationContainerRef, StackActions } from "@react-navigation/native";
+import { getFocusedRouteNameFromRoute, NavigationContainerRef, StackActions, TabActions } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { CacheKeys } from "../constants";
@@ -27,3 +27,6 @@ export const pop = (count: number) => {
     navigationRef.current?.pop(count);
 }
 
+export const selectTab = () => {
+    navigationRef.current?.dispatch(TabActions.jumpTo('HomeRoute'))
+}

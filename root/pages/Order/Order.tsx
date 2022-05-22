@@ -1,21 +1,26 @@
 import React, { FunctionComponent, useState } from "react";
-import { View, Button, Platform, Alert } from "react-native";
+import { View } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import Ripple from "react-native-material-ripple";
 import { Text } from "react-native-paper";
-import useWalletInfo from "@/hooks/useWalletInfo";
-import { ReduxToken, UIELEMENTS } from "@/constants/index";
-import { useSelector } from "react-redux";
+import {UIELEMENTS } from "@/constants/index";
 import styles from "@/styles/pages/order/order";
+import useInitScreen from "@/hooks/useInitScreen";
 const Order: FunctionComponent = () => {
+
+  useInitScreen({
+    navigationOptions: {
+      title:'订单',
+      headerTitleAlign: "left",
+    },
+    statusBar: {
+      backgroundColor: "transparent",
+      barStyle: "light-content",
+    },
+  });
+
   const connector = useWalletConnect(); // valid
-    const {  walletInfo,sendReduxAction} = useWalletInfo();
-    // const { walletInfo} = useSelector((state: any) => ({ ...state?.user }));
-  const connectThis=()=>{
-      sendReduxAction(ReduxToken.SET_WalletINFO, { walletInfo:{'address':'0x11133323331'} });
-      connector.connect()
-    }
   const showButton = () => {
     if (!connector.connected) {
       /**
@@ -27,7 +32,7 @@ const Order: FunctionComponent = () => {
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "#fff",
-        }} onPress={()=>connectThis()}><Text>Connect mea</Text></Ripple>
+        }} onPress={()=>{}}><Text>Connect mea</Text></Ripple>
     }
     else  { 
 
@@ -36,7 +41,7 @@ const Order: FunctionComponent = () => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#fff",
-      }} onPress={() => connector.killSession()}><Text>Kill Session</Text><Text>{walletInfo?.address}</Text></Ripple>)
+      }} onPress={() => connector.killSession()}><Text>Kill Session</Text></Ripple>)
     }
   }
 

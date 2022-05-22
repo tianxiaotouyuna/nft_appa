@@ -7,50 +7,20 @@ import Market from '@/pages/Market/Market'
 import Order from '@/pages/Order/Order'
 import Asset from '@/pages/Asset/Asset'
 import useInitScreen from '@/hooks/useInitScreen'
-import { Alert, Image, Pressable } from 'react-native'
+import { Alert, Image, Pressable, TouchableOpacity } from 'react-native'
 import styles from '@/styles/pages/home/home';
 import { Navigate } from '../utils';
 import { UIELEMENTS } from '../constants';
 import NtfDetail from '@/pages/Market/NtfDetail';
 import { title } from 'process';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute, NavigationContainer } from '@react-navigation/native';
+import MaketRoute from './MaketRoute';
+import HomeRoute from './HomeRoute';
+import OrderRoute from './OrderRoute';
+import AssetRoute from './AssetRoute';
  'src/screens/ArtistScreen';
 export const Tab: FunctionComponent = ({ navigation, route }) => {
-	const [a, seta] = useState();
-	// React.useLayoutEffect(() => {
-	// 	const name=getFocusedRouteNameFromRoute(route)  ;
-	// 	navigation.setOptions({ headerTitle: name  });
-	//   }, [navigation, route]);
 	const Tabs = AnimatedTabBarNavigator()
-	// useEffect(() => {
-	// 	navigation.setOptions({ headerTitleAlign: 'left' ,
-	// 	headerRight: () => (
-	// 		<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
-	// 			<Image style={styles.tab_right} source={require('@/resources/home/more.png')} />
-	// 		</Pressable>
-	// 	) ,
-	// 	statusBar: {
-	// 		backgroundColor: "transparent",
-	// 		barStyle: "light-content"
-	// 	}
-	// });
-
-	// }, [a])
-	useInitScreen({
-		navigationOptions: {
-			title:getFocusedRouteNameFromRoute(route),
-			headerRight: () => (
-				<Pressable onPress={() => { Navigate.navigate('Search', {}) }}>
-					<Image style={styles.tab_right} source={require('@/resources/home/more.png')} />
-				</Pressable>
-			),
-			headerTitleAlign:'left'
-		},
-		statusBar: {
-			backgroundColor: "transparent",
-			barStyle: "light-content"
-		}
-	})
 
 	const TabBarIcon = (props: any) => {
 		return (
@@ -64,7 +34,7 @@ export const Tab: FunctionComponent = ({ navigation, route }) => {
 
 	const configTabs = () => {
 		return (
-			<Tabs.Navigator initialRouteName="Home"
+			<Tabs.Navigator 
 				tabBarOptions={{
 					activeTintColor: UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE,
 					inactiveTintColor: UIELEMENTS.DEFAULT_HEADER_COLOR,
@@ -78,7 +48,7 @@ export const Tab: FunctionComponent = ({ navigation, route }) => {
 			>
 				<Tabs.Screen
 					name="首页"
-					component={Home}
+					component={HomeRoute}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
 							<TabBarIcon
@@ -91,7 +61,7 @@ export const Tab: FunctionComponent = ({ navigation, route }) => {
 				/>
 				<Tabs.Screen
 					name="市场"
-					component={Market}
+					component={MaketRoute}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
 							<TabBarIcon
@@ -104,7 +74,7 @@ export const Tab: FunctionComponent = ({ navigation, route }) => {
 				/>
 				<Tabs.Screen
 					name="订单"
-					component={Order}
+					component={OrderRoute}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
 							<TabBarIcon
@@ -117,7 +87,7 @@ export const Tab: FunctionComponent = ({ navigation, route }) => {
 				/>
 				<Tabs.Screen
 					name="资产"
-					component={Asset}
+					component={AssetRoute}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
 							<TabBarIcon
