@@ -125,7 +125,11 @@ const Asset: FunctionComponent = () => {
     <View style={styles.container}>
       {showButton()}
 
-      <Modal isVisible={showLoginout} style={styles.bottomModal}>
+      <Modal isVisible={showLoginout} style={styles.bottomModal} 
+      hideModalContentWhileAnimating={true}
+      useNativeDriverForBackdrop={true}
+      animationOutTiming={1000}
+      >
         <PopBtn cancle_press={()=>setshowLoginout(false)} sure_press={logout}></PopBtn>
       </Modal>
     </View>

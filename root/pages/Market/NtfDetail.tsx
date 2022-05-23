@@ -1,14 +1,22 @@
-import MarketDetailWraps from "@/pageranges/MarketDetailWraps/MarketDetailWraps";
+import Bottom from "@/pageranges/markdetail/bottom/Bottom";
+import Center from "@/pageranges/markdetail/center/Center";
 import { MarketService } from "@/services/index";
-import { windowHeight, windowWidth } from "@/utils/system";
+import { pxToDp, windowHeight, windowWidth } from "@/utils/system";
 import { useNavigation } from "@react-navigation/native";
-import { useHeaderHeight } from "@react-navigation/stack";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { View, Button, Platform, Alert, Image, Pressable, Animated, StyleSheet, Text } from "react-native";
-import { Icon } from 'react-native-elements';
 import FastImage from "react-native-fast-image";
+import {
+  findNodeHandle,
+  UIManager
+} from 'react-native';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 const NtfDetail: FunctionComponent = () => {
   const [data, setdata] = useState({});
+  
+  const bottomRef = useRef<any>();
+
   const yOffset = useRef(new Animated.Value(0)).current;
   const headerOpacity = yOffset.interpolate({
     inputRange: [0, 200],
@@ -18,6 +26,11 @@ const NtfDetail: FunctionComponent = () => {
   const headerOpacity2 = yOffset.interpolate({
     inputRange: [0, 200],
     outputRange: [1, 1],
+    extrapolate: "clamp",
+  });
+  const headerOpacity3 = yOffset.interpolate({
+    inputRange: [windowWidth-(44+useSafeAreaInsets().top), windowWidth-(44+useSafeAreaInsets().top)+80],
+    outputRange: [0, 1],
     extrapolate: "clamp",
   });
   const backButtonBackgroundColorAnimation = yOffset.interpolate({
@@ -42,6 +55,8 @@ const NtfDetail: FunctionComponent = () => {
       // headerStyle: {
       //   opacity: headerOpacity,
       // },
+      title:data?.assetName,
+      headerTitleStyle:{opacity:headerOpacity3},
       headerLeft: () => (
         <Animated.View 
         style={{
@@ -59,7 +74,7 @@ const NtfDetail: FunctionComponent = () => {
           style={{
             backgroundColor: "white",
             ...StyleSheet.absoluteFillObject,
-            opacity: headerOpacity,
+            opacity: headerOpacity3,
           }}
         />
       ),
@@ -71,6 +86,13 @@ const NtfDetail: FunctionComponent = () => {
     backArrowColorAnimation,
     backButtonBackgroundColorAnimation,]);
 
+    const Teste=()=>{
+      const handle = findNodeHandle(bottomRef.current);
+      UIManager.measure(handle , (x , y , w , h ,pagex) => {
+          console.log(pagex)
+          return h;
+      })
+  }
     const getData=async ()=>{
       
       try {
@@ -81,10 +103,13 @@ const NtfDetail: FunctionComponent = () => {
     } catch (error) {
     }
     }
+
   return (
     <View style={[styles.container]}>
       <Animated.ScrollView
+      style={{marginBottom:pxToDp(165)+useSafeAreaInsets().bottom}}
         contentContainerStyle={{ paddingTop: 0 }}
+        showsVerticalScrollIndicator={false}
         onScroll={Animated.event(
           [
             {
@@ -104,11 +129,15 @@ const NtfDetail: FunctionComponent = () => {
         resizeMode="cover"
         source={{ uri: data?.imageThumbnailUrl }}
       />
-        <MarketDetailWraps data={data} />
+        <Center data={data} />
+        <Center data={data} />
       </Animated.ScrollView>
+
+        <Bottom ref={bottomRef}/>
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
