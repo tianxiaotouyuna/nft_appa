@@ -26,12 +26,108 @@ const Home: FunctionComponent = () => {
 
 
   const [inputValue, setinputValue] = useState('');
-  const [publishData, setpublishData] = useState([
-    { 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-6251efa3014f2d0f7ce0d1accc95ff21_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=8faa71fc0de2752a60dcae21ea1a2c6a', 'name': 'NFT藏品' },
-    { 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F13050014876%2F641&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=ce7ef1afa03c07ff217cd3a63d54549b', 'name': 'NFT藏品' },
-    { 'thumb': 'https://img0.baidu.com/it/u=4225805921,1113792677&fm=253&fmt=auto&app=120&f=JPEG?w=890&h=500', 'name': 'NFT藏品' },
-    { 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F13050014876%2F641&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=ce7ef1afa03c07ff217cd3a63d54549b', 'name': 'NFT藏品' },
-    { 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.11467.com%2F2021%2F09-04%2F3477865343.jpg&refer=http%3A%2F%2Fimg.11467.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=5185900885f6af72df52c17a32aa9e2c', 'name': 'NFT藏品' }
+  const [publishData, setpublishData] = useState( [
+    [{
+      "id": 440821083,
+      "imageUrl": 'https://img0.baidu.com/it/u=940732863,1808085947&fm=253&fmt=auto&app=138&f=JPEG?w=553&h=500',
+      "tokenId": "3882",
+      "assetName": '悟空来了',
+      "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+      "collectionName": "THE TATTOO ARTIST",
+      "salePrice": 0
+    },
+    {
+      "id": 440821082,
+      "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1011%2Fbe8ac782j00r0s6ur000vc000hs00ckc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886615&t=92429f76e923e99c6056a5fee02ebfd6',
+      "tokenId": "3876",
+      "assetName": '油画',
+      "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+      "collectionName": "THE TATTOO ARTIST",
+      "salePrice": 0
+    }],
+    [{
+      "id": 440821080,
+      "imageUrl": 'https://img0.baidu.com/it/u=590006338,1231462113&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+      "tokenId": "3317",
+      "assetName": '猴哥来玩了',
+      "assetAddress": "0x46b95a569ef932adc1ebe0000727035ee1f2da75",
+      "collectionName": "Eth.r Brews Generative Collection",
+      "salePrice": 0
+    },
+    {
+      "id": 440821079,
+      "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20220225s%2F99%2Fw400h499%2F20220225%2F88e8-4189a62eb588fa8ef89c28e098807c3f.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886949&t=993b49b1b7609a6e20fbc1453fc8a5f0',
+      "tokenId": "2814",
+      "assetName": '战争之下',
+      "assetAddress": "0x11ca9693156929ee2e7e1470c5e1a55b413e9007",
+      "collectionName": "Psychedelics Anonymous Psilocybin",
+      "salePrice": 0
+    }],
+    [{
+      "id": 440821077,
+      "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20220225s%2F99%2Fw400h499%2F20220225%2F88e8-4189a62eb588fa8ef89c28e098807c3f.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886949&t=993b49b1b7609a6e20fbc1453fc8a5f0',
+      "tokenId": "3873",
+      "assetName": null,
+      "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+      "collectionName": "THE TATTOO ARTIST",
+      "salePrice": 0
+    },
+    {
+      "id": 440821076,
+      "imageUrl": 'https://img0.baidu.com/it/u=590006338,1231462113&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+      "tokenId": "3879",
+      "assetName": null,
+      "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+      "collectionName": "THE TATTOO ARTIST",
+      "salePrice": 0
+    }],
+    [{
+      "id": 440821073,
+      "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1011%2Fbe8ac782j00r0s6ur000vc000hs00ckc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886615&t=92429f76e923e99c6056a5fee02ebfd6',
+      "tokenId": "3864",
+      "assetName": null,
+      "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+      "collectionName": "THE TATTOO ARTIST",
+      "salePrice": 0
+    },
+    {
+      "id": 440821072,
+      "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20220225s%2F99%2Fw400h499%2F20220225%2F88e8-4189a62eb588fa8ef89c28e098807c3f.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886949&t=993b49b1b7609a6e20fbc1453fc8a5f0',
+      "tokenId": "3881",
+      "assetName": null,
+      "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+      "collectionName": "THE TATTOO ARTIST",
+      "salePrice": 0
+    }],
+    [{
+      "id": 440821071,
+      "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1011%2Fbe8ac782j00r0s6ur000vc000hs00ckc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886615&t=92429f76e923e99c6056a5fee02ebfd6',
+      "tokenId": "21269221605813514809481462890651808057441306200692816149898726332250211712452",
+      "assetName": null,
+      "assetAddress": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+      "collectionName": "ENS: Ethereum Name Service",
+      "salePrice": 0
+    },
+    {
+      "id": 440821070,
+      "imageUrl": 'https://img0.baidu.com/it/u=940732863,1808085947&fm=253&fmt=auto&app=138&f=JPEG?w=553&h=500',
+      "tokenId": "3875",
+      "assetName": null,
+      "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+      "collectionName": "THE TATTOO ARTIST",
+      "salePrice": 0
+    }],
+    [{
+      "id": 440821067,
+      "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20220225s%2F99%2Fw400h499%2F20220225%2F88e8-4189a62eb588fa8ef89c28e098807c3f.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886949&t=993b49b1b7609a6e20fbc1453fc8a5f0',
+      "tokenId": "105796204734605626712023685081731545537107694952405135557134397778624654289028",
+      "assetName": null,
+      "assetAddress": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+      "collectionName": "ENS: Ethereum Name Service",
+      "salePrice": 0
+    }],
+  
+
   ]);
   const [hotData, sethotData] = useState([
     { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-6251efa3014f2d0f7ce0d1accc95ff21_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=8faa71fc0de2752a60dcae21ea1a2c6a', 'name': 'NFT藏品' },

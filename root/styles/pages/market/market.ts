@@ -6,9 +6,9 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop:UIELEMENTS.PADDING_TOP,
+        paddingHorizontal:UIELEMENTS.PADDING_HORIZONTAL,
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
-        paddingHorizontal: pxToDp(40),
-
     },
     tab_right:{
         width:pxToDp(44),
@@ -52,7 +52,21 @@ const styles = StyleSheet.create({
         bottom: 0,
         height: 1,
         backgroundColor: "#EEE"
-      }
+      },
+      empty_box:{
+              justifyContent:"center",
+              alignItems:"center",
+              flex:1
+      },
+      icon: {
+          width:pxToDp(526),
+          height:pxToDp(284),
+      },
+      empty_text1: {
+          fontSize:pxToDp(32),
+          color:'#222222',
+          marginTop:pxToDp(40)
+      },
 })
 
 export default styles;

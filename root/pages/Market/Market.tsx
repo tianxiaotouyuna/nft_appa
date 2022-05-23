@@ -1,28 +1,22 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
-import { View, Button, Platform, Alert, Image, Pressable } from "react-native";
+import { View, Button, Platform, Alert, Image, Pressable, TabBarIOSItem } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import Ripple from "react-native-material-ripple";
 import { ActivityIndicator, Colors, Searchbar, Text } from "react-native-paper";
 import { ReduxToken, UIELEMENTS } from "@/constants/index";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "@/styles/pages/market/market";
 import useInitScreen from "@/hooks/useInitScreen";
 import { Navigate } from "@/utils/index";
-import DropDownPicker from "react-native-dropdown-picker";
-import { color } from "react-native-reanimated";
-import { pxToDp, pxToSp } from "@/utils/system";
+import { pxToDp, pxToSp, tabBarHeight } from "@/utils/system";
 import { LargeList } from "react-native-largelist";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
-import { NFTActivity_footer } from "@/components/NFTActivity/NFTActivity_footer";
-import { NFTActivity_header } from "@/components/NFTActivity/NFTActivity_header";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-const Market: FunctionComponent = (navigation,route,) => {
-  Alert.alert(JSON.stringify(navigation.route.params))
-  const listRef = useRef<LargeList>(null);
+import { MarketService } from "@/services/index";
+import GDataList from "@/components/GDataList";
+const Market: FunctionComponent = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [allLoaded, setallLoaded] = useState(false);
   const [items, setItems] = useState([
     {
       label: "价格从高到低",
@@ -44,17 +38,7 @@ const Market: FunctionComponent = (navigation,route,) => {
     },
   ]);
 
-  const [data, setdata] = useState([]);
-  const [section, setsection] = useState(3);
-  const [rowCount, setrowCount] = useState(1);
-  for (let section = 0; section < 3; ++section) {
-    const sContent = { items: [1] };
-    for (let row = 0; row < rowCount; ++row) {
-      sContent.items.push(row);
-    }
-    data.push(sContent);
-  }
-  
+
   const [inputValue, setinputValue] = useState("");
   const onChangeSearch = (query: string) => {
     setinputValue(query);
@@ -62,28 +46,28 @@ const Market: FunctionComponent = (navigation,route,) => {
 
   const connector = useWalletConnect(); // valid
 
-useInitScreen({
-  navigationOptions: {
-    title:'市场',
-    headerRight: () => (
-      <Pressable
-        onPress={() => {
-          Navigate.navigate("LoginOut", {});
-        }}
-      >
-        <Image
-          style={styles.tab_right}
-          source={require("@/resources/home/more.png")}
-        />
-      </Pressable>
-    ),
-    headerTitleAlign: "left",
-  },
-  statusBar: {
-    backgroundColor: "transparent",
-    barStyle: "light-content",
-  },
-});
+  useInitScreen({
+    navigationOptions: {
+      title: '市场',
+      headerRight: () => (
+        <Pressable
+          onPress={() => {
+            Navigate.navigate("LoginOut", {});
+          }}
+        >
+          <Image
+            style={styles.tab_right}
+            source={require("@/resources/home/more.png")}
+          />
+        </Pressable>
+      ),
+      headerTitleAlign: "left",
+    },
+    statusBar: {
+      backgroundColor: "transparent",
+      barStyle: "light-content",
+    },
+  });
   const connectThis = () => {
     sendReduxAction(ReduxToken.SET_WalletINFO, {
       walletInfo: { address: "0x11133323331" },
@@ -125,45 +109,40 @@ useInitScreen({
       );
     }
   };
-  const renderSection = () => {
-    return <Text>123</Text>;
-  };
-  const renderIndexPath = () => {
+  const renderItem = ({ item, index }: any) => {
     return (
       <BannerCard
-      onTap={() => { Navigate.navigate('NtfDetail', {}) }}
-        data={{
-          thumb:
-            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.11467.com%2F2021%2F09-04%2F3477865343.jpg&refer=http%3A%2F%2Fimg.11467.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=5185900885f6af72df52c17a32aa9e2c",
-          name: "NFT藏品",
-        }}
+        onTap={() => { Navigate.navigate('NtfDetail', {}) }}
+        data={item}
         cardStyle={CardStyle.PUBLISH_STYLE}
       ></BannerCard>
     );
   };
-  // const renderSection = (section: number) => {
-  //   return (
-  //     <View style={styles.section}>
-  //       <Text>
-  //         Section {section}
-  //       </Text>
-  //     </View>
-  //   );
-  // };
-
-  // const renderIndexPath = ({ section: section, row: row }) => {
-  //   return (
-  //     <View style={styles.row}>
-  //       <Text>
-  //         Section {section} Row {row}
-  //       </Text>
-  //       <View style={styles.line} />
-  //     </View>
-  //   );
-  // };
+  const bottomPadding = useSafeAreaInsets().bottom
   return (
-    <View style={[styles.container,{paddingBottom:useSafeAreaInsets().bottom}]}>
-      {/* <View style={styles.header_wraps}>
+    /* render something */
+    <View style={[styles.container, { paddingBottom: 100 + bottomPadding }]}>
+      <GDataList
+        requestMethod={MarketService.getMarketList}
+        requestParams={{}}
+        defaultPageSize={10}
+        noDeaultPageName={true}
+        renderItem={renderItem}
+        ItemSeparatorComponent={() => <View style={{ height: pxToDp(20) }}></View>}
+        ListEmptyComponent={() => (
+          <View style={styles.empty_box}>
+            <Text style={styles.empty_text1}>暂无相关订单～</Text>
+
+          </View>
+        )}
+      />
+    </View>
+  )
+};
+
+export default Market;
+
+{/* <View style={styles.header_wraps}>
         <View style={styles.search_wraps2}>
           <Searchbar
             placeholder="搜索"
@@ -229,35 +208,3 @@ useInitScreen({
           />
       </View>
       </View> */}
-
-      <LargeList
-        ref={listRef}
-        style={styles.list}
-        data={data}
-        showsVerticalScrollIndicator={false}
-        // heightForSection={() => 50}
-        // renderSection={renderSection}
-        heightForIndexPath={() => 150}
-        renderIndexPath={renderIndexPath}
-        refreshHeader={NFTActivity_header}
-        onRefresh={() => {
-          setTimeout(() => {
-            listRef.current?.endRefresh();
-            // setTimeout(()=>this.setState({prop:"your changed props"}));
-          }, 2000);
-        }}
-        loadingFooter={NFTActivity_footer}
-        allLoaded={allLoaded}
-        onLoading={() => {
-          setTimeout(() => {
-            listRef.current?.endLoading();
-            setallLoaded(true);
-          }, 2000);
-        }}
-      />
-    </View>
-  );
-};
-
-export default Market;
-

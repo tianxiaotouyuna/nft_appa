@@ -9,6 +9,7 @@ export const SCREEN = {
     Order:"Order",
     LoginOut:"LoginOut",
     Search:"Search",
+    NtfDetail:"NtfDetail",
 }
 
 /**
@@ -24,4 +25,6 @@ export const authRoutes = [
     SCREEN.Market,
     SCREEN.Search,
     SCREEN.LoginOut,
+    SCREEN.NtfDetail,
+
 ]

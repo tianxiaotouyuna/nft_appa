@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     }, 
     publish_image: {
         height:pxToDp(310),
+        marginHorizontal:pxToDp(8)
     },
     hot_image: {
         width:pxToDp(280),

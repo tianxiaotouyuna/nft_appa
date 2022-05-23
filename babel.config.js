@@ -19,7 +19,9 @@ module.exports = {
                     '@/hooks': './root/hooks',
                     '@/resources': './root/resources',
                     '@/components': './root/components',
-                    '@/pageranges': './root/pageranges'
+                    '@/pageranges': './root/pageranges',
+                    '@/request': './root/request',
+                    '@/services': './root/services'
 
                 },
             },

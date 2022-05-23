@@ -14,7 +14,6 @@ import { walletActions } from "@/action/walletActions";
 import PopBtn from "@/components/LoginOutBtn/PopBtn";
 import { useNavigation } from "@react-navigation/native";
 import { Navigate } from "@/utils/index";
-import { SafeAreaView } from "react-native-safe-area-context";
 const Asset: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
   const [showLoginout, setshowLoginout] = useState(false);
@@ -123,7 +122,6 @@ const Asset: FunctionComponent = () => {
   };
 
   return (
-    <SafeAreaView>
     <View style={styles.container}>
       {showButton()}
 
@@ -131,7 +129,6 @@ const Asset: FunctionComponent = () => {
         <PopBtn cancle_press={()=>setshowLoginout(false)} sure_press={logout}></PopBtn>
       </Modal>
     </View>
-    </SafeAreaView>
   );
 };
 

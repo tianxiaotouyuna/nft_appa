@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     btn_text: {
         marginLeft:pxToDp(10),
         fontSize:pxToSp(28),
-        color:'#3352DB'
+        color:UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE
     }
 })
 

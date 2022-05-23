@@ -21,7 +21,7 @@ type butonProps = {
 };
 
 const NtfButton: FunctionComponent<butonProps> = (props) => {
-  const { width, heigh, onPress, font, style, imageSource, text,textColor, borderRadius=1000,borderColor =UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE,backgroundColor='white'} =
+  const { width, heigh, onPress, font, style, imageSource, text,textColor=UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE, borderRadius=1000,borderColor =UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE,backgroundColor='white'} =
     props;
   return (
     <Ripple

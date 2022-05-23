@@ -18,10 +18,10 @@ import MaketRoute from './MaketRoute';
 import HomeRoute from './HomeRoute';
 import OrderRoute from './OrderRoute';
 import AssetRoute from './AssetRoute';
+import { TabBarComponent } from '@/components/tabBarComponent';
  'src/screens/ArtistScreen';
-export const Tab: FunctionComponent = ({ navigation, route }) => {
+export const Tab: FunctionComponent = () => {
 	const Tabs = AnimatedTabBarNavigator()
-
 	const TabBarIcon = (props: any) => {
 		return (
 			<Icon
@@ -45,6 +45,7 @@ export const Tab: FunctionComponent = ({ navigation, route }) => {
 					floating: true,//是否悬浮
 					dotSize: DotSize.SMALL
 				}}
+				
 			>
 				<Tabs.Screen
 					name="首页"

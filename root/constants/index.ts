@@ -42,7 +42,8 @@ const MERCHANT = 'energy';
 /** 好大夫合作KEY */
 const doctorPartnerKey = "08f50000a22b00a6";
 
-const BASE_PHP_HOST = `${envParams.PHP_HOST}/app/ewei_shopv2_api.php?i=${UNIACID}`;
+const BASE_NFT_HOST = `${envParams.PHP_HOST}/app/ewei_shopv2_api.php?i=${UNIACID}`;
+const BASE_OPENSEA_HOST = 'https://testnets-api.opensea.io/api/v1';
 
 /** 商家标识 */
 /**
@@ -70,7 +71,8 @@ export default {
   UNIACID,
   MERCHANT,
   PROTOCOL,
-  BASE_PHP_HOST,
+  BASE_NFT_HOST,
+  BASE_OPENSEA_HOST,
   isReleaseEnvironment,
   doctorPartnerKey,
 };

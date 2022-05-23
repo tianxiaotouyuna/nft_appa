@@ -1,10 +1,14 @@
+import MarketDetailWraps from "@/pageranges/MarketDetailWraps/MarketDetailWraps";
+import { MarketService } from "@/services/index";
 import { windowHeight, windowWidth } from "@/utils/system";
 import { useNavigation } from "@react-navigation/native";
 import { useHeaderHeight } from "@react-navigation/stack";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { View, Button, Platform, Alert, Image, Pressable, Animated, StyleSheet, Text } from "react-native";
 import { Icon } from 'react-native-elements';
+import FastImage from "react-native-fast-image";
 const NtfDetail: FunctionComponent = () => {
+  const [data, setdata] = useState({});
   const yOffset = useRef(new Animated.Value(0)).current;
   const headerOpacity = yOffset.interpolate({
     inputRange: [0, 200],
@@ -28,6 +32,11 @@ const NtfDetail: FunctionComponent = () => {
     extrapolate: 'clamp',
   });
   const navigation=useNavigation();
+  useEffect(() => {
+    getData()
+  
+  }, [])
+  
   useEffect(() => {
     navigation.setOptions({
       // headerStyle: {
@@ -62,6 +71,16 @@ const NtfDetail: FunctionComponent = () => {
     backArrowColorAnimation,
     backButtonBackgroundColorAnimation,]);
 
+    const getData=async ()=>{
+      
+      try {
+        const order = await MarketService.getAssetsOneInfo();
+        setdata(order?.data)
+        console.log('goods22=' + JSON.stringify(order))
+
+    } catch (error) {
+    }
+    }
   return (
     <View style={[styles.container]}>
       <Animated.ScrollView
@@ -80,10 +99,12 @@ const NtfDetail: FunctionComponent = () => {
         )}
         scrollEventThrottle={16}
       >
-					<Image style={styles.image} source={require('@/resources/nz.jpg')} />
-        <Text style={styles.paragraph}>Some random stuff why</Text>
-          <View style={{height:1000,backgroundColor:'yellow'}}></View>
-          <Text>assssss</Text>
+          <FastImage
+        style={styles.image }
+        resizeMode="cover"
+        source={{ uri: data?.imageThumbnailUrl }}
+      />
+        <MarketDetailWraps data={data} />
       </Animated.ScrollView>
     </View>
   );

@@ -5,8 +5,9 @@ import { color } from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop:pxToDp(26),
         flex: 1,
+        paddingTop:UIELEMENTS.PADDING_TOP,
+        paddingHorizontal:UIELEMENTS.PADDING_HORIZONTAL,
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
         alignItems:"center",
         justifyContent:"flex-start"
