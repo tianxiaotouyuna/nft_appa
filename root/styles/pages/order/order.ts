@@ -9,7 +9,12 @@ const styles = StyleSheet.create({
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
         paddingHorizontal: pxToDp(40),
         paddingVertical: pxToDp(24),
-    }
+    },
+    tab_right:{
+        width:pxToDp(44),
+        height:pxToDp(44),
+        marginHorizontal:pxToDp(32)
+    },
   
 })
 

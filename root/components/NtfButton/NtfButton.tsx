@@ -13,29 +13,33 @@ type butonProps = {
   children?: ReactNode;
   imageSource?: ImageSource;
   text?: string;
+  textColor?: string;
+  font?: number;
   borderRadius?: number;
+  borderColor?: string;
+  backgroundColor?: string;
 };
 
 const NtfButton: FunctionComponent<butonProps> = (props) => {
-  const { width, heigh, onPress, children, style, imageSource, text, borderRadius } =
+  const { width, heigh, onPress, font, style, imageSource, text,textColor, borderRadius=1000,borderColor =UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE,backgroundColor='white'} =
     props;
   return (
     <Ripple
       rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}
       onPress={onPress}
       style={[
-        style,
         styles.base,
-        { width: width, height: heigh, borderRadius: borderRadius },
+        style,
+        { width: width, height: heigh, borderRadius: borderRadius ,borderColor:borderColor,backgroundColor:backgroundColor},
       ]}
       rippleContainerBorderRadius={borderRadius}
     >
-      <View style={{ flexDirection: "row" }}>
-        <Image
+      <View style={{ flexDirection: "row",alignItems:"center" }}>
+        {imageSource?<Image
           style={styles.btn_icon}
           source={imageSource}
-        />
-        <Text style={styles.btn_text}>{text}</Text>
+        />:null}
+        <Text style={[styles.btn_text,{fontSize:font,color:textColor}]}>{text}</Text>
       </View>
     </Ripple>
   );

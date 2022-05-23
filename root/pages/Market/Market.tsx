@@ -1,10 +1,9 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
-import { View, Button, Platform, Alert, Image } from "react-native";
+import { View, Button, Platform, Alert, Image, Pressable } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import Ripple from "react-native-material-ripple";
 import { ActivityIndicator, Colors, Searchbar, Text } from "react-native-paper";
-import useWalletInfo from "@/hooks/useWalletInfo";
 import { ReduxToken, UIELEMENTS } from "@/constants/index";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "@/styles/pages/market/market";
@@ -14,15 +13,12 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { color } from "react-native-reanimated";
 import { pxToDp, pxToSp } from "@/utils/system";
 import { LargeList } from "react-native-largelist";
-import {
-  ChineseNormalFooter,
-  ChineseNormalHeader,
-  ChineseWithLastDateHeader,
-} from "react-native-spring-scrollview/Customize";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
 import { NFTActivity_footer } from "@/components/NFTActivity/NFTActivity_footer";
 import { NFTActivity_header } from "@/components/NFTActivity/NFTActivity_header";
-const Market: FunctionComponent = () => {
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+const Market: FunctionComponent = (navigation,route,) => {
+  Alert.alert(JSON.stringify(navigation.route.params))
   const listRef = useRef<LargeList>(null);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -58,14 +54,36 @@ const Market: FunctionComponent = () => {
     }
     data.push(sContent);
   }
+  
   const [inputValue, setinputValue] = useState("");
   const onChangeSearch = (query: string) => {
     setinputValue(query);
   };
 
   const connector = useWalletConnect(); // valid
-  const { walletInfo, sendReduxAction } = useWalletInfo();
 
+useInitScreen({
+  navigationOptions: {
+    title:'市场',
+    headerRight: () => (
+      <Pressable
+        onPress={() => {
+          Navigate.navigate("LoginOut", {});
+        }}
+      >
+        <Image
+          style={styles.tab_right}
+          source={require("@/resources/home/more.png")}
+        />
+      </Pressable>
+    ),
+    headerTitleAlign: "left",
+  },
+  statusBar: {
+    backgroundColor: "transparent",
+    barStyle: "light-content",
+  },
+});
   const connectThis = () => {
     sendReduxAction(ReduxToken.SET_WalletINFO, {
       walletInfo: { address: "0x11133323331" },
@@ -144,8 +162,8 @@ const Market: FunctionComponent = () => {
   //   );
   // };
   return (
-    <View style={styles.container}>
-      <View style={styles.header_wraps}>
+    <View style={[styles.container,{paddingBottom:useSafeAreaInsets().bottom}]}>
+      {/* <View style={styles.header_wraps}>
         <View style={styles.search_wraps2}>
           <Searchbar
             placeholder="搜索"
@@ -210,7 +228,7 @@ const Market: FunctionComponent = () => {
             )}
           />
       </View>
-      </View>
+      </View> */}
 
       <LargeList
         ref={listRef}
@@ -243,10 +261,3 @@ const Market: FunctionComponent = () => {
 
 export default Market;
 
-function payload(
-  SET_TABNAVCHANGE: string,
-  payload: any,
-  arg2: { title: string; headerTitleAlign: string }
-) {
-  throw new Error("Function not implemented.");
-}

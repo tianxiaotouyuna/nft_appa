@@ -1,4 +1,6 @@
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { Dimensions, PixelRatio, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const windowWidth = Dimensions.get('window').width;
 export const windowHeight = Dimensions.get('window').height;
@@ -14,7 +16,15 @@ const scalePx = Math.min(windowHeightPx / uiHeight, windowWidthPx / uiWidth);
 
 export const isAndroid = Platform.OS === "android";
 export const isIOS = Platform.OS === "ios";
+let tabHeigh= function(){
+    return useBottomTabBarHeight();
+}
+let bottom_inset= function(){
+    return useSafeAreaInsets().bottom;
+}
+export const paddingBottom_ = tabHeigh ;
 
+    
 export const pxToSp = (value: number) => {
     const scaleWidth = windowWidth / uiWidth;
     const scaleHeight = windowHeight / uiHeight;

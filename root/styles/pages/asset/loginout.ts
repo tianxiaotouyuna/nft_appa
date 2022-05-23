@@ -9,20 +9,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
         alignItems:"center",
-        justifyContent:"flex-start"
-    },
-    modalContent: {
-      backgroundColor: 'white',
-      padding: 22,
-      height:pxToDp(400),
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 4,
-      borderColor: 'rgba(0, 0, 0, 0.1)',
-    },
-    bottomModal: {
-      justifyContent: 'flex-end',
-      margin: 0,
+        justifyContent:'flex-end'
     },
     btn_icon: {
         marginTop:pxToDp(84),

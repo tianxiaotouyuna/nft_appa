@@ -15,7 +15,7 @@ import {
 } from "rn-placeholder";
 import { Navigate } from "../../utils";
 import BannerCard, { CardStyle } from "../BannerCard/BannerCard";
-import styles from "./nft-autoScroll";
+import styles from "./nftauto-style";
 import AutoScroll from "@homielab/react-native-auto-scroll";
 type BannerProps = {
   data: any;

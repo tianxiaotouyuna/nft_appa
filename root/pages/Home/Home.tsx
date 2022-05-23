@@ -65,6 +65,29 @@ const Home: FunctionComponent = () => {
       borderRadius={pxToDp(28)}
     />
   )
+
+  useInitScreen({
+    navigationOptions: {
+      title:'首页',
+      headerRight: () => (
+        <Pressable
+          onPress={() => {
+            Navigate.navigate("LoginOut", {});
+          }}
+        >
+          <Image
+            style={styles.tab_right}
+            source={require("@/resources/home/more.png")}
+          />
+        </Pressable>
+      ),
+      headerTitleAlign: "left",
+    },
+    statusBar: {
+      backgroundColor: "transparent",
+      barStyle: "light-content",
+    },
+  });
   return (
     <ScrollView
       style={styles.container}
@@ -141,7 +164,21 @@ const Home: FunctionComponent = () => {
         </View>
 
       </View>
-      <RankCard style={{ width: pxToDp(100), height: pxToDp(100) }} data={{ 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'name': 'NFT藏品', 'plus': '-80%' }}></RankCard>
+      {/* <RankCard style={{ width: pxToDp(100), height: pxToDp(100) }} data={{ 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'name': 'NFT藏品', 'plus': '-80%' }}></RankCard> */}
+      <Card>
+        <Placeholder Animation={ShineOverlay} Left={PlaceholderMedia} style={styles.spacing1}>
+          <PlaceholderLine width={80} />
+          <PlaceholderLine />
+          <PlaceholderLine width={30} />
+        </Placeholder>
+      </Card>
+      <Card>
+        <Placeholder Animation={ShineOverlay} Left={PlaceholderMedia} style={styles.spacing1}>
+          <PlaceholderLine width={80} />
+          <PlaceholderLine />
+          <PlaceholderLine width={30} />
+        </Placeholder>
+      </Card>
 
 
       <View style={styles.IGO_Warps}>
@@ -151,8 +188,7 @@ const Home: FunctionComponent = () => {
         </View>
         <Image style={styles.IGO_Warps_arrow} source={require('@/resources/home/return.png')} />
       </View>
-      <HotNFtCard borderRadius={14} data={{ 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'name': 'NFT藏品', 'plus': '-80%' }}></HotNFtCard>
-
+      {/* <HotNFtCard borderRadius={14} data={{ 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'name': 'NFT藏品', 'plus': '-80%' }}></HotNFtCard> */}
       <Card>
         <Placeholder Animation={ShineOverlay} Left={PlaceholderMedia} style={styles.spacing1}>
           <PlaceholderLine width={90} />
@@ -160,7 +196,14 @@ const Home: FunctionComponent = () => {
           <PlaceholderLine width={30} />
         </Placeholder>
       </Card>
-
+      <Card>
+        <Placeholder Animation={ShineOverlay} Left={PlaceholderMedia} style={styles.spacing1}>
+          <PlaceholderLine width={80} />
+          <PlaceholderLine />
+          <PlaceholderLine width={30} />
+        </Placeholder>
+      </Card>
+      
     </ScrollView>
   );
 };
