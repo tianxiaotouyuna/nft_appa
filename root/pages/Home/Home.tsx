@@ -27,7 +27,7 @@ const Home: FunctionComponent = () => {
 
   const [inputValue, setinputValue] = useState('');
   const [publishData, setpublishData] = useState( [
-    [{
+   {
       "id": 440821083,
       "imageUrl": 'https://img0.baidu.com/it/u=940732863,1808085947&fm=253&fmt=auto&app=138&f=JPEG?w=553&h=500',
       "tokenId": "3882",
@@ -44,8 +44,8 @@ const Home: FunctionComponent = () => {
       "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
       "collectionName": "THE TATTOO ARTIST",
       "salePrice": 0
-    }],
-    [{
+    },
+    {
       "id": 440821080,
       "imageUrl": 'https://img0.baidu.com/it/u=590006338,1231462113&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
       "tokenId": "3317",
@@ -62,8 +62,8 @@ const Home: FunctionComponent = () => {
       "assetAddress": "0x11ca9693156929ee2e7e1470c5e1a55b413e9007",
       "collectionName": "Psychedelics Anonymous Psilocybin",
       "salePrice": 0
-    }],
-    [{
+    },
+    {
       "id": 440821077,
       "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20220225s%2F99%2Fw400h499%2F20220225%2F88e8-4189a62eb588fa8ef89c28e098807c3f.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886949&t=993b49b1b7609a6e20fbc1453fc8a5f0',
       "tokenId": "3873",
@@ -80,8 +80,8 @@ const Home: FunctionComponent = () => {
       "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
       "collectionName": "THE TATTOO ARTIST",
       "salePrice": 0
-    }],
-    [{
+    },
+    {
       "id": 440821073,
       "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1011%2Fbe8ac782j00r0s6ur000vc000hs00ckc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886615&t=92429f76e923e99c6056a5fee02ebfd6',
       "tokenId": "3864",
@@ -98,8 +98,8 @@ const Home: FunctionComponent = () => {
       "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
       "collectionName": "THE TATTOO ARTIST",
       "salePrice": 0
-    }],
-    [{
+    },
+    {
       "id": 440821071,
       "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1011%2Fbe8ac782j00r0s6ur000vc000hs00ckc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886615&t=92429f76e923e99c6056a5fee02ebfd6',
       "tokenId": "21269221605813514809481462890651808057441306200692816149898726332250211712452",
@@ -116,8 +116,8 @@ const Home: FunctionComponent = () => {
       "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
       "collectionName": "THE TATTOO ARTIST",
       "salePrice": 0
-    }],
-    [{
+    },
+    {
       "id": 440821067,
       "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20220225s%2F99%2Fw400h499%2F20220225%2F88e8-4189a62eb588fa8ef89c28e098807c3f.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886949&t=993b49b1b7609a6e20fbc1453fc8a5f0',
       "tokenId": "105796204734605626712023685081731545537107694952405135557134397778624654289028",
@@ -125,7 +125,7 @@ const Home: FunctionComponent = () => {
       "assetAddress": "0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
       "collectionName": "ENS: Ethereum Name Service",
       "salePrice": 0
-    }],
+    },
   
 
   ]);
@@ -141,6 +141,25 @@ const Home: FunctionComponent = () => {
     { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
     { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
   ]);
+
+  const [hotNft, sethotNft] = useState(  [{
+    "id": 440821077,
+    "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20220225s%2F99%2Fw400h499%2F20220225%2F88e8-4189a62eb588fa8ef89c28e098807c3f.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886949&t=993b49b1b7609a6e20fbc1453fc8a5f0',
+    "tokenId": "3873",
+    "assetName": null,
+    "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+    "collectionName": "THE TATTOO ARTIST",
+    "salePrice": '0.1131 ETH'
+  },
+  {
+    "id": 440821076,
+    "imageUrl": 'https://img0.baidu.com/it/u=590006338,1231462113&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+    "tokenId": "3879",
+    "assetName": null,
+    "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+    "collectionName": "THE TATTOO ARTIST",
+    "salePrice": '0.0021 ETH'
+  }],);
   const onChangeSearch = (query: string) => {
     setinputValue(query)
   }
@@ -253,15 +272,15 @@ const Home: FunctionComponent = () => {
 
 
 
-      <View style={styles.IGO_Warps}>
+      {/* <View style={styles.IGO_Warps}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.IGO_Warps_Text}>市场排行</Text>
           <Image style={styles.IGO_Warps_Image} source={require('@/resources/home/ranking.png')} />
         </View>
 
-      </View>
+      </View> */}
       {/* <RankCard style={{ width: pxToDp(100), height: pxToDp(100) }} data={{ 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'name': 'NFT藏品', 'plus': '-80%' }}></RankCard> */}
-      <Card>
+      {/* <Card>
         <Placeholder Animation={ShineOverlay} Left={PlaceholderMedia} style={styles.spacing1}>
           <PlaceholderLine width={80} />
           <PlaceholderLine />
@@ -274,7 +293,7 @@ const Home: FunctionComponent = () => {
           <PlaceholderLine />
           <PlaceholderLine width={30} />
         </Placeholder>
-      </Card>
+      </Card> */}
 
 
       <View style={styles.IGO_Warps}>
@@ -284,8 +303,12 @@ const Home: FunctionComponent = () => {
         </View>
         <Image style={styles.IGO_Warps_arrow} source={require('@/resources/home/return.png')} />
       </View>
-      {/* <HotNFtCard borderRadius={14} data={{ 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'name': 'NFT藏品', 'plus': '-80%' }}></HotNFtCard> */}
-      <Card>
+      <BannerCard
+        onTap={() => { Navigate.navigate('NtfDetail', {}) }}
+        data={hotNft}
+        cardStyle={CardStyle.HOTNTF_STYLE}
+      />
+      {/* <Card>
         <Placeholder Animation={ShineOverlay} Left={PlaceholderMedia} style={styles.spacing1}>
           <PlaceholderLine width={90} />
           <PlaceholderLine width={80} />
@@ -298,7 +321,7 @@ const Home: FunctionComponent = () => {
           <PlaceholderLine />
           <PlaceholderLine width={30} />
         </Placeholder>
-      </Card>
+      </Card> */}
       
     </ScrollView>
   );
