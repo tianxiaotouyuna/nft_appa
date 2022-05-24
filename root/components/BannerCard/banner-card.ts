@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     }, 
     publish_image: {
         height:pxToDp(310),
-        marginHorizontal:pxToDp(8)
+        width:'100%',
     },
     hot_image: {
         width:pxToDp(280),
@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
         height:pxToDp(88),
         borderRadius: 100,
         marginTop:-pxToDp(44)
+    },
+    spacing1: {
+        margin: 12 
     },
 })
 

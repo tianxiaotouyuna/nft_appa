@@ -22,6 +22,7 @@ import RankCard from "@/components/RanCard/RankCard";
 import HotNFtCard from "@/components/HotNFtCard/HotNFtCard";
 import Carousel from 'react-native-snap-carousel'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import FastImage from "react-native-fast-image";
 
 const Home: FunctionComponent = () => {
 
@@ -172,6 +173,7 @@ const Home: FunctionComponent = () => {
       borderRadius={pxToDp(28)}
     />
   )
+  FastImage.clearMemoryCache();
   const renderHot = (item, index) => (
     <BannerCard
       data={item['item']}

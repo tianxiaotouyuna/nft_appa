@@ -24,7 +24,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
       >
         {data?.assetName}
       </Text>
-      <Text numberOfLines={3} style={{ width: pxToDp(750) }}>
+      <Text numberOfLines={3} style={{ width:'100%' }}>
         {data?.description}
       </Text>
       <View
@@ -105,7 +105,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
         <View style={{}}>
           <Text style={{ color: "#707A83", fontSize: pxToDp(24) }}>网络</Text>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ color: "#383838" ,marginTop:pxToDp(6)}}>123</Text>
+            <Text style={{ color: "#383838" ,marginTop:pxToDp(6)}}>无数据</Text>
           </View>
         </View>
 
@@ -143,7 +143,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
             发行数量
           </Text>
           <View style={{ flexDirection: "row", alignItems: "center",marginTop:pxToDp(6) }}>
-            <Text style={{ color: "#383838" }}>{data?.totalSupply||1}</Text>
+            <Text style={{ color: "#383838" }}>{data?.totalSupply||'无数据'}</Text>
           </View>
         </View>
 

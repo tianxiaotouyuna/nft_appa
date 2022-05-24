@@ -52,7 +52,7 @@ const Market: FunctionComponent = () => {
       headerRight: () => (
         <Pressable
           onPress={() => {
-            Navigate.navigate("LoginOut", {});
+            // Navigate.navigate("LoginOut", {});
           }}
         >
           <Image
@@ -130,7 +130,7 @@ const Market: FunctionComponent = () => {
         ItemSeparatorComponent={() => <View style={{ height: pxToDp(20) }}></View>}
         ListEmptyComponent={() => (
           <View style={styles.empty_box}>
-            <Text style={styles.empty_text1}>暂无相关订单～</Text>
+            <Text style={styles.empty_text1}>暂无相关数据～</Text>
 
           </View>
         )}

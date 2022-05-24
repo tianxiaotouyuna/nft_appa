@@ -12,12 +12,13 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Navigate } from "@/utils/index";
+import { Placeholder, PlaceholderLine, PlaceholderMedia, ShineOverlay } from "rn-placeholder";
 
 const NtfDetail: FunctionComponent = () => {
-  const params: any = useRoute().params?.item?? {};
+  const params: any = useRoute().params?.item ?? {};
   const [data, setdata] = useState({});
   const bottomRef = useRef<any>();
-
+  const [imageEnd, setimageEnd] = useState(false);
   const yOffset = useRef(new Animated.Value(0)).current;
   const headerOpacity = yOffset.interpolate({
     inputRange: [0, 200],
@@ -30,7 +31,7 @@ const NtfDetail: FunctionComponent = () => {
     extrapolate: "clamp",
   });
   const headerOpacity3 = yOffset.interpolate({
-    inputRange: [windowWidth - (44 + useSafeAreaInsets().top), windowWidth - (44 + useSafeAreaInsets().top) + 80],
+    inputRange: [windowWidth - (44 + useSafeAreaInsets().top) + 40, windowWidth - (44 + useSafeAreaInsets().top) + 80],
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
@@ -59,23 +60,25 @@ const NtfDetail: FunctionComponent = () => {
       title: data?.assetName,
       headerTitleStyle: { opacity: headerOpacity3 },
       headerLeft: () => (
-        <Animated.View
-          style={{
-            borderRadius: 500,
-            padding: 5,
-            marginLeft: 10,
-            opacity: headerOpacity2, backgroundColor: 'white'
-          }}>
-          <Animated.Image source={require('@/resources/home/return_2.png')}
-          ></Animated.Image>
-        </Animated.View>
+        <Pressable onPress={() => Navigate.goBack()}>
+          <Animated.View
+            style={{
+              borderRadius: 500,
+              padding: 5,
+              marginLeft: 10,
+              opacity: headerOpacity2, backgroundColor: 'white'
+            }}>
+            <Animated.Image source={require('@/resources/home/return_2.png')}
+            ></Animated.Image>
+          </Animated.View>
+        </Pressable>
       ),
       headerBackground: () => (
         <Animated.View
           style={{
             backgroundColor: "white",
             ...StyleSheet.absoluteFillObject,
-            opacity: headerOpacity3,
+            opacity: headerOpacity,
           }}
         />
       ),
@@ -87,10 +90,11 @@ const NtfDetail: FunctionComponent = () => {
     backArrowColorAnimation,
     backButtonBackgroundColorAnimation,]);
 
-  const getData =  async () => {
+  const getData = async () => {
 
-      const order = await MarketService.getAssetsOneInfo({'AssetContractAddress':params?.assetAddress,'tokenId':params?.tokenId},{});
-      setdata(order?.data)
+    const order = await MarketService.getAssetsOneInfo({ 'AssetContractAddress': params?.assetAddress, 'tokenId': params?.tokenId }, {});
+    setdata(order?.data)
+    console.log(JSON.stringify('data==='+JSON.stringify(order)))
 
   }
 
@@ -114,11 +118,23 @@ const NtfDetail: FunctionComponent = () => {
         )}
         scrollEventThrottle={16}
       >
+
         <FastImage
-          style={styles.image}
+          style={imageEnd ? styles.image : { width: 0, height: 0 }}
           resizeMode="cover"
           source={{ uri: data?.imageThumbnailUrl }}
+          onLoadEnd={() => {
+            setimageEnd(true)
+          }}
+          fallback={true}
         />
+        {imageEnd == false ?
+          (
+              <Placeholder Animation={ShineOverlay} >
+                <PlaceholderMedia style={[styles.image]} />
+              </Placeholder>
+          ) : null}
+        <Center data={data} />
         <Center data={data} />
       </Animated.ScrollView>
 
@@ -143,7 +159,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: windowWidth,
-    height: windowWidth
+    height: windowWidth, backgroundColor: '#EEEEEE'
   },
 });
 

@@ -15,8 +15,9 @@ export const getMarketList = async () => {
       }
       new_res.push(sub_arr)
   }
+  res.data=new_res
   console.log(JSON.stringify('res==='+JSON.stringify(new_res)))
-  return new_res
+  return res
 }
   export const getMarketList2 = (params?: any) => {
 
