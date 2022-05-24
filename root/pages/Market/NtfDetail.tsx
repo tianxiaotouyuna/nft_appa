@@ -2,7 +2,7 @@ import Bottom from "@/pageranges/markdetail/bottom/Bottom";
 import Center from "@/pageranges/markdetail/center/Center";
 import { MarketService } from "@/services/index";
 import { pxToDp, windowHeight, windowWidth } from "@/utils/system";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { View, Button, Platform, Alert, Image, Pressable, Animated, StyleSheet, Text } from "react-native";
 import FastImage from "react-native-fast-image";
@@ -11,10 +11,11 @@ import {
   UIManager
 } from 'react-native';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Navigate } from "@/utils/index";
 
 const NtfDetail: FunctionComponent = () => {
+  const params: any = useRoute().params?.item?? {};
   const [data, setdata] = useState({});
-  
   const bottomRef = useRef<any>();
 
   const yOffset = useRef(new Animated.Value(0)).current;
@@ -29,7 +30,7 @@ const NtfDetail: FunctionComponent = () => {
     extrapolate: "clamp",
   });
   const headerOpacity3 = yOffset.interpolate({
-    inputRange: [windowWidth-(44+useSafeAreaInsets().top), windowWidth-(44+useSafeAreaInsets().top)+80],
+    inputRange: [windowWidth - (44 + useSafeAreaInsets().top), windowWidth - (44 + useSafeAreaInsets().top) + 80],
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
@@ -44,29 +45,29 @@ const NtfDetail: FunctionComponent = () => {
     outputRange: ['rgb(255,255,255)', 'rgb(0,0,0)'], // white to black
     extrapolate: 'clamp',
   });
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   useEffect(() => {
     getData()
-  
+
   }, [])
-  
+
   useEffect(() => {
     navigation.setOptions({
       // headerStyle: {
       //   opacity: headerOpacity,
       // },
-      title:data?.assetName,
-      headerTitleStyle:{opacity:headerOpacity3},
+      title: data?.assetName,
+      headerTitleStyle: { opacity: headerOpacity3 },
       headerLeft: () => (
-        <Animated.View 
-        style={{
-          borderRadius: 500,
-          padding: 5,
-          marginLeft: 10,
-          opacity:headerOpacity2,backgroundColor:'white'
-        }}>
-        <Animated.Image source={require('@/resources/home/return_2.png')}
-       ></Animated.Image>
+        <Animated.View
+          style={{
+            borderRadius: 500,
+            padding: 5,
+            marginLeft: 10,
+            opacity: headerOpacity2, backgroundColor: 'white'
+          }}>
+          <Animated.Image source={require('@/resources/home/return_2.png')}
+          ></Animated.Image>
         </Animated.View>
       ),
       headerBackground: () => (
@@ -86,28 +87,17 @@ const NtfDetail: FunctionComponent = () => {
     backArrowColorAnimation,
     backButtonBackgroundColorAnimation,]);
 
-    const Teste=()=>{
-      const handle = findNodeHandle(bottomRef.current);
-      UIManager.measure(handle , (x , y , w , h ,pagex) => {
-          console.log(pagex)
-          return h;
-      })
-  }
-    const getData=async ()=>{
-      
-      try {
-        const order = await MarketService.getAssetsOneInfo();
-        setdata(order?.data)
-        console.log('goods22=' + JSON.stringify(order))
+  const getData =  async () => {
 
-    } catch (error) {
-    }
-    }
+      const order = await MarketService.getAssetsOneInfo({'AssetContractAddress':params?.assetAddress,'tokenId':params?.tokenId},{});
+      setdata(order?.data)
+
+  }
 
   return (
     <View style={[styles.container]}>
       <Animated.ScrollView
-      style={{marginBottom:pxToDp(165)+useSafeAreaInsets().bottom}}
+        style={{ marginBottom: pxToDp(165) + useSafeAreaInsets().bottom }}
         contentContainerStyle={{ paddingTop: 0 }}
         showsVerticalScrollIndicator={false}
         onScroll={Animated.event(
@@ -124,16 +114,16 @@ const NtfDetail: FunctionComponent = () => {
         )}
         scrollEventThrottle={16}
       >
-          <FastImage
-        style={styles.image }
-        resizeMode="cover"
-        source={{ uri: data?.imageThumbnailUrl }}
-      />
-        <Center data={data} />
+        <FastImage
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: data?.imageThumbnailUrl }}
+        />
         <Center data={data} />
       </Animated.ScrollView>
 
-        <Bottom ref={bottomRef}/>
+
+      <Bottom onPress_2={() => { Navigate.navigate('Buy', {}) }} />
     </View>
   );
 };
@@ -152,8 +142,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   image: {
-    width:windowWidth,
-    height:windowWidth
+    width: windowWidth,
+    height: windowWidth
   },
 });
 

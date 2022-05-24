@@ -1,9 +1,24 @@
 import { NFTRequest } from "@/request/index"
+import jquery from "@/utils/jquery"
+import { Alert } from "react-native"
 
 /**
  * 获取NFT资产列表
  */
-export const getMarketList = (params?: any) => {
+export const getMarketList = async () => {
+  const res=await NFTRequest.get('getMarketList/')
+  var new_res=new Array()
+  for( var i=0;i<10;i++){
+  var sub_arr=new Array()
+      for(var j=0;j<2;j++){
+        sub_arr.push(res.data.assets[i*2+j])
+      }
+      new_res.push(sub_arr)
+  }
+  console.log(JSON.stringify('res==='+JSON.stringify(new_res)))
+  return new_res
+}
+  export const getMarketList2 = (params?: any) => {
 
     return {
         "msg": "操作成功",
@@ -12,9 +27,9 @@ export const getMarketList = (params?: any) => {
           [{
             "id": 440821083,
             "imageUrl": 'https://img0.baidu.com/it/u=940732863,1808085947&fm=253&fmt=auto&app=138&f=JPEG?w=553&h=500',
-            "tokenId": "3882",
+            "tokenId": "51155626847932538964005676839147869416091349697233307241626733179541737439233",
             "assetName": '悟空来了',
-            "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
+            "assetAddress": "0x495f947276749ce646f68ac8c248420045cb7b5e",
             "collectionName": "THE TATTOO ARTIST",
             "salePrice": '0.1131 ETH'
           },
@@ -112,14 +127,20 @@ export const getMarketList = (params?: any) => {
       
         ]
       }
-    // return NFTRequest.get('www.baidu.com')
 }
 
-/**
- * 获取NFT资产列表
+  /**
+ * 获取NFT详情
  */
- export const getAssetsOneInfo = (params?: any) => {
-   return{
+ export const getAssetsOneInfo = (path?: any,data:any) => {
+
+  const api=`getAssetsOneInfo/${!!path ? `${jquery.path(path)}` : ""}`
+    return NFTRequest.get(api,data)
+  }
+
+  
+ export const getAssetsOneInfo2 = (path?: any,data:any) => {
+  return{
     "msg": "操作成功",
     "code": 200,
     "data": {

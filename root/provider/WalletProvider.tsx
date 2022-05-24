@@ -1,10 +1,11 @@
 import "react-native-gesture-handler";
-import WalletConnectProvider from "@walletconnect/react-native-dapp";
+import WalletConnectProvider, { RenderQrcodeModalProps } from "@walletconnect/react-native-dapp";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 
 import React, { FunctionComponent } from "react";
 import { Alert, Platform, View } from "react-native";
 import { Nav } from "@/routes/Nav";
+import { CustomBottomSheet } from "@/components/CustomBottomSheet/CustomBottomSheet";
 const { default: AsyncStorage } = require('@react-native-async-storage/async-storage');
 
  const WalletProvider: any = (options:any) => {
@@ -23,11 +24,14 @@ const { default: AsyncStorage } = require('@react-native-async-storage/async-sto
     //   close:()=>{console.log('关闭')}
     // }}
     redirectUrl={
-      Platform.OS === "web" ? "window.location.origin" : "nftxm://"
+      Platform.OS == 'android' ? 'nftxm://nftxm/' : 'nftxm://'
     }
     storageOptions={{
       asyncStorage: AsyncStorage,
     }}
+    renderQrcodeModal={(props: RenderQrcodeModalProps): JSX.Element => (
+      <CustomBottomSheet {...props} />
+    )}
   >
       <Nav/>
   </WalletConnectProvider>

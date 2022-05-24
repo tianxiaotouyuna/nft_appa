@@ -112,7 +112,6 @@ const Market: FunctionComponent = () => {
   const renderItem = ({ item, index }: any) => {
     return (
       <BannerCard
-        onTap={() => { Navigate.navigate('NtfDetail', {}) }}
         data={item}
         cardStyle={CardStyle.HOTNTF_STYLE}
       ></BannerCard>

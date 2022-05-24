@@ -1,6 +1,7 @@
 import * as ReduxToken from './redux-token';
 import * as CacheKeys from './cache-keys';
 import * as UIELEMENTS from './ui-elements';
+import { Platform } from 'react-native';
 
 const isReleaseEnvironment = true; // 是否发布环境
 // const isReleaseEnvironment = false; // 是否发布环境
@@ -42,9 +43,10 @@ const MERCHANT = 'energy';
 /** 好大夫合作KEY */
 const doctorPartnerKey = "08f50000a22b00a6";
 
-const BASE_NFT_HOST = `${envParams.PHP_HOST}/app/ewei_shopv2_api.php?i=${UNIACID}`;
-const BASE_OPENSEA_HOST = 'https://testnets-api.opensea.io/api/v1';
 
+
+const BASE_HOST='http://43.155.94.122:8080/api/nftMarket'// 线上测试环境
+// const BASE_HOST='http://192.168.1.105:8080/api/nftMarket'// 测试环境
 /** 商家标识 */
 /**
  * 隐私
@@ -54,7 +56,6 @@ const PROTOCOL = {
   USER: 'energy_002', // 用户协议
   PRIVACY: 'energy_003', // 隐私政策
 };
-
 /**
  * 导航配
  */
@@ -71,8 +72,7 @@ export default {
   UNIACID,
   MERCHANT,
   PROTOCOL,
-  BASE_NFT_HOST,
-  BASE_OPENSEA_HOST,
+  BASE_HOST,
   isReleaseEnvironment,
   doctorPartnerKey,
 };

@@ -36,6 +36,7 @@ function connect(connector) {
   };
 }
 
+
 //These are the function calls which are dispatched when the user makes a request. The state of the app changes with the status of the request response.
 function request(message: string) {
   return { type: walletConstants.CONNECT_REQUEST, message };

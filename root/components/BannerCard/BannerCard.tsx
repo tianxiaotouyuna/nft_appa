@@ -39,7 +39,7 @@ const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
 );
 const item_one=(item:any,index:number)=>(
 
-<Ripple onPress={()=>Navigate.navigate('NtfDetail', {id:item?.id}) } rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} rippleContainerBorderRadius={borderRadius}>
+<Ripple onPress={()=>Navigate.navigate('NtfDetail', {item:item}) } rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} rippleContainerBorderRadius={borderRadius} key={`${index}`}>
 <BaseCard style={[{ borderRadius: borderRadius },{width:pxToDp(326)}]}>
     <FastImage
       style={[styles.publish_image, { borderRadius: borderRadius }]}

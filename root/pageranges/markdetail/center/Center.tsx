@@ -48,7 +48,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
         <View style={{}}>
           <Text style={{ color: "#707A83", fontSize: pxToDp(24) }}>拥有者</Text>
           <View style={{ flexDirection: "row", alignItems: "center",marginTop:pxToDp(6) }}>
-            <Text style={{ color: "#3352DB" }}>123</Text>
+            <Text style={{ color: "#3352DB" }}>{data?.topOwnerships?.[0]?.quantity}人</Text>
             <Image
               style={styles.arrow}
               source={require("@/resources/return.png")}
@@ -143,7 +143,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
             发行数量
           </Text>
           <View style={{ flexDirection: "row", alignItems: "center",marginTop:pxToDp(6) }}>
-            <Text style={{ color: "#383838" }}>123</Text>
+            <Text style={{ color: "#383838" }}>{data?.totalSupply||1}</Text>
           </View>
         </View>
 
@@ -160,7 +160,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
               }}
               numberOfLines={1}
             >
-              {data?.creatorAddress}
+              {data?.schemaName}
             </Text>
           </View>
         </View>

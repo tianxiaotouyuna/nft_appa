@@ -8,6 +8,7 @@ import React, { FunctionComponent } from 'react'
 import LoginOut from "@/pages/Asset/LoginOut";
 import Search from "@/pages/Home/Search";
 import NtfDetail from "@/pages/Market/NtfDetail";
+import Buy from "@/pages/Market/Buy/Buy";
 
 const ScreenStack = createStackNavigator();
 
@@ -18,7 +19,8 @@ const Screen: FunctionComponent = () => {
             <ScreenStack.Screen name={Route.SCREEN.LoginOut} component={LoginOut}/>
             <ScreenStack.Screen name={Route.SCREEN.Search} component={Search}/>
             <ScreenStack.Screen name={Route.SCREEN.Market} component={Market}/>
-            <ScreenStack.Screen name={Route.SCREEN.NtfDetail} component={NtfDetail}/>
+            <ScreenStack.Screen name={Route.SCREEN.NtfDetail} component={NtfDetail}  options={{ title: ' ' }}/>
+            <ScreenStack.Screen name={Route.SCREEN.Buy} component={Buy}/>
 
         </ScreenStack.Navigator>
     )

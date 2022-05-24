@@ -21,6 +21,7 @@ import NftAutoScroll from "../../components/AutoScroll/NftAutoScroll";
 import RankCard from "@/components/RanCard/RankCard";
 import HotNFtCard from "@/components/HotNFtCard/HotNFtCard";
 import Carousel from 'react-native-snap-carousel'
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Home: FunctionComponent = () => {
 
@@ -204,9 +205,7 @@ const Home: FunctionComponent = () => {
     },
   });
   return (
-    <ScrollView
-      style={styles.container}
-    >
+    <ScrollView style={[styles.container, { marginBottom: 100 + useSafeAreaInsets().bottom }]}>
       <Searchbar
         placeholder="搜索"
         onChangeText={(query) => { onChangeSearch(query) }}
