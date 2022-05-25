@@ -19,9 +19,9 @@ const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
                         价格
                     </Text>
                     <View style={{ alignItems: "center" }}>
-                        <Text style={{ color: "#383838", fontSize: pxToDp(28), fontWeight: 'bold' }}>123</Text>
-                        <Text style={{ color: "#707A83", fontSize: pxToDp(24), marginTop: pxToDp(10) }}>123</Text>
-                        <Text style={{ color: "#707A83", fontSize: pxToDp(24), marginTop: pxToDp(10) }}>123</Text>
+                        <Text style={{ color: "#383838", fontSize: pxToDp(28), fontWeight: 'bold' }}>{data?.sellOrders[0]?.current_price}</Text>
+                        {/* <Text style={{ color: "#707A83", fontSize: pxToDp(24), marginTop: pxToDp(10) }}>123</Text> */}
+                        {/* <Text style={{ color: "#707A83", fontSize: pxToDp(24), marginTop: pxToDp(10) }}>123</Text> */}
                     </View>
                 </View>
 

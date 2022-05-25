@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import Ripple from "react-native-material-ripple";
@@ -7,8 +7,9 @@ import { Text } from "react-native-paper";
 import {UIELEMENTS } from "@/constants/index";
 import styles from "@/styles/pages/order/order";
 import useInitScreen from "@/hooks/useInitScreen";
-const Order: FunctionComponent = () => {
-
+import { useDispatch } from "react-redux";
+import { walletActions } from "@/action/walletActions";
+  const Order: FunctionComponent = () => {
   useInitScreen({
     navigationOptions: {
       title:'订单',
@@ -21,6 +22,18 @@ const Order: FunctionComponent = () => {
   });
 
   const connector = useWalletConnect(); // valid
+  const buy=()=>{
+    Alert.alert('2')
+
+      connector.signPersonalMessage([]).then(async function (result: any) {
+          console.log("成功：" + JSON.stringify(result));
+          Alert.alert('1')
+        })
+        .catch(function (error: any) {
+          console.log("失败：" + error);
+          Alert.alert('2')
+        });
+  }
   const showButton = () => {
     if (!connector.connected) {
       /**
@@ -41,7 +54,7 @@ const Order: FunctionComponent = () => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#fff",
-      }} onPress={() => connector.killSession()}><Text>Kill Session</Text></Ripple>)
+      }} onPress={() => buy()}><Text>购买1</Text></Ripple>)
     }
   }
 
@@ -50,7 +63,6 @@ const Order: FunctionComponent = () => {
       style={styles.container}
     >
       {showButton()}
-
     </View>
   );
 };

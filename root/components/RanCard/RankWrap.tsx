@@ -13,7 +13,6 @@ import BannerCard, { CardStyle } from "../BannerCard/BannerCard";
 import styles from "./rank-style";
 import AutoScroll from "@homielab/react-native-auto-scroll";
 import BaseCard from "../BaseCard/BaseCard";
-import { Title } from "react-native-paper";
 type RankCardProps = {
     data: any;
     style?: StyleProp<ViewStyle>;

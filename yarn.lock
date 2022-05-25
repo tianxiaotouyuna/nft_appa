@@ -7368,6 +7368,11 @@ react-native-screens@^2.16.1:
   resolved "https://registry.npmmirror.com/react-native-screens/-/react-native-screens-2.18.1.tgz#47b9991c6f762d00d0ed3233e5283d523e859885"
   integrity sha512-r5WZLpmx2hHjC1RgMdPq5YpSU9tEhBpUaZ5M1SUtNIONyiLqQVxabhRCINdebIk4depJiIl7yw2Q85zJyeX6fw==
 
+react-native-scrollable-tab@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/react-native-scrollable-tab/-/react-native-scrollable-tab-1.0.13.tgz#8a725fb57ba06b2a7f027074ab898dbad662f9b2"
+  integrity sha1-inJftXugayp/AnB0q4mNutZi+bI=
+
 react-native-size-matters@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"

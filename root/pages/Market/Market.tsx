@@ -68,47 +68,6 @@ const Market: FunctionComponent = () => {
       barStyle: "light-content",
     },
   });
-  const connectThis = () => {
-    sendReduxAction(ReduxToken.SET_WalletINFO, {
-      walletInfo: { address: "0x11133323331" },
-    });
-    connector.connect();
-  };
-  const showButton = () => {
-    if (!connector.connected) {
-      /**
-       *  Connect! 🎉
-       */
-      return (
-        <Ripple
-          style={{
-            height: 100,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#fff",
-          }}
-          onPress={() => connectThis()}
-        >
-          <Text>Connect mea</Text>
-        </Ripple>
-      );
-    } else {
-      return (
-        <Ripple
-          style={{
-            height: 100,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#fff",
-          }}
-          onPress={() => connector.killSession()}
-        >
-          <Text>Kill Session</Text>
-          <Text>{walletInfo?.address}</Text>
-        </Ripple>
-      );
-    }
-  };
   const renderItem = ({ item, index }: any) => {
     return (
       <BannerCard

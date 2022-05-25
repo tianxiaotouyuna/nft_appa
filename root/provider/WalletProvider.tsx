@@ -5,7 +5,6 @@ import QRCodeModal from "@walletconnect/qrcode-modal";
 import React, { FunctionComponent } from "react";
 import { Alert, Platform, View } from "react-native";
 import { Nav } from "@/routes/Nav";
-import { CustomBottomSheet } from "@/components/CustomBottomSheet/CustomBottomSheet";
 const { default: AsyncStorage } = require('@react-native-async-storage/async-storage');
 
  const WalletProvider: any = (options:any) => {
@@ -29,9 +28,9 @@ const { default: AsyncStorage } = require('@react-native-async-storage/async-sto
     storageOptions={{
       asyncStorage: AsyncStorage,
     }}
-    renderQrcodeModal={(props: RenderQrcodeModalProps): JSX.Element => (
-      <CustomBottomSheet {...props} />
-    )}
+    // renderQrcodeModal={(props: RenderQrcodeModalProps): JSX.Element => (
+    //   <CustomBottomSheet {...props} />
+    // )}
   >
       <Nav/>
   </WalletConnectProvider>

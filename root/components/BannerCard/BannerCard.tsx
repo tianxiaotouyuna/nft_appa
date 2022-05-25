@@ -30,15 +30,18 @@ type BannerCardProps = {
 };
 const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
   const { data, style, cardStyle, onTap, borderRadius = pxToDp(10) } = props;
-const [imageEnd, setimageEnd] = useState(false);
+const [imageEnd, setimageEnd] = useState(true);
 const [imageError, setimageError] = useState(false);
-const renderHotNtf = () => (
+const renderHotNtf = () =>{
+  console.log('================'+JSON.stringify(data))
+ return (
     <View style={[{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
       {data?.map((item: any, index: number) => (
         item_one(item, index)
       ))}
     </View>
-  );
+  );  
+}
   const item_one = (item: any, index: number) => (
 
     <Ripple onPress={() => Navigate.navigate('NtfDetail', { item: item })} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} rippleContainerBorderRadius={borderRadius} key={`${index}`}>

@@ -94,8 +94,6 @@ const NtfDetail: FunctionComponent = () => {
 
     const order = await MarketService.getAssetsOneInfo({ 'AssetContractAddress': params?.assetAddress, 'tokenId': params?.tokenId }, {});
     setdata(order?.data)
-    console.log(JSON.stringify('data==='+JSON.stringify(order)))
-
   }
 
   return (
@@ -139,7 +137,7 @@ const NtfDetail: FunctionComponent = () => {
       </Animated.ScrollView>
 
 
-      <Bottom onPress_2={() => { Navigate.navigate('Buy', {}) }} />
+      <Bottom onPress_2={() => { Navigate.navigate('Buy', {data:data}) }} />
     </View>
   );
 };

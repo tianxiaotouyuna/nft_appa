@@ -61,4 +61,27 @@ function disconnect(connector) {
   function requestDisconnect(message: string) {
     return { type: walletConstants.DISCONNECT_REQUEST, message };
   }
+
+
+
+function buy(connector) {
+  return (dispatch: any) => {
+    let asyncConnect = () =>
+      connector
+        .signPersonalMessage()
+        .then(async function (result: any) {
+          console.log("成功：" + JSON.stringify(result));
+          dispatch(success(result));
+          await Storage.save(CacheKeys.WALLETINFO, result);
+
+        })
+        .catch(function (error: any) {
+          console.log("失败：" + error);
+          dispatch(failure(error));
+        });
+
+    dispatch(request("Connecting to wallet"));
+    asyncConnect();
+  };
+}
 }

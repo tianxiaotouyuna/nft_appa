@@ -46,7 +46,7 @@ const doctorPartnerKey = "08f50000a22b00a6";
 
 
 const BASE_HOST='http://43.155.94.122:8080/api/nftMarket'// 线上测试环境
-// const BASE_HOST='http://192.168.1.105:8080/api/nftMarket'// 测试环境
+// const BASE_HOST='http://192.168.1.103:8080/api/nftMarket'// 测试环境
 /** 商家标识 */
 /**
  * 隐私

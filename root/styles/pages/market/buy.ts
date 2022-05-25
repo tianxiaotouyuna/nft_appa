@@ -13,7 +13,11 @@ const styles = StyleSheet.create({
         width:pxToDp(206),
         height:pxToDp(206),
         borderRadius:pxToDp(20)
-    }
+    },
+    bottomModal: {
+      justifyContent: 'flex-end',
+      margin: 0,
+    },
 })
 
 export default styles;
