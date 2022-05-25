@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { Alert, View } from "react-native";
+import { Alert, TouchableHighlight, View } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import Ripple from "react-native-material-ripple";
@@ -9,7 +9,10 @@ import styles from "@/styles/pages/order/order";
 import useInitScreen from "@/hooks/useInitScreen";
 import { useDispatch } from "react-redux";
 import { walletActions } from "@/action/walletActions";
-  const Order: FunctionComponent = () => {
+import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
+import Market from "../Market/Market";
+import Home from "../Home/Home";
+const Order: FunctionComponent = () => {
   useInitScreen({
     navigationOptions: {
       title:'订单',
@@ -58,12 +61,47 @@ import { walletActions } from "@/action/walletActions";
     }
   }
 
+  const handleChangeTab=()=>{
+
+  }
+
+ const renderTab = (name, page, isTabActive, onPressHandler, onLayoutHandler) => {
+    return (
+      <TouchableHighlight
+        key={`${name}_${page}`}
+        onPress={() => onPressHandler(page)}
+        onLayout={onLayoutHandler}
+        style={{ flex: 1, width: 100 }}
+        underlayColor="#aaaaaa"
+      >
+        <Text>{name} haloo</Text>
+      </TouchableHighlight>
+    );
+  }
+const showScrollBar=()=>{
+  return(
+
+    <ScrollableTabView>
+      <Text tabLabel='Tab #1'>My</Text>
+       <Text tabLabel='Tab #2'>favorite</Text>
+       <Text tabLabel='Tab #3'>project</Text>
+  </ScrollableTabView>
+  // <ScrollableTabView
+  //     style={styles.container}
+  //     renderTabBar={() => <ScrollableTabBar renderTab={renderTab}/>}
+  //     onChangeTab={handleChangeTab}
+  //     // onChangeTab={this.handleChangeTab}
+  //   >
+  //   <Text tabLabel='Tab #1'>My</Text>
+  //   <Text tabLabel='Tab #2'>favorite</Text>
+  //   <Text tabLabel='Tab #3'>project</Text>
+  //   </ScrollableTabView>
+  )
+}
   return (
-    <View
-      style={styles.container}
-    >
-      {showButton()}
-    </View>
+    showScrollBar()
+
+      
   );
 };
 
