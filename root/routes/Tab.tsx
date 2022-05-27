@@ -18,8 +18,6 @@ import MaketRoute from './MaketRoute';
 import HomeRoute from './HomeRoute';
 import OrderRoute from './OrderRoute';
 import AssetRoute from './AssetRoute';
-import { TabBarComponent } from '@/components/tabBarComponent';
- 'src/screens/ArtistScreen';
 export const Tab: FunctionComponent = () => {
 	const Tabs = AnimatedTabBarNavigator()
 	const TabBarIcon = (props: any) => {
@@ -52,11 +50,14 @@ export const Tab: FunctionComponent = () => {
 					component={HomeRoute}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
-							<TabBarIcon
-								focused={focused}
-								tintColor={color}
-								name="home"
-							/>
+						focused?<Image
+						style={styles.tab_right}
+						source={require("@/resources/home.png")}
+					  />
+					  :<Image
+					  style={styles.tab_right}
+					  source={require("@/resources/home_un.png")}
+					/>
 						),
 					}}
 				/>
@@ -65,11 +66,14 @@ export const Tab: FunctionComponent = () => {
 					component={MaketRoute}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
-							<TabBarIcon
-								focused={focused}
-								tintColor={color}
-								name="search"
-							/>
+						focused?<Image
+						style={styles.tab_right}
+						source={require("@/resources/issued.png")}
+					  />
+					  :<Image
+					  style={styles.tab_right}
+					  source={require("@/resources/issued_un.png")}
+					/>
 						),
 					}}
 				/>
@@ -78,11 +82,14 @@ export const Tab: FunctionComponent = () => {
 					component={OrderRoute}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
-							<TabBarIcon
-								focused={focused}
-								tintColor={color}
-								name="image"
-							/>
+						focused?<Image
+						style={styles.tab_right}
+						source={require("@/resources/market.png")}
+					  />
+					  :<Image
+					  style={styles.tab_right}
+					  source={require("@/resources/market_un.png")}
+					/>
 						),
 					}}
 				/>
@@ -91,11 +98,14 @@ export const Tab: FunctionComponent = () => {
 					component={AssetRoute}
 					options={{
 						tabBarIcon: ({ focused, color }) => (
-							<TabBarIcon
-								focused={focused}
-								tintColor={color}
-								name="user"
-							/>
+						focused?<Image
+						style={styles.tab_right}
+						source={require("@/resources/assets.png")}
+					  />
+					  :<Image
+					  style={styles.tab_right}
+					  source={require("@/resources/assets_un.png")}
+					/>
 						),
 					}}
 				/>

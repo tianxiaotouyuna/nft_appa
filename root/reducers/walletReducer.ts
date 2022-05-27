@@ -4,12 +4,14 @@ import { walletConstants } from "@/constants/walletConstants";
 const initialState = {
   failed: true,
   connecting: false,
-  message: '',
+  message: "",
 
   accounts: [],
-  chainId:0,
-  peerId:'',
-  peerMeta:{}
+  chainId: 0,
+  peerId: "",
+  peerMeta: {},
+  buySuccessResult: {},
+  buyFaildResult: {},
 };
 
 // This is the wallet reducer which takes the state and action as parameters.
@@ -27,11 +29,19 @@ export function wallet(state = initialState, action: any) {
         accounts: action.res.accounts,
         chainId: action.res.chainId,
         peerId: action.res.peerId,
-        peerMeta: action.res.peerMeta
+        peerMeta: action.res.peerMeta,
       };
     case walletConstants.CONNECT_FAILURE:
       return {
         error: action.error,
+      };
+    case walletConstants.BUY_SUCCESS:
+      return {
+        buySuccessResult: action.message,
+      };
+    case walletConstants.BUY_FAILURE:
+      return {
+        buyFaildResult: action.message,
       };
     default:
       return state;

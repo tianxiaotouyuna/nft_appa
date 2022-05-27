@@ -1,4 +1,6 @@
 import { walletConstants } from "@/constants/walletConstants";
+import { Alert } from "react-native";
+import { useDispatch } from "react-redux";
 import { CacheKeys } from "../constants";
 import { Storage } from "../utils";
 
@@ -8,12 +10,21 @@ import { Storage } from "../utils";
 export const walletActions = {
   connect,
   disconnect,
+  buy
 };
 
-/*
-This function is a simple method provided by Celo to connect to the Valora or Alfajores (for testing) wallet.
-The `dispatch()` is a redux function which is used to emit actions which we can then listen for in the reducer and update the state accordingly.
-*/
+function buy(connector:any,data:any) {
+return (dispatch: any) => {
+connector.sendTransaction(data).then(async function (result: any) {
+    console.log("成功：" + JSON.stringify(result));
+    Alert.alert(JSON.stringify(result))
+    dispatch(buySuccess(result));
+  })
+  .catch(function (error: any) {
+    dispatch(buyFailure(error));
+  });
+};
+}
 
 function connect(connector) {
   return (dispatch: any) => {
@@ -47,6 +58,15 @@ function success(res: object) {
 function failure(error: any) {
   return { type: walletConstants.CONNECT_FAILURE, error };
 }
+function buySuccess(res: object) {
+  Alert.alert('1'+JSON.stringify(res))
+  return { type: walletConstants.BUY_SUCCESS, res };
+}
+
+function buyFailure(res: object) {
+  Alert.alert('2'+JSON.stringify(res))
+  return { type: walletConstants.BUY_FAILURE, res };
+}
 
 function disconnect(connector) {
   return async (dispatch: any) => {
@@ -63,25 +83,4 @@ function disconnect(connector) {
   }
 
 
-
-function buy(connector) {
-  return (dispatch: any) => {
-    let asyncConnect = () =>
-      connector
-        .signPersonalMessage()
-        .then(async function (result: any) {
-          console.log("成功：" + JSON.stringify(result));
-          dispatch(success(result));
-          await Storage.save(CacheKeys.WALLETINFO, result);
-
-        })
-        .catch(function (error: any) {
-          console.log("失败：" + error);
-          dispatch(failure(error));
-        });
-
-    dispatch(request("Connecting to wallet"));
-    asyncConnect();
-  };
-}
 }

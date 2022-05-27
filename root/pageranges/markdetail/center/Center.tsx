@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactNode, useState } from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import styles from "./range";
 import NtfButton from "@/components/NtfButton/NtfButton";
 import { pxToDp } from "@/utils/system";
@@ -9,9 +9,13 @@ import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { Image, Text } from "react-native-animatable";
 type AssetBtnWrapsProps = {
   data?: any;
+  onpress_1?: () => void;
+  onpress_2?: () => void;
+  onpress_3?: () => void;
+  
 };
 const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
-  const { data } = props;
+  const { data,onpress_1,onpress_2,onpress_3 } = props;
   const dispatch = useDispatch();
   const connector = useWalletConnect(); // valid
   const login = () => {
@@ -173,12 +177,13 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
           width: "100%",
         }}
       />
-      <View
+      <Pressable
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
           paddingVertical: pxToDp(34),
         }}
+        onPress={onpress_1}
       >
         <Text
           style={{
@@ -194,7 +199,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
           style={styles.arrow}
           source={require("@/resources/return_4.png")}
         />
-      </View>
+      </Pressable>
 
       <View
         style={{
@@ -204,12 +209,13 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
         }}
       />
 
-      <View
+      <Pressable
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
           paddingVertical: pxToDp(34),
         }}
+        onPress={onpress_2}
       >
         <Text
           style={{
@@ -225,7 +231,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
           style={styles.arrow}
           source={require("@/resources/return_4.png")}
         />
-      </View>
+      </Pressable>
 
       <View
         style={{

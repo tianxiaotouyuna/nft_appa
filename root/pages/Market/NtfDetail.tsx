@@ -6,13 +6,12 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { View, Button, Platform, Alert, Image, Pressable, Animated, StyleSheet, Text } from "react-native";
 import FastImage from "react-native-fast-image";
-import {
-  findNodeHandle,
-  UIManager
-} from 'react-native';
+import Modal from "react-native-modal";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Navigate } from "@/utils/index";
 import { Placeholder, PlaceholderLine, PlaceholderMedia, ShineOverlay } from "rn-placeholder";
+import Offer from "@/components/Selleroffer/Offer";
+import { PriceCardStyle } from "@/components/Selleroffer/SellerofferCard/OfferCard";
 
 const NtfDetail: FunctionComponent = () => {
   const params: any = useRoute().params?.item ?? {};
@@ -20,6 +19,8 @@ const NtfDetail: FunctionComponent = () => {
   const bottomRef = useRef<any>();
   const [imageEnd, setimageEnd] = useState(false);
   const yOffset = useRef(new Animated.Value(0)).current;
+  const [sellerShow, setsellerShow] = useState(false);
+  const [buyshow, setbuyshow] = useState(false);
   const headerOpacity = yOffset.interpolate({
     inputRange: [0, 200],
     outputRange: [0, 1],
@@ -96,6 +97,19 @@ const NtfDetail: FunctionComponent = () => {
     setdata(order?.data)
   }
 
+  const gotoBuy = () => {
+    setsellerShow(false)
+    setTimeout(() => {
+      Navigate.navigate('Buy', { data: data })
+    }, 1);
+  }
+
+  const closeSeller = () => {
+    setsellerShow(false)
+  }
+  const closeBuy = () => {
+    setbuyshow(false)
+  }
   return (
     <View style={[styles.container]}>
       <Animated.ScrollView
@@ -128,22 +142,42 @@ const NtfDetail: FunctionComponent = () => {
         />
         {imageEnd == false ?
           (
-              <Placeholder Animation={ShineOverlay} >
-                <PlaceholderMedia style={[styles.image]} />
-              </Placeholder>
+            <Placeholder Animation={ShineOverlay} >
+              <PlaceholderMedia style={[styles.image]} />
+            </Placeholder>
           ) : null}
-        <Center data={data} />
+        <Center data={data} onpress_1={() => setsellerShow(true)} onpress_2={() => setbuyshow(true)} />
         <Center data={data} />
       </Animated.ScrollView>
 
 
-      <Bottom onPress_2={() => { Navigate.navigate('Buy', {data:data}) }} />
+      <Modal isVisible={sellerShow} style={styles.bottomModal}
+        hideModalContentWhileAnimating={true}
+        useNativeDriverForBackdrop={true}
+        animationOutTiming={600}
+      >
+        <Offer data={data} onBuy={() => gotoBuy()} cancle_press={closeSeller} priceCardStyle={PriceCardStyle.SELLER_STYLE}></Offer>
+      </Modal>
+
+
+      <Modal isVisible={buyshow} style={styles.bottomModal}
+        hideModalContentWhileAnimating={true}
+        useNativeDriverForBackdrop={true}
+        animationOutTiming={600}
+      >
+        <Offer data={data} cancle_press={closeBuy} priceCardStyle={PriceCardStyle.BUY_STYLE}></Offer>
+      </Modal>
+      <Bottom onPress_2={() => { Navigate.navigate('Buy', { data: data }) }} />
     </View>
   );
 };
 
 
 const styles = StyleSheet.create({
+  bottomModal: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
   container: {
     flex: 1,
     justifyContent: "center",

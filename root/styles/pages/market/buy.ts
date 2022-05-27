@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-end',
       margin: 0,
     },
+    centerModal: {
+      justifyContent: 'center',
+      alignItems:'center',
+    },
 })
 
 export default styles;

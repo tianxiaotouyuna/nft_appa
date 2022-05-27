@@ -16,10 +16,6 @@ import { UIELEMENTS } from "@/constants/index";
 import HomeGirdle from "@/components/HomeGirdle";
 import { ScrollView } from "react-native-gesture-handler";
 import BannerCard, { CardStyle } from "../../components/BannerCard/BannerCard";
-import Banner from "../../components/Banner/Banner";
-import NftAutoScroll from "../../components/AutoScroll/NftAutoScroll";
-import RankCard from "@/components/RanCard/RankCard";
-import HotNFtCard from "@/components/HotNFtCard/HotNFtCard";
 import Carousel from 'react-native-snap-carousel'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import FastImage from "react-native-fast-image";
