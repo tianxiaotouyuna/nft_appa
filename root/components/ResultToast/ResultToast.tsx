@@ -23,14 +23,19 @@ type ResultToastProps = {
 };
 
 const ResultToast: FunctionComponent<ResultToastProps> = (props) => {
-  const { style, title, onOk ,sub_title,resultToastStyle } = props;
+  const { style, title, onOk ,sub_title,resultToastStyle ,data} = props;
+  var title_=new String();
+if(JSON.stringify(data).concat('Error')) title_='失败'
+else title_='成功'
+var sub_title_=JSON.stringify(data)
   const renderLoginOut = () => {
     return (
       <View style={[styles.container, style]}>
         <View style={{paddingVertical:pxToDp(60)}}>
-          <Text style={{fontWeight:'bold',fontSize:pxToDp(36),textAlign:'center'}}>{title}</Text>
-          <Text style={{fontSize:pxToDp(28),textAlign:'center',marginTop:pxToDp(20)}}>{sub_title}</Text>
+          <Text style={{fontWeight:'bold',fontSize:pxToDp(36),textAlign:'center'}}>{title_}</Text>
+          <Text style={{fontSize:pxToDp(28),textAlign:'center',marginTop:pxToDp(20)}}>{sub_title_}</Text>
         </View>
+        
 
         <View
           style={{

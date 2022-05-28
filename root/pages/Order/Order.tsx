@@ -9,7 +9,7 @@ import styles from "@/styles/pages/order/order";
 import useInitScreen from "@/hooks/useInitScreen";
 import { useDispatch } from "react-redux";
 import { walletActions } from "@/action/walletActions";
-import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
+// import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 import Market from "../Market/Market";
 import Home from "../Home/Home";
 const Order: FunctionComponent = () => {
@@ -65,27 +65,27 @@ const Order: FunctionComponent = () => {
 
   }
 
- const renderTab = (name, page, isTabActive, onPressHandler, onLayoutHandler) => {
-    return (
-      <TouchableHighlight
-        key={`${name}_${page}`}
-        onPress={() => onPressHandler(page)}
-        onLayout={onLayoutHandler}
-        style={{ flex: 1, width: 100 }}
-        underlayColor="#aaaaaa"
-      >
-        <Text>{name} haloo</Text>
-      </TouchableHighlight>
-    );
-  }
+//  const renderTab = (name, page, isTabActive, onPressHandler, onLayoutHandler) => {
+//     return (
+//       <TouchableHighlight
+//         key={`${name}_${page}`}
+//         onPress={() => onPressHandler(page)}
+//         onLayout={onLayoutHandler}
+//         style={{ flex: 1, width: 100 }}
+//         underlayColor="#aaaaaa"
+//       >
+//         <Text>{name} haloo</Text>
+//       </TouchableHighlight>
+//     );
+//   }
 const showScrollBar=()=>{
   return(
 
-    <ScrollableTabView>
-      <Text tabLabel='Tab #1'>My</Text>
-       <Text tabLabel='Tab #2'>favorite</Text>
-       <Text tabLabel='Tab #3'>project</Text>
-  </ScrollableTabView>
+  //   <ScrollableTabView>
+  //     <Text tabLabel='Tab #1'>My</Text>
+  //      <Text tabLabel='Tab #2'>favorite</Text>
+  //      <Text tabLabel='Tab #3'>project</Text>
+  // </ScrollableTabView>
   // <ScrollableTabView
   //     style={styles.container}
   //     renderTabBar={() => <ScrollableTabBar renderTab={renderTab}/>}
@@ -96,6 +96,7 @@ const showScrollBar=()=>{
   //   <Text tabLabel='Tab #2'>favorite</Text>
   //   <Text tabLabel='Tab #3'>project</Text>
   //   </ScrollableTabView>
+  <></>
   )
 }
   return (

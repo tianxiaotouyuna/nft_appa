@@ -14,7 +14,8 @@ import ContractInteraction from "@/components/ContractInteraction/ContractIntera
 import WalletInput from "@/components/WalletInput/WalletInput";
 import Authorization from "@/components/Authorization/Authorization";
 import ResultToast, { ResultToastStyle } from "@/components/ResultToast/ResultToast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { walletActions } from "@/action/walletActions";
 const Buy: FunctionComponent = () => {
   // const [data, setdata] = useState({});
   const data: any = useRoute().params?.data ?? {};
@@ -36,15 +37,15 @@ const Buy: FunctionComponent = () => {
       barStyle: "light-content",
     },
   });
-    const { buyFaildResult } = useSelector((state: any) => ({ ...state?.wallet }));
+  const wallet = useSelector((state: any) => state);
     
-    useEffect(() => {
-    AppState.addEventListener("change", _handleAppStateChange);
+  //   useEffect(() => {
+  //   AppState.addEventListener("change", _handleAppStateChange);
 
-    return () => {
-       AppState.removeEventListener("change", _handleAppStateChange);
-    };
-  }, [])
+  //   return () => {
+  //      AppState.remove("change", _handleAppStateChange);
+  //   };
+  // }, [])
 
   const _handleAppStateChange = async (nextAppState: any) => {
     if (appState === "active" && nextAppState === "background") {
@@ -54,8 +55,8 @@ const Buy: FunctionComponent = () => {
 
   } else if (appState === "background" && nextAppState === "active") {
     setappState('active')
-    showResultToast()
-    Alert.alert(JSON.stringify(buyFaildResult))
+    // showResultToast()
+    // Alert.alert(JSON.stringify(wallet))
   
       // this condition calls when app is in foreground mode
       // here you can detect application is in active state again, 
@@ -82,8 +83,10 @@ const Buy: FunctionComponent = () => {
   const showResultToast = () => {
     setshowResult(true)
   }
+  const dispatch=useDispatch()
   const closeResultToast = () => {
     setshowResult(false)
+    dispatch(walletActions.resetResult(null));
   }
   return (
     <View style={[styles.container]}>
@@ -94,7 +97,6 @@ const Buy: FunctionComponent = () => {
           source={{ uri: data?.imageThumbnailUrl }}
         />
 
-        <Text>122222233333 {JSON.stringify(buyFaildResult)}</Text>
         <View style={{ flex: 1, justifyContent: "space-between", paddingVertical: pxToDp(10) }}>
           <Text style={{ fontSize: pxToSp(28), color: '#707A83' }}>{data?.collectionName}</Text>
           <Text style={{ fontSize: pxToSp(32), color: '#383838' }}>{data?.assetName}</Text>
@@ -114,13 +116,13 @@ const Buy: FunctionComponent = () => {
 
 
 
-      <Modal isVisible={buyFaildResult} style={styles.centerModal}
+      <Modal isVisible={wallet?.buyResult} style={styles.centerModal}
         hideModalContentWhileAnimating={true}
         animationIn='bounce'
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
       >
-        <ResultToast data={data} onOk={closeResultToast} resultToastStyle={ResultToastStyle.BUY_STYLE} title='购买成功' sub_title="='恭喜您已成功拥有此NTF"/>
+        <ResultToast data={wallet?.buyResult} onOk={closeResultToast} resultToastStyle={ResultToastStyle.BUY_STYLE} title='购买成功' sub_title="='恭喜您已成功拥有此NTF"/>
       </Modal>
 
 

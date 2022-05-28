@@ -10,8 +10,7 @@ const initialState = {
   chainId: 0,
   peerId: "",
   peerMeta: {},
-  buySuccessResult: {},
-  buyFaildResult: {},
+  buyResult: null,
 };
 
 // This is the wallet reducer which takes the state and action as parameters.
@@ -35,14 +34,14 @@ export function wallet(state = initialState, action: any) {
       return {
         error: action.error,
       };
-    case walletConstants.BUY_SUCCESS:
+    case walletConstants.BUY_RESULT:
       return {
-        buySuccessResult: action.message,
+        buyResult: action.res,
       };
-    case walletConstants.BUY_FAILURE:
-      return {
-        buyFaildResult: action.message,
-      };
+      case walletConstants.CLEAR_BUY_RESULT:
+        return {
+          buyResult: null,
+        };
     default:
       return state;
   }

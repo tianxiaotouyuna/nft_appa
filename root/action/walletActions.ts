@@ -10,18 +10,27 @@ import { Storage } from "../utils";
 export const walletActions = {
   connect,
   disconnect,
-  buy
+  buy,
+  resetResult
 };
+
+function resetResult(data:any) {
+  return (dispatch: any) => {
+      dispatch(resetBuy(data));
+    };
+  }
 
 function buy(connector:any,data:any) {
 return (dispatch: any) => {
 connector.sendTransaction(data).then(async function (result: any) {
     console.log("成功：" + JSON.stringify(result));
     Alert.alert(JSON.stringify(result))
-    dispatch(buySuccess(result));
+    dispatch(buyResult(result));
   })
   .catch(function (error: any) {
-    dispatch(buyFailure(error));
+    dispatch(buyResult(error));
+    console.log("失败：" + JSON.stringify(error));
+    dispatch(buyResult(JSON.stringify(error)));
   });
 };
 }
@@ -58,16 +67,13 @@ function success(res: object) {
 function failure(error: any) {
   return { type: walletConstants.CONNECT_FAILURE, error };
 }
-function buySuccess(res: object) {
-  Alert.alert('1'+JSON.stringify(res))
-  return { type: walletConstants.BUY_SUCCESS, res };
+function buyResult(res: string) {
+  return { type: walletConstants.BUY_RESULT, res };
 }
 
-function buyFailure(res: object) {
-  Alert.alert('2'+JSON.stringify(res))
-  return { type: walletConstants.BUY_FAILURE, res };
+function resetBuy(res: object) {
+  return { type: walletConstants.CLEAR_BUY_RESULT, res };
 }
-
 function disconnect(connector) {
   return async (dispatch: any) => {
     // This dispatch calls a function that is declared later on in the code.
