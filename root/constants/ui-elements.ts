@@ -7,4 +7,5 @@ import { pxToDp } from "@/utils/system";
  export const DEFAULT_HEADER_COLOR_ACTIVE = '#3352DB';
  export const DEFAULT_BACKGROUND_COLOR = '#F9FBFF';
  export const DEFAULT_SEPARATOR_COLOR = '#F0F0F0';
+ export const DEFAULT_IMAGEBACKGROUND_COLOR = '#EEEEEE';
  

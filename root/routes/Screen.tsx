@@ -9,6 +9,7 @@ import LoginOut from "@/pages/Asset/LoginOut";
 import Search from "@/pages/Home/Search";
 import NtfDetail from "@/pages/Market/NtfDetail";
 import Buy from "@/pages/Market/Buy/Buy";
+import Sell from "@/pages/Asset/Sell/Sell";
 
 const ScreenStack = createStackNavigator();
 
@@ -21,6 +22,7 @@ const Screen: FunctionComponent = () => {
             <ScreenStack.Screen name={Route.SCREEN.Market} component={Market}/>
             <ScreenStack.Screen name={Route.SCREEN.NtfDetail} component={NtfDetail}  options={{ title: ' ' }}/>
             <ScreenStack.Screen name={Route.SCREEN.Buy} component={Buy}/>
+            <ScreenStack.Screen name={Route.SCREEN.Sell} component={Sell}/>
 
         </ScreenStack.Navigator>
     )

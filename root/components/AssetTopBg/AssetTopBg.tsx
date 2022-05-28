@@ -41,9 +41,9 @@ const AssetTopBg: FunctionComponent = (props) => {
             source={require("@/resources/return_3.png")}
           />
         </View>
-        <Text style={{ color: "white" ,fontSize:pxToSp(52)}}>{wallet?.peerMeta?.name}</Text>
+        <Text style={{ color: "white" ,fontSize:pxToSp(52)}}>MetaMask</Text>
 
-        <Text style={{ color: "white",fontSize:pxToSp(28) }} numberOfLines={1} ellipsizeMode={'middle'}>地址：{wallet?.accounts?.[0]}</Text>
+        <Text style={{ color: "white",fontSize:pxToSp(28) }} numberOfLines={1} ellipsizeMode={'middle'}>地址：0xbb5cadb413be5db6cfc6011eae9764497883d152</Text>
 
       </ImageBackground>
     </View>

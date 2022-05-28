@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     publish_image:{
         width:pxToDp(206),
         height:pxToDp(206),
-        borderRadius:pxToDp(20)
+        borderRadius:pxToDp(20),
+        backgroundColor:UIELEMENTS.DEFAULT_IMAGEBACKGROUND_COLOR
     },
     bottomModal: {
       justifyContent: 'flex-end',

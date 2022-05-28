@@ -14,10 +14,15 @@ import { walletActions } from "@/action/walletActions";
 import PopBtn from "@/components/LoginOutBtn/PopBtn";
 import { useNavigation } from "@react-navigation/native";
 import { Navigate } from "@/utils/index";
+import { connected } from "process";
+import { MarketService } from "@/services/index";
+import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
+
 const Asset: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
   const [showLoginout, setshowLoginout] = useState(false);
   const [ntfData, setntfData] = useState([]);
+  const [data, setdata] = useState();
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(walletActions.disconnect(connector));
@@ -26,10 +31,20 @@ const Asset: FunctionComponent = () => {
   const rightBtnClick = () => {setshowLoginout(true)};
 
   const nav=useNavigation()
+  const navigation = useNavigation();
+  useEffect(() => {
+   if(connector.connected==false) getData()
 
+  }, [connector])
+
+  const getData = async () => {
+
+    const res = await MarketService.getMarketList_my();
+    setntfData(res?.data[0])  
+  }
   const refreshHeaderData= ()=>{
 
-    if(connector.connected){
+    if(connector.connected==false){
         nav.setOptions(
           {
             title: "资产",
@@ -65,8 +80,19 @@ const Asset: FunctionComponent = () => {
     refreshHeaderData();
 }, [connector])
   
+
+
+const renderBottom=()=>{
+  return (
+    <BannerCard
+      data={ntfData}
+      cardStyle={CardStyle.HOTNTF_STYLE}
+      isFromMy={true}
+    ></BannerCard>
+  );
+}
   const showButton = () => {
-    if (connector.connected == false) {
+    if (connector.connected == true) {
       return (
         <>
           <Image
@@ -115,7 +141,7 @@ const Asset: FunctionComponent = () => {
                 margin: pxToDp(200),
               }}
             />
-          ) : null}
+          ) : renderBottom()}
         </>
       );
     }

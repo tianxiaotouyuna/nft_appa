@@ -26,10 +26,11 @@ type BannerCardProps = {
   data: any;
   cardStyle?: CardStyle;
   onTap?: () => void;
+  isFromMy?: boolean;
   borderRadius?: number;
 };
 const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
-  const { data, style, cardStyle, onTap, borderRadius = pxToDp(10) } = props;
+  const { data, style, cardStyle, onTap, borderRadius = pxToDp(10),isFromMy } = props;
 const [imageEnd, setimageEnd] = useState(true);
 const [imageError, setimageError] = useState(false);
 const renderHotNtf = () =>{
@@ -42,9 +43,13 @@ const renderHotNtf = () =>{
     </View>
   );  
 }
+const pushCard=(item:any)=>{
+  if(isFromMy)Navigate.navigate('NtfDetail', { item: item,isMyDetail: true})
+  else Navigate.navigate('NtfDetail', { item: item })
+}
   const item_one = (item: any, index: number) => (
 
-    <Ripple onPress={() => Navigate.navigate('NtfDetail', { item: item })} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} rippleContainerBorderRadius={borderRadius} key={`${index}`}>
+    <Ripple onPress={()=>pushCard(item )} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} rippleContainerBorderRadius={borderRadius} key={`${index}`}>
       <BaseCard style={[{ borderRadius: borderRadius }, { width: pxToDp(326), paddingHorizontal: pxToDp(8) }]}>
       <FastImage
                 style={imageEnd?[styles.publish_image, { borderRadius: borderRadius ,backgroundColor:'#EEEEEE'}]:[{width:0,height:0}]}

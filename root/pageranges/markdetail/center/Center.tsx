@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactNode, useState } from "react";
-import { Pressable, View } from "react-native";
+import { Alert, Clipboard, Pressable, View } from "react-native";
 import styles from "./range";
 import NtfButton from "@/components/NtfButton/NtfButton";
 import { pxToDp } from "@/utils/system";
@@ -12,15 +12,23 @@ type AssetBtnWrapsProps = {
   onpress_1?: () => void;
   onpress_2?: () => void;
   onpress_3?: () => void;
+  isMyDetail?:boolean;
   
 };
 const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
-  const { data,onpress_1,onpress_2,onpress_3 } = props;
+  const { data,onpress_1,onpress_2,isMyDetail=false } = props;
   const dispatch = useDispatch();
   const connector = useWalletConnect(); // valid
   const login = () => {
     dispatch(walletActions.connect(connector));
   };
+  const  copyAdress=async(value:string)=>{
+     Clipboard.setString(value);
+     let  str = await Clipboard.getString();
+     Alert.alert(data?.creatorAddress+'复制成功')
+     console.log('复制的内容',str)
+ }
+ 
   return (
     <View style={styles.container}>
       <Text
@@ -73,10 +81,13 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
             >
               {data?.creatorAddress}
             </Text>
+            <Pressable onPress={()=>copyAdress(data?.creatorAddress)}>
+            
             <Image
               style={styles.arrow}
               source={require("@/resources/copy.png")}
             />
+            </Pressable>
           </View>
         </View>
       </View>
@@ -177,29 +188,31 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
           width: "100%",
         }}
       />
+      {isMyDetail?
       <Pressable
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingVertical: pxToDp(34),
+      }}
+      onPress={onpress_1}
+    >
+      <Text
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingVertical: pxToDp(34),
+          color: "#383838",
+          fontSize: pxToDp(28),
+          width: pxToDp(199),
         }}
-        onPress={onpress_1}
+        numberOfLines={1}
       >
-        <Text
-          style={{
-            color: "#383838",
-            fontSize: pxToDp(28),
-            width: pxToDp(199),
-          }}
-          numberOfLines={1}
-        >
-          卖家定价
-        </Text>
-        <Image
-          style={styles.arrow}
-          source={require("@/resources/return_4.png")}
-        />
-      </Pressable>
+        卖家定价
+      </Text>
+      <Image
+        style={styles.arrow}
+        source={require("@/resources/return_4.png")}
+      />
+    </Pressable>:
+    null}
 
       <View
         style={{
