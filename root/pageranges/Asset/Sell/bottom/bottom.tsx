@@ -5,16 +5,18 @@ import { pxToDp, pxToSp } from "@/utils/system";
 import NtfButton from "@/components/NtfButton/NtfButton";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Image } from "react-native-animatable";
+import { TextInput } from "react-native-gesture-handler";
 type AssetBtnWrapsProps = {
     onPress_1?: () => void;
     onPress_2?: () => void;
     onPress_3?: () => void;//选择币种
     onPress_4?: () => void;//选择天数
     bottom?: number;
-    currency?:string
+    currency?:string;
+    day?:string
 };
 const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
-    const { onPress_1,  onPress_3 ,currency,onPress_4} = props;
+    const { onPress_1,  onPress_3,onPress_4 ,currency,day} = props;
     return (
         <View style={styles.container} >
 
@@ -26,7 +28,7 @@ const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
                     <View style={{ alignItems: "center", flexDirection: "row", justifyContent: "space-between" }}>
 
                         <Text style={{ color: "#383838", fontSize: pxToDp(32), fontWeight: 'bold', marginTop: pxToDp(10) }}>
-                            3天
+                            {day}
                         </Text>
                         <Image style={{ width: pxToDp(24), height: pxToDp(24) }} source={require('@/resources/return_333.png')} />
                     </View>
@@ -45,10 +47,10 @@ const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
                         设置价格
                     </Text>
                     <View style={{ alignItems: "center", flexDirection: "row", justifyContent: "space-between" }}>
+                        <TextInput style={{width:pxToDp(400)}} placeholder='请输入价格' keyboardType='number-pad'>
 
-                        <Text style={{ color: "#383838", fontSize: pxToDp(32), fontWeight: 'bold', marginTop: pxToDp(10) }}>
-                            0.0000
-                        </Text>
+                        </TextInput>
+                   
                         <Pressable onPress={onPress_3} style={{ alignItems: "center", flexDirection: "row", justifyContent: 'center'}}>
 
                             <Text style={{ color: "#383838", fontSize: pxToDp(32), fontWeight: 'bold' }}>

@@ -21,6 +21,15 @@ const styles = StyleSheet.create({
       borderTopRightRadius:pxToDp(28),
       borderTopLeftRadius:pxToDp(28),
     },
+    modalContent_scroll: {
+      backgroundColor: 'white',
+      marginHorizontal:pxToDp(140),
+      marginVertical: pxToDp(340),
+      paddingHorizontal:pxToDp(20),
+      paddingVertical: pxToDp(20),
+      borderTopRightRadius:pxToDp(28),
+      borderTopLeftRadius:pxToDp(28),
+    },
     arrow:{
         width:pxToDp(22),
         height:pxToDp(20),

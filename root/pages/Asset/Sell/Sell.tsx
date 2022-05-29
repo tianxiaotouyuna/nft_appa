@@ -19,6 +19,7 @@ import { walletActions } from "@/action/walletActions";
 import SellPop, { PopStyle } from "@/components/SellPop/SellPop";
 const Sell: FunctionComponent = () => {
   // const [data, setdata] = useState({});
+  const dayCounts=['1天','2天','3天','4天','5天','6天','7天']
   const data: any = useRoute().params?.data ?? {};
   const [showSign, setshowSign] = useState(false);
   const [heyue, setheyue] = useState(false);
@@ -27,6 +28,8 @@ const Sell: FunctionComponent = () => {
   const [showData, setshowData] = useState(false);
   const [currency, setcurrency] = useState('USDT');
   const [currency_index, setcurrency_index] = useState(0);
+  const [dateStr, setdateStr] = useState('1天');
+  const [dateIndex, setdateIndex] = useState(0);
   const [showInput, setshowInput] = useState(false);
   const [showResult, setshowResult] = useState(false);
   const [appState, setappState] = useState('active');
@@ -66,6 +69,11 @@ const Sell: FunctionComponent = () => {
     setcurrency(name)
     setcurrency_index(index)
   }
+  const selectDateFinish = (name: string, index: number) => {
+    setshowData(false)
+    setdateStr(name)
+    setdateIndex(index)
+  }
   const dispatch = useDispatch()
   const closeResultToast = () => {
     setshowResult(false)
@@ -91,7 +99,7 @@ const Sell: FunctionComponent = () => {
         setshowCurrency(true)
       }} onPress_4={()=>{
         setshowData(true)
-      }} currency={currency} />
+      }} currency={currency} day={dateStr}/>
 
 
 
@@ -99,16 +107,19 @@ const Sell: FunctionComponent = () => {
         hideModalContentWhileAnimating={true}
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
+        animationIn='bounceIn'
+        animationOut='bounceOut'
       >
-        <SellPop cancle_press={() => setshowData(false)}  data={data} popStyle={PopStyle.Day_STYLE} selectBlock={(name: string, index: number) => selectCurrencyFinish(name, index)} index={currency_index}></SellPop>
+        <SellPop cancle_press={() => setshowData(false)}  data={dayCounts} popStyle={PopStyle.Day_STYLE} selectBlock_date={(name: string, index: number) => selectDateFinish(name, index)} selectIndex={dateIndex}></SellPop>
       </Modal>
+      {/* animationIn: "bounce" | "flash" | "jello" | "pulse" | "rotate" | "rubberBand" | "shake" | "swing" | "tada" | "wobble" | "bounceIn" | "bounceInDown" | "bounceInUp" | "bounceInLeft" | "bounceInRight" | "bounceOut" | "bounceOutDown" | "bounceOutUp" | "bounceOutLeft" | "bounceOutRight" | "fadeIn" | "fadeInDown" | "fadeInDownBig" | "fadeInUp" | "fadeInUpBig" | "fadeInLeft" | "fadeInLeftBig" | "fadeInRight" | "fadeInRightBig" | "fadeOut" | "fadeOutDown" | "fadeOutDownBig" | "fadeOutUp" | "fadeOutUpBig" | "fadeOutLeft" | "fadeOutLeftBig" | "fadeOutRight" | "fadeOutRightBig" | "flipInX" | "flipInY" | "flipOutX" | "flipOutY" | "lightSpeedIn" | "lightSpeedOut" | "slideInDown" | "slideInUp" | "slideInLeft" | "slideInRight" | "slideOutDown" | "slideOutUp" | "slideOutLeft" | "slideOutRight" | "zoomIn" | "zoomInDown" | "zoomInUp" | "zoomInLeft" | "zoomInRight" | "zoomOut" | "zoomOutDown" | "zoomOutUp" | "zoomOutLeft" | "zoomOutRight" | animatable.CustomAnimation<import("react-native").TextStyle & ViewStyle & import("react-native").ImageStyle>; */}
 
       <Modal isVisible={showCurrency} style={styles.bottomModal}
         hideModalContentWhileAnimating={true}
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
       >
-        <SellPop cancle_press={() => setshowCurrency(false)} sure_press={() => { }} data={data} popStyle={PopStyle.CURRENCY_STYLE} selectBlock={(name: string, index: number) => selectCurrencyFinish(name, index)} index={currency_index}></SellPop>
+        <SellPop cancle_press={() => setshowCurrency(false)} sure_press={() => { }} data={data} popStyle={PopStyle.CURRENCY_STYLE} selectBlock={(name: string, index: number) => selectCurrencyFinish(name, index)} selectIndex={currency_index}></SellPop>
       </Modal>
 
       <Modal isVisible={auth} style={styles.bottomModal}

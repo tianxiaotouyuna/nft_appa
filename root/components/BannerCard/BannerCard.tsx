@@ -30,7 +30,7 @@ type BannerCardProps = {
   borderRadius?: number;
 };
 const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
-  const { data, style, cardStyle, onTap, borderRadius = pxToDp(10),isFromMy } = props;
+  const { data, style, cardStyle, onTap, borderRadius = pxToDp(10),isFromMy=false } = props;
 const [imageEnd, setimageEnd] = useState(true);
 const [imageError, setimageError] = useState(false);
 const renderHotNtf = () =>{

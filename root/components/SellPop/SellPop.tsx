@@ -18,7 +18,7 @@ import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { useDispatch } from "react-redux";
 import { walletActions } from "@/action/walletActions";
 import StepIndicator from 'react-native-step-indicator';
-import { TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
 export enum PopStyle {
   SELL_STYLE = 1, //退出登录
   TRANSFER_STYLE = 2, //退出登录
@@ -30,14 +30,14 @@ type PopProps = {
   popStyle?: PopStyle;
   sure_press?: () => void;
   cancle_press?: () => void;
-  selectBlock?: (name:string,index:number) => void;
+  selectBlock?: (name: string, index: number) => void;
   data?: any;
-  index?:number;
-  dateCount?:number
+  selectIndex?: number;
+  selectBlock_date?: (name: string, index: number) => void;
 };
 
 const SellPop: FunctionComponent<PopProps> = (props) => {
-  const { style, data, popStyle = 1, cancle_press,selectBlock,index } = props;
+  const { style,  popStyle = 1, cancle_press, selectBlock, selectIndex,data,selectBlock_date } = props;
   const connector = useWalletConnect(); // valid
   const [wallet, setwallet] = useState();
   const dispatch = useDispatch();
@@ -186,12 +186,15 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
 
   )
 
-  const selectCurrency=(name:string,index:number)=>{
-    selectBlock(name,index)
+  const selectCurrency = (name: string, index: number) => {
+    selectBlock(name, index)
+  }
+  const selectDate = (name: string, index: number) => {
+    selectBlock_date(name, index)
   }
   const renderPopView_currency = () => (
 
-    <View style={[styles.modalContent, style,{paddingBottom:pxToDp(300)}]}>
+    <View style={[styles.modalContent, style, { paddingBottom: pxToDp(300) }]}>
       <View style={{ flexDirection: "row", width: '100%' }}>
         <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>选择币种</Text>
         <Pressable style={styles.arrow} onPress={cancle_press}>
@@ -202,7 +205,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
         </Pressable>
       </View>
 
-      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('USDT',0)}>
+      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('USDT', 0)}>
         <Image style={styles.image_icon}
           source={require("@/resources/USDT.png")}
         />
@@ -210,7 +213,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
           <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>USDT</Text>
           <Text style={{ fontSize: pxToSp(24), color: '#383838', marginLeft: pxToDp(10) }}>0.00</Text>
         </View>
-        {index == 0 ? <Image
+        {selectIndex == 0 ? <Image
           style={styles.arrow2}
           source={require("@/resources/choose.png")}
         /> : null}
@@ -224,7 +227,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
         }}
       />
 
-      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('USDC',1)}>
+      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('USDC', 1)}>
         <Image style={styles.image_icon}
           source={require("@/resources/USDC.png")}
         />
@@ -232,7 +235,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
           <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>USDC</Text>
           <Text style={{ fontSize: pxToSp(24), color: '#383838', marginLeft: pxToDp(10) }}>0.00</Text>
         </View>
-        {index == 1 ? <Image
+        {selectIndex == 1 ? <Image
           style={styles.arrow2}
           source={require("@/resources/choose.png")}
         /> : null}
@@ -246,7 +249,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
         }}
       />
 
-      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('BUSD',2)}>
+      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('BUSD', 2)}>
         <Image style={styles.image_icon}
           source={require("@/resources/BUSD.png")}
         />
@@ -254,7 +257,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
           <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>BUSD</Text>
           <Text style={{ fontSize: pxToSp(24), color: '#383838', marginLeft: pxToDp(10) }}>0.00</Text>
         </View>
-        {index == 2 ? <Image
+        {selectIndex == 2 ? <Image
           style={styles.arrow2}
           source={require("@/resources/choose.png")}
         /> : null}
@@ -268,7 +271,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
         }}
       />
 
-      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('WBNB',3)}>
+      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('WBNB', 3)}>
         <Image style={styles.image_icon}
           source={require("@/resources/WBNB.png")}
         />
@@ -277,7 +280,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
           <Text style={{ fontSize: pxToSp(24), color: '#383838', marginLeft: pxToDp(10) }}>0.00</Text>
         </View>
 
-        {index == 3 ? <Image
+        {selectIndex == 3 ? <Image
           style={styles.arrow2}
           source={require("@/resources/choose.png")}
         /> : null}
@@ -285,42 +288,48 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
     </View>
 
   )
-  const renderPopView_data = () => (
 
-    <View style={[styles.modalContent, style,{paddingBottom:pxToDp(300)}]}>
-      <View style={{ flexDirection: "row", width: '100%' }}>
-        <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>选择天数</Text>
-        <Pressable style={styles.arrow} onPress={cancle_press}>
-          <Image
-            style={styles.arrow}
-            source={require("@/resources/closure.png")}
-          />
+  const renderPopView_data = () => {
+
+    return (
+
+      <ScrollView style={[styles.modalContent_scroll, style, ]}>
+        <View style={{ flexDirection: "row", width: '100%',alignItems:"center" }}>
+          <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>选择天数</Text>
+          <Pressable style={styles.arrow} onPress={cancle_press}>
+            <Image
+              style={styles.arrow}
+              source={require("@/resources/closure.png")}
+            />
+          </Pressable>
+        </View>
+        {data?.map((item:any, index:number) => (
+          <>
+        <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20)}} onPress={() => selectDate(item, index)} key={`${index}`}>
+          <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>{item}</Text>
+          {index == selectIndex ? <Image
+            style={styles.arrow2}
+            source={require("@/resources/choose.png")}
+          /> : null}
         </Pressable>
-      </View>
+        <View
+          style={{
+            backgroundColor: "#F0F0F0",
+            height: pxToDp(2),
+            width: "100%",
+          }}
+        />
+          </>
+         ))}
 
-      <Pressable style={{ flexDirection: "row", width: '100%', alignItems: "center", paddingVertical: pxToDp(20) }} onPress={() => selectCurrency('USDT',0)}>
-          <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>USDT</Text>
-          <Text style={{ fontSize: pxToSp(24), color: '#383838', marginLeft: pxToDp(10) }}>0.00</Text>
-        {index == 0 ? <Image
-          style={styles.arrow2}
-          source={require("@/resources/choose.png")}
-        /> : null}
-      </Pressable>
 
-      <View
-        style={{
-          backgroundColor: "#F0F0F0",
-          height: pxToDp(2),
-          width: "100%",
-        }}
-      />
+      </ScrollView>
 
-    </View>
-
-  )
+    )
+  }
 
   return (
-    popStyle == PopStyle.SELL_STYLE ? renderPopView_sell() : (popStyle == PopStyle.TRANSFER_STYLE ? renderPopView_transfer() : (popStyle==PopStyle.CURRENCY_STYLE?renderPopView_currency():renderPopView_data()))
+    popStyle == PopStyle.SELL_STYLE ? renderPopView_sell() : (popStyle == PopStyle.TRANSFER_STYLE ? renderPopView_transfer() : (popStyle == PopStyle.CURRENCY_STYLE ? renderPopView_currency() : renderPopView_data()))
   );
 };
 

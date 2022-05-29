@@ -12,11 +12,11 @@ type AssetBtnWrapsProps = {
   onpress_1?: () => void;
   onpress_2?: () => void;
   onpress_3?: () => void;
-  isMyDetail?:boolean;
+  isFromMyDetail?:boolean;
   
 };
 const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
-  const { data,onpress_1,onpress_2,isMyDetail=false } = props;
+  const { data,onpress_1,onpress_2,isFromMyDetail=false } = props;
   const dispatch = useDispatch();
   const connector = useWalletConnect(); // valid
   const login = () => {
@@ -188,7 +188,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
           width: "100%",
         }}
       />
-      {isMyDetail?
+      {isFromMyDetail==false?
       <Pressable
       style={{
         flexDirection: "row",

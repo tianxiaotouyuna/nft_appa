@@ -16,7 +16,8 @@ import SellPop, { PopStyle } from "@/components/SellPop/SellPop";
 
 const NtfDetail: FunctionComponent = () => {
   const params: any = useRoute().params?.item ?? {};
-  const isMyDetail: boolean = useRoute().params?.isMyDetail ?? false;
+  const isMyDetail: boolean = useRoute().params?.isMyDetail ??false;
+
   const [data, setdata] = useState({});
   const bottomRef = useRef<any>();
   const [imageEnd, setimageEnd] = useState(false);
@@ -152,7 +153,7 @@ const pushToNext=()=>{
               <PlaceholderMedia style={[styles.image]} />
             </Placeholder>
           ) : null}
-        <Center data={data} onpress_1={() => setsellerShow(true)} onpress_2={() => setbuyshow(true)} />
+        <Center data={data} onpress_1={() => setsellerShow(true)} onpress_2={() => setbuyshow(true)} isFromMyDetail={isMyDetail} />
       </Animated.ScrollView>
 
 
@@ -182,7 +183,7 @@ const pushToNext=()=>{
       >
         <SellPop cancle_press={() => settransfer(false)} sure_press={() => { }} data={data} popStyle={PopStyle.TRANSFER_STYLE}></SellPop>
       </Modal>
-      <Bottom onPress_2={pushToNext} isFromMyDetail={true} onPress_1={()=>{settransfer(true)}}/>
+      <Bottom onPress_2={pushToNext} isFromMyDetail={isMyDetail} onPress_1={()=>{settransfer(true)}}/>
     </View>
   );
 };
