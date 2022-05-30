@@ -6,8 +6,6 @@ import { color } from 'react-native-reanimated';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop:UIELEMENTS.PADDING_TOP,
-        paddingHorizontal:UIELEMENTS.PADDING_HORIZONTAL,
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
     },
     tab_right:{

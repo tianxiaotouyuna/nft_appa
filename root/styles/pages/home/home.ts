@@ -23,8 +23,9 @@ const styles = StyleSheet.create({
         marginBottom: 12 
     },
     tab_right:{
-        width:pxToDp(44),
-        height:pxToDp(44),
+            width:pxToDp(44),
+            height:pxToDp(44),
+            marginHorizontal:pxToDp(32)
     },
 
     IGO_Warps:{ flexDirection: "row", alignItems: "center",marginTop: pxToDp(25), marginBottom: pxToDp(7),justifyContent:"space-between"},

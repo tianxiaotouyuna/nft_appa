@@ -9,9 +9,11 @@ import styles from "@/styles/pages/order/order";
 import useInitScreen from "@/hooks/useInitScreen";
 import { useDispatch } from "react-redux";
 import { walletActions } from "@/action/walletActions";
-// import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { DefaultTabBar, ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 import Market from "../Market/Market";
-import Home from "../Home/Home";
+import NFTDefaultTabBar from "./NFTDefaultTabBar";
+import { pxToDp, pxToSp } from "@/utils/system";
+import OrderList from "./OrderList/OrderList";
 const Order: FunctionComponent = () => {
   useInitScreen({
     navigationOptions: {
@@ -24,47 +26,6 @@ const Order: FunctionComponent = () => {
     },
   });
 
-  const connector = useWalletConnect(); // valid
-  const buy=()=>{
-    Alert.alert('2')
-
-      connector.signPersonalMessage([]).then(async function (result: any) {
-          console.log("成功：" + JSON.stringify(result));
-          Alert.alert('1')
-        })
-        .catch(function (error: any) {
-          console.log("失败：" + error);
-          Alert.alert('2')
-        });
-  }
-  const showButton = () => {
-    if (!connector.connected) {
-      /**
-       *  Connect! 🎉
-       */
-      return <Ripple
-        style={{
-          height: 100,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#fff",
-        }} onPress={()=>{}}><Text>Connect mea</Text></Ripple>
-    }
-    else  { 
-
-      return (<Ripple rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} style={{
-        height: 100,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#fff",
-      }} onPress={() => buy()}><Text>购买1</Text></Ripple>)
-    }
-  }
-
-  const handleChangeTab=()=>{
-
-  }
-
  const renderTab = (name, page, isTabActive, onPressHandler, onLayoutHandler) => {
     return (
       <TouchableHighlight
@@ -74,22 +35,25 @@ const Order: FunctionComponent = () => {
         style={{ flex: 1, width: 100 }}
         underlayColor="#aaaaaa"
       >
-        <Text>{name} haloo</Text>
+        <Text>{name}</Text>
       </TouchableHighlight>
     );
   }
+  const handleChangeTab=()=>{
+
+  }
 const showScrollBar=()=>{
   return(
-    <View></View>
-    // <ScrollableTabView
-    //   style={styles.container}
-    //   renderTabBar={() => <ScrollableTabBar renderTab={renderTab} />}
-    //   onChangeTab={handleChangeTab}
-    // >
-    //     <Text tabLabel='Tab #1'>My</Text>
-    //     <Text tabLabel='Tab #2'>favorite</Text>
-    //     <Text tabLabel='Tab #3'>project</Text>
-    //   </ScrollableTabView>
+    <ScrollableTabView
+      style={styles.container}
+      onChangeTab={handleChangeTab}
+      renderTabBar={() => <NFTDefaultTabBar  activeTextColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} inactiveTextColor={'#383838'} textStyle={{fontSize:pxToSp(28)}}/>}
+    >
+        <OrderList tabLabel='我的出价'></OrderList>
+        <OrderList tabLabel='收到的出价'></OrderList>
+        <OrderList tabLabel='挂单'></OrderList>
+        <OrderList tabLabel='成交'></OrderList>
+      </ScrollableTabView>
   )
 }
   return (

@@ -33,8 +33,7 @@ const Asset: FunctionComponent = () => {
   const nav=useNavigation()
   const navigation = useNavigation();
   useEffect(() => {
-  //  if(connector.connected) getData()
-   getData()
+   if(connector.connected) getData()
 
   }, [connector])
 
@@ -78,7 +77,7 @@ const Asset: FunctionComponent = () => {
   }
   
   useEffect(() => {
-    if(connector.connected)refreshHeaderData();
+    refreshHeaderData();
 }, [connector])
   
 
@@ -150,8 +149,7 @@ const renderBottom=()=>{
 
   return (
     <View style={styles.container}>
-      {renderBottom()}
-      {/* {showButton()} */}
+      {showButton()}
 
       <Modal isVisible={showLoginout} style={styles.bottomModal} 
       hideModalContentWhileAnimating={true}
