@@ -179,7 +179,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
       </View>
 
       <Text style={{ fontSize: pxToDp(28), color: 'rgba(56,56,56,0.5)', marginTop: pxToDp(16) }}>资产如果转入错误的地址无法追回，请谨慎。</Text>
-      <NtfButton style={{ marginTop: pxToDp(40) }} text="确定" width='100%' heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={buy} loadingUse={true}>
+      <NtfButton style={{ marginTop: pxToDp(40) }} text="确定" width='100%' heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={onApprove} loadingUse={true}>
         {" "}
       </NtfButton>
     </View>
