@@ -11,7 +11,8 @@ export const walletActions = {
   connect,
   disconnect,
   buy,
-  resetResult
+  resetResult,
+  approve
 };
 
 function resetResult(data:any) {
@@ -34,6 +35,22 @@ connector.sendTransaction(data).then(async function (result: any) {
   });
 };
 }
+
+//授权
+function approve(connector:any,data:any) {
+  return (dispatch: any) => {
+  connector.approveSession(data).then(async function (result: any) {
+      console.log("成功：" + JSON.stringify(result));
+      Alert.alert(JSON.stringify(result))
+      dispatch(approveNtf(result));
+    })
+    .catch(function (error: any) {
+      dispatch(approveNtf(error));
+      console.log("失败：" + JSON.stringify(error));
+      // dispatch(approveNtf(JSON.stringify(error)));
+    });
+  };
+  }
 
 function connect(connector) {
   return (dispatch: any) => {
@@ -72,6 +89,9 @@ function buyResult(res: string) {
 }
 
 function resetBuy(res: object) {
+  return { type: walletConstants.CLEAR_BUY_RESULT, res };
+}
+function approveNtf(res: object) {
   return { type: walletConstants.CLEAR_BUY_RESULT, res };
 }
 function disconnect(connector) {

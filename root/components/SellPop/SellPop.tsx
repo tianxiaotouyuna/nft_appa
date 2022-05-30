@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { walletActions } from "@/action/walletActions";
 import StepIndicator from 'react-native-step-indicator';
 import { ScrollView, TextInput } from "react-native-gesture-handler";
+import Buy from "@/pages/Market/Buy/Buy";
 export enum PopStyle {
   SELL_STYLE = 1, //退出登录
   TRANSFER_STYLE = 2, //退出登录
@@ -41,7 +42,6 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
   const connector = useWalletConnect(); // valid
   const [wallet, setwallet] = useState();
   const dispatch = useDispatch();
-  const [currentPosition, setcurrentPosition] = useState(1);
   const labels = ["Cart", "Delivery Address"];
   const stepIndicatorStyles = {
     stepIndicatorSize: pxToDp(40),
@@ -73,27 +73,27 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
     console.log('info==========' + JSON.stringify(info))
     console.log('data==========' + JSON.stringify(data))
   }
-  const buy = () => {
+  const onApprove = () => {
     const param = {
-      "data": data?.creatorAddress,
-      "from": wallet?.accounts[0],//20字节，发送方地址
-      "gas": "0x76c0",
-      "gasPrice": "0x9184e72a000",
-      "to": data?.creatorAddress,//20字节，接收方地址，当为空时，为创建合约交易；
-      // "value": "0x9184e72a"
-      "value": "0x99184e7"
+      "chainId": wallet?.chainId,
+      "accounts": wallet?.accounts,//20字节，发送方地址
     }
-    console.log('signPersonalMessage==========' + JSON.stringify({
-      "data": data?.creatorAddress,
-      "from": '0x306Ed1Fc004A69298D730F876F178A679fAdC084',//20字节，发送方地址
-      "gas": "0x76c0",
-      "gasPrice": "0x9184e72a000",
-      "to": data?.creatorAddress,//20字节，接收方地址，当为空时，为创建合约交易；
-      "value": "0x9184e72a"
-    }))
-    dispatch(walletActions.buy(connector, param));
+    console.log('param123==========' + JSON.stringify(param))
+
+  dispatch(walletActions.approve(connector, param));
 
   }
+  const onSell = () => {
+    const param = {
+      "chainId": wallet?.chainId,
+      "accounts": wallet?.accounts,//20字节，发送方地址
+    }
+    console.log('param123==========' + JSON.stringify(param))
+
+  dispatch(walletActions.approve(connector, param));
+
+  }
+  const currentPosition=connector.connected==true?2:1
 
   const renderPopView_sell = () => (
 
@@ -101,7 +101,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
       <View style={{ flexDirection: "row", width: '100%', justifyContent: "center", alignItems: "center" }}>
 
         <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>确认出售</Text>
-        <Pressable style={styles.arrow} onPress={cancle_press}>
+        <Pressable style={[styles.arrow,{width:pxToDp(88),height:pxToDp(88),justifyContent:"center"}]} onPress={cancle_press}>
           <Image
             style={styles.arrow}
             source={require("@/resources/closure.png")}
@@ -134,9 +134,9 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
           direction="vertical"
           labels={labels.map((item) => item)}
           currentPosition={currentPosition}
-          renderLabel={({ position, stepStatus, label, currentPosition }) => {
+          renderLabel={({ position, stepStatus, label, currentPosition2 }) => {
             return (
-              position == currentPosition ? <Text style={{
+              position == 1 ? <Text style={{
                 fontSize: pxToSp(24), color: '#383838', textAlign: 'left', position: 'absolute', width:
                   '100%'
               }}>确认出售</Text>
@@ -153,7 +153,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
 
       <View style={{ justifyContent: "space-between", alignItems: "center", width: '100%', marginTop: pxToDp(40) }}>
         <View style={{ width: '100%', flexDirection: "row", justifyContent: "space-between" }}>
-          <NtfButton text="授权" width='100%' heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={buy} loadingUse={true}>
+          <NtfButton text={currentPosition==1?"授权":'出售'} width='100%' heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={currentPosition==1?onApprove:onSell} loadingUse={true}>
             {" "}
           </NtfButton>
         </View>
@@ -164,7 +164,7 @@ const SellPop: FunctionComponent<PopProps> = (props) => {
 
   const renderPopView_transfer = () => (
 
-    <View style={[styles.modalContent, { paddingBottom: pxToDp(400) }, style]}>
+    <View style={[styles.modalContent, style]}>
       <View style={{ flexDirection: "row", width: '100%', justifyContent: "center", alignItems: "center" }}>
         <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>转移商品</Text>
         <Pressable style={styles.arrow} onPress={cancle_press}>
