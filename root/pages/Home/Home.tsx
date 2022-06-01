@@ -190,7 +190,7 @@ const Home: FunctionComponent = () => {
           }}
         >
           <Image
-            style={styles.tab_right}
+            style={styles.tab_right2}
             source={require("@/resources/home/more.png")}
           />
         </Pressable>

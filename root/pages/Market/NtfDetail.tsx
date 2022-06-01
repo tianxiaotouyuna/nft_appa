@@ -13,12 +13,16 @@ import { Placeholder, PlaceholderLine, PlaceholderMedia, ShineOverlay } from "rn
 import Offer from "@/components/Selleroffer/Offer";
 import { PriceCardStyle } from "@/components/Selleroffer/SellerofferCard/OfferCard";
 import SellPop, { PopStyle } from "@/components/SellPop/SellPop";
+import Centerheader from "@/pageranges/markdetail/centerheader/Centerheader";
 
 const NtfDetail: FunctionComponent = () => {
   const params: any = useRoute().params?.item ?? {};
   const isMyDetail: boolean = useRoute().params?.isMyDetail ??false;
 
   const [data, setdata] = useState({});
+  const [buyData, setbuyData] = useState(null);
+  const [sellData, setsellData] = useState(null);
+  const [hisData, sethisData] = useState(null);
   const bottomRef = useRef<any>();
   const [imageEnd, setimageEnd] = useState(false);
   const yOffset = useRef(new Animated.Value(0)).current;
@@ -54,7 +58,9 @@ const NtfDetail: FunctionComponent = () => {
   const navigation = useNavigation();
   useEffect(() => {
     getData()
-
+    queryBidOffersList()
+    querySellerList()
+    queryEventList()
   }, [])
 
   useEffect(() => {
@@ -100,6 +106,40 @@ const NtfDetail: FunctionComponent = () => {
     const order = await MarketService.getAssetsOneInfo({ 'AssetContractAddress': params?.assetAddress, 'tokenId': params?.tokenId }, {});
     setdata(order?.data)
   }
+  // const queryBidOffersList = async () => {
+
+  //   const order = await MarketService.queryBidOffersList({ 'AssetContractAddress': params?.assetAddress, 'tokenId': params?.tokenId }, {'limit':20});
+  //   setbuyData(order?.data)
+  // }
+
+  // const querySellerList = async () => {
+  //   const order = await MarketService.querySellerList({ 'AssetContractAddress': params?.assetAddress, 'tokenId': params?.tokenId }, {'limit':20});
+  //   setsellData(order?.data)
+  // }
+
+  // const queryEventList = async () => {
+  //   const order = await MarketService.queryEventList({ 'AssetContractAddress': params?.assetAddress, 'tokenId': params?.tokenId }, {'limit':20});
+  //   setsellData(order?.data)
+  // }
+  
+  const queryBidOffersList = async () => {
+
+    const order = await MarketService.queryBidOffersList({ 'AssetContractAddress': '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d', 'tokenId': 8520}, {'limit':20});
+    setbuyData(order?.data?.offers)
+}
+
+  const querySellerList = async () => {
+    const order = await MarketService.querySellerList({ 'AssetContractAddress': '0x5ba27d17821f9ac041b648fe9f90ec40abb8c3c2', 'tokenId': 7 }, {'limit':20});
+    setsellData(order?.data?.listings)
+}
+
+  const queryEventList = async () => {
+    const order = await MarketService.queryEventList({},{'token_id': 7,'asset_contract_address': '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d'});
+    console.log('asdasd==='+JSON.stringify(order))
+    sethisData(order?.data)
+  }
+
+
 
   const gotoBuy = () => {
     setsellerShow(false)
@@ -153,7 +193,8 @@ const pushToNext=()=>{
               <PlaceholderMedia style={[styles.image]} />
             </Placeholder>
           ) : null}
-        <Center data={data} onpress_1={() => setsellerShow(true)} onpress_2={() => setbuyshow(true)} isFromMyDetail={isMyDetail} />
+      
+        <Center data={data} onpress_1={() => setsellerShow(true)} onpress_2={() => setbuyshow(true)} isFromMyDetail={isMyDetail} data_buy={buyData} data_sell={sellData} data_history={hisData}  />
       </Animated.ScrollView>
 
 
@@ -162,7 +203,7 @@ const pushToNext=()=>{
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
       >
-        <Offer data={data} onBuy={() => gotoBuy()} cancle_press={closeSeller} priceCardStyle={PriceCardStyle.SELLER_STYLE}></Offer>
+        <Offer data={sellData} onBuy={() => gotoBuy()} cancle_press={closeSeller} priceCardStyle={PriceCardStyle.SELLER_STYLE}></Offer>
       </Modal>
 
 
@@ -171,7 +212,7 @@ const pushToNext=()=>{
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
       >
-        <Offer data={data} cancle_press={closeBuy} priceCardStyle={PriceCardStyle.BUY_STYLE}></Offer>
+        <Offer data={buyData} cancle_press={closeBuy} priceCardStyle={PriceCardStyle.BUY_STYLE}></Offer>
       </Modal>
 
 
@@ -181,7 +222,7 @@ const pushToNext=()=>{
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
       >
-        <SellPop cancle_press={() => settransfer(false)} sure_press={() => { }} data={data} popStyle={PopStyle.TRANSFER_STYLE}></SellPop>
+        <SellPop cancle_press={() => settransfer(false)} sure_press={() => { }} data={hisData} popStyle={PopStyle.TRANSFER_STYLE}></SellPop>
       </Modal>
       <Bottom onPress_2={pushToNext} isFromMyDetail={isMyDetail} onPress_1={()=>{settransfer(true)}}/>
     </View>

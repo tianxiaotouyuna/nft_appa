@@ -1,4 +1,4 @@
-import { Dimensions, PixelRatio, Platform } from 'react-native';
+import { Dimensions, PixelRatio, Platform, StyleProp, ViewStyle } from 'react-native';
 
 export const windowWidth = Dimensions.get('window').width;
 export const windowHeight = Dimensions.get('window').height;
@@ -39,7 +39,31 @@ export const pxToDp = (value: number) => {
     }
     return Math.round((value * scalePx) / pixelRatio + 0.5);
 }
-
+export const generateBoxShadowStyle = (
+  xOffset,
+  yOffset,
+  shadowColorIos,
+  shadowOpacity,
+  shadowRadius,
+  elevation,
+  shadowColorAndroid,
+    style?: StyleProp<ViewStyle>
+ ) => {var style_
+  if (Platform.OS === 'ios') {
+    style_={
+      shadowColor: shadowColorIos,
+      shadowOffset: {width: xOffset, height: yOffset},
+      shadowOpacity,
+      shadowRadius,
+    };
+  } else if (Platform.OS === 'android') {
+    style_={
+      elevation,
+      shadowColor: shadowColorAndroid,
+    };
+  }
+  return [style,style_]
+};
 /** 等待时长（秒） */
 export const awaitTime = (duration: number) => {
     return new Promise((resolve) => {

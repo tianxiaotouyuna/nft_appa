@@ -40,6 +40,7 @@ const Asset: FunctionComponent = () => {
   const getData = async () => {
 
     const res = await MarketService.getMarketList_my();
+    console.log('getMarketList_my'+res)
     setntfData(res?.data[0])  
   }
   const refreshHeaderData= ()=>{

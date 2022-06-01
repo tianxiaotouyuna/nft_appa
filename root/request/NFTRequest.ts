@@ -34,7 +34,7 @@ const instance = Axios.create({
 // });
 
 export const getUrl = (api: string, data?: any) => {
-    return `${Constants.BASE_HOST}/${api}${!!data ? `${jquery.param(data)}` : ""}`;
+    return `${Constants.BASE_HOST}/${api}?${!!data ? `${jquery.param(data)}` : ""}`;
 }
 
 const json = async (api: string, data: any = {}, config?: AxiosRequestConfig) => {

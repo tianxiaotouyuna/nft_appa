@@ -22,12 +22,16 @@ const styles = StyleSheet.create({
     spacing2: {
         marginBottom: 12 
     },
-    tab_right:{
+    tab_right2:{
             width:pxToDp(44),
             height:pxToDp(44),
             marginHorizontal:pxToDp(32)
     },
 
+    tab_right:{
+        width:pxToDp(44),
+        height:pxToDp(44),
+},
     IGO_Warps:{ flexDirection: "row", alignItems: "center",marginTop: pxToDp(25), marginBottom: pxToDp(7),justifyContent:"space-between"},
     IGO_Warps_Text:{ fontSize: UIELEMENTS.HEADER_SIZE, color: UIELEMENTS.DEFAULT_HEADER_COLOR},
     IGO_Warps_Image:{ width: pxToDp(34), height: pxToDp(34),marginLeft:pxToDp(20) },

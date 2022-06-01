@@ -27,7 +27,7 @@ const OfferCard: FunctionComponent<priceprops> = (props) => {
             <BaseCard style={[{ paddingVertical: pxToDp(24), paddingHorizontal: pxToDp(26), backgroundColor: '#FEFCF5', width: '100%', borderRadius: pxToDp(28) }, style]}>
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     <View style={{}}>
-                        <Text style={styles.text1}>0.6217 WETH/件</Text>
+                        <Text style={styles.text1}>{data?.current_price} WETH/件</Text>
                         <Text style={styles.text2}>$1,888.21</Text>
                     </View>
                     <NtfButton text="购买" width={pxToDp(164)} heigh={pxToDp(68)} textColor='white' backgroundColor="#3352DB" borderRadius={pxToDp(12)} onPress={onPress}></NtfButton>
