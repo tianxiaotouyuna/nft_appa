@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         height:pxToDp(44),
 },
     IGO_Warps:{ flexDirection: "row", alignItems: "center",marginTop: pxToDp(25), marginBottom: pxToDp(7),justifyContent:"space-between"},
-    IGO_Warps_Text:{ fontSize: UIELEMENTS.HEADER_SIZE, color: UIELEMENTS.DEFAULT_HEADER_COLOR},
+    IGO_Warps_Text:{ fontSize: UIELEMENTS.HEADER_SIZE, color: UIELEMENTS.DEFAULT_HEADER_COLOR,fontWeight:"bold"},
     IGO_Warps_Image:{ width: pxToDp(34), height: pxToDp(34),marginLeft:pxToDp(20) },
     IGO_Warps_arrow:{ width: pxToDp(22), height: pxToDp(22),marginLeft:pxToDp(20) },
   

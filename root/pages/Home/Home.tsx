@@ -1,4 +1,4 @@
-import React, { Component, FunctionComponent, useState } from "react";
+import React, { Component, FunctionComponent, useEffect, useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import Ripple from "react-native-material-ripple";
 import { Button, Card, Searchbar, Title } from "react-native-paper";
@@ -19,9 +19,12 @@ import BannerCard, { CardStyle } from "../../components/BannerCard/BannerCard";
 import Carousel from 'react-native-snap-carousel'
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import FastImage from "react-native-fast-image";
+import NFTSearchBar, { SearchStyle } from "@/components/NFTSearchBar/NFTSearchBar";
+import { HomeService } from "@/services/index";
 
 const Home: FunctionComponent = () => {
 
+  const [collectionData, setCollectionData] = useState([]);
 
   const [inputValue, setinputValue] = useState('');
   const [publishData, setpublishData] = useState( [
@@ -174,7 +177,6 @@ const Home: FunctionComponent = () => {
     <BannerCard
       data={item['item']}
       cardStyle={CardStyle.HOTCOLLECTION_STYLE}
-      onTap={() => { }}
       onTap={() => { Navigate.navigate('Search', {}) }}
       borderRadius={pxToDp(28)}
     />
@@ -202,9 +204,18 @@ const Home: FunctionComponent = () => {
       barStyle: "light-content",
     },
   });
+  useEffect(() => {
+    getData()
+  }, [])
+  const getData = async () => {
+
+    const order = await HomeService.queryCollectionList({ }, {});
+    console.log('orderorder==='+JSON.stringify(order))
+    setCollectionData(order?.data?.collections)
+  }
   return (
     <ScrollView style={[styles.container, { marginBottom: 100 + useSafeAreaInsets().bottom }]}>
-      <Searchbar
+      {/* <Searchbar
         placeholder="搜索"
         onChangeText={(query) => { onChangeSearch(query) }}
         onEndEditing={() => { Navigate.navigate('Search', {}) }}
@@ -213,8 +224,8 @@ const Home: FunctionComponent = () => {
         style={styles.search_wraps}
         inputStyle={styles.search_input}
         selectionColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}
-      />
-
+      /> */}
+  <NFTSearchBar searchStyle={SearchStyle.HOME1_STYLE}></NFTSearchBar>
       <View style={styles.IGO_Warps}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.IGO_Warps_Text}>分类</Text>
@@ -255,7 +266,7 @@ const Home: FunctionComponent = () => {
       </View>
       {/* <NftAutoScroll duration={100000} bannerCard={CardStyle.HOTCOLLECTION_STYLE} data={ hotData} ></NftAutoScroll> */}
       <Carousel
-        data={hotData}
+        data={collectionData}
         activeSlideAlignment={'start'}
         renderItem={(item, index) => renderHot(item, index)}
         sliderWidth={pxToDp(670)}
@@ -265,6 +276,7 @@ const Home: FunctionComponent = () => {
         inactiveSlideOpacity={1}
         firstItem={0}
         scrollEndDragDebounceValue={40}
+
       />
 
 

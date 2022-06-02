@@ -12,6 +12,7 @@ export const SCREEN = {
     NtfDetail:"NtfDetail",
     Buy:"Buy",
     Sell:"Sell",
+    Category:"Category"
 }
 
 /**
@@ -30,4 +31,5 @@ export const authRoutes = [
     SCREEN.NtfDetail,
     SCREEN.Buy,
     SCREEN.Sell,
+    SCREEN.Category,
 ]

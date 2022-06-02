@@ -15,7 +15,7 @@ import { PriceCardStyle } from "@/components/Selleroffer/SellerofferCard/OfferCa
 import SellPop, { PopStyle } from "@/components/SellPop/SellPop";
 import Centerheader from "@/pageranges/markdetail/centerheader/Centerheader";
 
-const NtfDetail: FunctionComponent = () => {
+const NftCollectionDetail: FunctionComponent = () => {
   const params: any = useRoute().params?.item ?? {};
   const isMyDetail: boolean = useRoute().params?.isMyDetail ??false;
 
@@ -28,7 +28,6 @@ const NtfDetail: FunctionComponent = () => {
   const yOffset = useRef(new Animated.Value(0)).current;
   const [sellerShow, setsellerShow] = useState(false);
   const [buyshow, setbuyshow] = useState(false);
-  const [hisShow, sethisShow] = useState(false);
       const [transfer, settransfer] = useState(false);
       const headerOpacity = yOffset.interpolate({
     inputRange: [0, 200],
@@ -136,8 +135,8 @@ const NtfDetail: FunctionComponent = () => {
 
   const queryEventList = async () => {
     const order = await MarketService.queryEventList({},{'token_id': 7,'asset_contract_address': '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d'});
-    console.log('qqqq==='+JSON.stringify(order))
-    sethisData(order?.data?.asset_events)
+    console.log('asdasd==='+JSON.stringify(order))
+    sethisData(order?.data)
   }
 
 
@@ -157,9 +156,6 @@ const pushToNext=()=>{
   }
   const closeBuy = () => {
     setbuyshow(false)
-  }
-  const closeHis = () => {
-    sethisShow(false)
   }
   return (
     <View style={[styles.container]}>
@@ -198,7 +194,7 @@ const pushToNext=()=>{
             </Placeholder>
           ) : null}
       
-        <Center data={data} onpress_1={() => setsellerShow(true)} onpress_2={() => setbuyshow(true)}  onpress_3={() => sethisShow(true)} isFromMyDetail={isMyDetail} data_buy={buyData} data_sell={sellData} data_history={hisData}  />
+        <Center data={data} onpress_1={() => setsellerShow(true)} onpress_2={() => setbuyshow(true)} isFromMyDetail={isMyDetail} data_buy={buyData} data_sell={sellData} data_history={hisData}  />
       </Animated.ScrollView>
 
 
@@ -220,14 +216,6 @@ const pushToNext=()=>{
       </Modal>
 
 
-
-      <Modal isVisible={hisShow} style={styles.bottomModal}
-        hideModalContentWhileAnimating={true}
-        useNativeDriverForBackdrop={true}
-        animationOutTiming={300}
-      >
-        <Offer data={hisData} cancle_press={closeHis} priceCardStyle={PriceCardStyle.HIS_STYLE}></Offer>
-      </Modal>
 
       <Modal isVisible={transfer} style={styles.bottomModal}
         hideModalContentWhileAnimating={true}
@@ -265,5 +253,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default NtfDetail;
+export default NftCollectionDetail;
 

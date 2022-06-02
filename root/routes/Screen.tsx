@@ -10,7 +10,7 @@ import Search from "@/pages/Home/Search";
 import NtfDetail from "@/pages/Market/NtfDetail";
 import Buy from "@/pages/Market/Buy/Buy";
 import Sell from "@/pages/Asset/Sell/Sell";
-
+import Category from "@/pages/Home/Category/Category";
 const ScreenStack = createStackNavigator();
 
 const Screen: FunctionComponent = () => {
@@ -23,6 +23,7 @@ const Screen: FunctionComponent = () => {
             <ScreenStack.Screen name={Route.SCREEN.NtfDetail} component={NtfDetail}  options={{ title: ' ' }}/>
             <ScreenStack.Screen name={Route.SCREEN.Buy} component={Buy}/>
             <ScreenStack.Screen name={Route.SCREEN.Sell} component={Sell}/>
+            <ScreenStack.Screen name={Route.SCREEN.Category} component={Category}/>
 
         </ScreenStack.Navigator>
     )

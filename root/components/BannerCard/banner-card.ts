@@ -1,3 +1,4 @@
+import { UIELEMENTS } from "@/constants/";
 import { pxToDp } from "@/utils/system";
 import { StyleSheet } from "react-native";
 
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
     hot_image: {
         width:pxToDp(280),
         height:pxToDp(200),
+        backgroundColor:UIELEMENTS.DEFAULT_IMAGEBACKGROUND_COLOR
     },
     hot_head: {
         width:pxToDp(88),

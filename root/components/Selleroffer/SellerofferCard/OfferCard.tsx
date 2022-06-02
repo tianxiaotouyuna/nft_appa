@@ -6,8 +6,9 @@ import { pxToDp } from "@/utils/system";
 import NtfButton from "@/components/NtfButton/NtfButton";
 import BaseCard from "@/components/BaseCard/BaseCard";
 export enum PriceCardStyle {
-    SELLER_STYLE = 1, //发行
-    BUY_STYLE = 2, //热门合集
+    SELLER_STYLE = 1, //卖
+    BUY_STYLE = 2, //买
+    HIS_STYLE = 3, //历史
 }
 type priceprops = {
     data?: any;
@@ -154,8 +155,44 @@ const OfferCard: FunctionComponent<priceprops> = (props) => {
 
         )
     }
+
+
+    const renderHis = () => {
+        return (
+            <View style={[{ paddingVertical: pxToDp(24), paddingHorizontal: pxToDp(26), width: '100%', borderRadius: pxToDp(28),borderBottomColor:'#F0F0F0',borderBottomWidth:pxToDp(2) }, style]}>
+                <View
+                    style={{
+                    }}
+                >
+                    <View style={{ flexDirection: 'row',justifyContent:"space-between",width:'100%' }}>
+                        <View style={{}}>
+                            <Text style={{ color: "#707A83", fontSize: pxToDp(24) }}>类型</Text>
+                            <Text style={{ color: "#383838", marginTop: pxToDp(6) }}>出价</Text>
+                        </View>
+
+                        <View style={{}}>
+                            <Text style={{ color: "#707A83", fontSize: pxToDp(24) }}>价格</Text>
+                            <Text style={{ color: "#383838", marginTop: pxToDp(6) }}>0.221 WETH</Text>
+                        </View>
+
+                        <View style={{}}>
+                            <Text style={{ color: "#707A83", fontSize: pxToDp(24) }}>时间</Text>
+                            <Text style={{ color: "#383838", marginTop: pxToDp(6) }}>2022-4-21 22:22:00</Text>
+                        </View>
+                    </View> 
+
+                    <View style={{marginTop:pxToDp(30)}}>
+                            <Text style={{ color: "#707A83", fontSize: pxToDp(24) }}>从</Text>
+                            <Text style={{ color: "#383838", marginTop: pxToDp(6) }}>0x7ad9…9e51</Text>
+                        </View>
+                </View>
+            </View>
+
+
+        )
+    }
     return (
-        priceCardStyle == PriceCardStyle.SELLER_STYLE ? renderSeller() : renderBuy()
+        priceCardStyle == PriceCardStyle.SELLER_STYLE ? renderSeller() : (priceCardStyle == PriceCardStyle.BUY_STYLE ? renderBuy() : renderHis())
 
     );
 };

@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         width:pxToDp(22),
         height:pxToDp(20),
     },
+    arrowStyle:{width:pxToDp(32),height:pxToDp(32)}
 })
 
 export default styles;

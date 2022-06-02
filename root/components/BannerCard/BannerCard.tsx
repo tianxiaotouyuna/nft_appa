@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import FastImage from "react-native-fast-image";
 import BaseCard from "../BaseCard/BaseCard";
-import { pxToDp } from "@/utils/system";
+import { pxToDp, pxToSp } from "@/utils/system";
 import Ripple from "react-native-material-ripple";
 import { UIELEMENTS } from "@/constants/index";
 import { Navigate } from "@/utils/index";
@@ -109,24 +109,26 @@ const pushCard=(item:any)=>{
         resizeMode="cover"
         source={{ uri: data?.imageUrl }}
       />
-      <Text>{data?.assetName}</Text>
+          <Text style={{fontSize:pxToSp(44),color:'#383838',fontWeight:'bold'}}>{data?.assetName}</Text>
     </BaseCard>
   );
 
-  const renderHot = () => (
+  const renderHot = () =>{
+    console.log('data========'+JSON.stringify(data))
+    return (
     <Ripple onPress={onTap} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}>
       <BaseCard style={[{ borderRadius: borderRadius }, { padding: 0, width: pxToDp(280) }]}>
         <View style={{ alignItems: "center" }}>
           <FastImage
             style={[styles.hot_image, { borderRadius: borderRadius }]}
             resizeMode="cover"
-            source={{ uri: data?.thumb }}
+            source={{ uri: data?.banner_image_url }}
           />
-          <Text>{data?.name}</Text>
+          <Text style={{fontSize:pxToSp(24),color:'#383838',fontWeight:'bold'}} ellipsizeMode='middle' numberOfLines={1}>{data?.name}</Text>
         </View>
       </BaseCard>
     </Ripple>
-  );
+  );}
 
   return cardStyle == CardStyle.PUBLISH_STYLE ? renderPublish() : (cardStyle == CardStyle.HOTCOLLECTION_STYLE ? renderHot() : renderHotNtf())
 };

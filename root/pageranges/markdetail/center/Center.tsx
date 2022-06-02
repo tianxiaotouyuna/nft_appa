@@ -20,7 +20,7 @@ type AssetBtnWrapsProps = {
 
 };
 const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
-  const { data, onpress_1, onpress_2, isFromMyDetail = false, data_buy, data_sell,data_history } = props;
+  const { data, onpress_1, onpress_2, onpress_3, isFromMyDetail = false, data_buy, data_sell, data_history } = props;
   const dispatch = useDispatch();
   const connector = useWalletConnect(); // valid
   const login = () => {
@@ -35,7 +35,7 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
 
   return (
     <View style={styles.container}>
-      <Centerheader  data={data} style={{position:"absolute",top:pxToDp(-54)}}/>
+      <Centerheader data={data} style={{ position: "absolute", top: pxToDp(-54) }} />
       <Text
         style={{ color: "#383838", fontSize: pxToDp(32), fontWeight: "bold" }}
       >
@@ -186,79 +186,45 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
         </View>
       </View>
 
-     
-      {isFromMyDetail == false &&data_sell?
-      <>
-       <View
-        style={{
-          backgroundColor: "#F0F0F0",
-          height: pxToDp(8),
-          width: "100%",
-        }}
-      />
-        <Pressable
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingVertical: pxToDp(34),
-          }}
-          onPress={onpress_1}
-        >
-          <Text
+
+      {isFromMyDetail == false && data_sell ?
+        <>
+          <View
             style={{
-              color: "#383838",
-              fontSize: pxToDp(28),
-              width: pxToDp(199),
+              backgroundColor: "#F0F0F0",
+              height: pxToDp(8),
+              width: "100%",
             }}
-            numberOfLines={1}
-          >
-            卖家定价
-          </Text>
-          <Image
-            style={styles.arrow}
-            source={require("@/resources/return_4.png")}
           />
-      
-        </Pressable></> :
+          <Pressable
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              paddingVertical: pxToDp(34),
+            }}
+            onPress={onpress_1}
+          >
+            <Text
+              style={{
+                color: "#383838",
+                fontSize: pxToDp(28),
+                width: pxToDp(199),
+              }}
+              numberOfLines={1}
+            >
+              卖家定价
+            </Text>
+            <Image
+              style={styles.arrow}
+              source={require("@/resources/return_4.png")}
+            />
+
+          </Pressable></> :
         null}
 
 
       {data_buy ?
-      <>
-          <View
-          style={{
-            backgroundColor: "#F0F0F0",
-            height: pxToDp(4),
-            width: "100%",
-          }}
-        />
-        <Pressable
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingVertical: pxToDp(34),
-        }}
-        onPress={onpress_2}
-      >
-        <Text
-          style={{
-            color: "#383838",
-            fontSize: pxToDp(28),
-            width: pxToDp(199),
-          }}
-          numberOfLines={1}
-        >
-          买家出价
-        </Text>
-        <Image
-          style={styles.arrow}
-          source={require("@/resources/return_4.png")}
-        />
-      </Pressable></> : null}
-
-
-      {data_history ?
-          <>
+        <>
           <View
             style={{
               backgroundColor: "#F0F0F0",
@@ -266,12 +232,47 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
               width: "100%",
             }}
           />
-          <View
+          <Pressable
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
               paddingVertical: pxToDp(34),
             }}
+            onPress={onpress_2}
+          >
+            <Text
+              style={{
+                color: "#383838",
+                fontSize: pxToDp(28),
+                width: pxToDp(199),
+              }}
+              numberOfLines={1}
+            >
+              买家出价
+            </Text>
+            <Image
+              style={styles.arrow}
+              source={require("@/resources/return_4.png")}
+            />
+          </Pressable></> : null}
+
+
+      {data_history ?
+        <>
+          <View
+            style={{
+              backgroundColor: "#F0F0F0",
+              height: pxToDp(4),
+              width: "100%",
+            }}
+          />
+          <Pressable
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              paddingVertical: pxToDp(34),
+            }}
+            onPress={onpress_3}
           >
             <Text
               style={{
@@ -287,19 +288,19 @@ const Center: FunctionComponent<AssetBtnWrapsProps> = (props) => {
               style={styles.arrow}
               source={require("@/resources/return_4.png")}
             />
-          </View>
-          </>
-              :null}
-          <View
-            style={{
-              backgroundColor: "#F0F0F0",
-              height: pxToDp(4),
-              width: "100%",
-            }}
-          />
+          </Pressable>
+        </>
+        : null}
+      <View
+        style={{
+          backgroundColor: "#F0F0F0",
+          height: pxToDp(4),
+          width: "100%",
+        }}
+      />
 
-        </View>
+    </View>
   );
 };
-      //https://www.apifox.cn/apidoc/shared-82b71f6c-7299-46df-ac3b-41f48031a9ed/api-20735620
-      export default Center;
+//https://www.apifox.cn/apidoc/shared-82b71f6c-7299-46df-ac3b-41f48031a9ed/api-20735620
+export default Center;
