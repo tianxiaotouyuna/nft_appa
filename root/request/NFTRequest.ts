@@ -45,7 +45,7 @@ const json = async (api: string, data: any = {}, config?: AxiosRequestConfig) =>
         // Alert.alert(JSON.stringify(resp?.data))
         return Promise.resolve(resp?.data);
     } else {
-        // Alert.alert(JSON.stringify(resp?.data))
+        Alert.alert(JSON.stringify(resp?.data))
         return Promise.reject(resp);
     }
 }

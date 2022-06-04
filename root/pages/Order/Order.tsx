@@ -25,20 +25,12 @@ const Order: FunctionComponent = () => {
       barStyle: "light-content",
     },
   });
-
- const renderTab = (name, page, isTabActive, onPressHandler, onLayoutHandler) => {
-    return (
-      <TouchableHighlight
-        key={`${name}_${page}`}
-        onPress={() => onPressHandler(page)}
-        onLayout={onLayoutHandler}
-        style={{ flex: 1, width: 100 }}
-        underlayColor="#aaaaaa"
-      >
-        <Text>{name}</Text>
-      </TouchableHighlight>
-    );
-  }
+  const [tabsInfo] = useState([
+    { name: "我的出价", type: 1 },
+    { name: "收到的出价", type: 2 },
+    { name: "挂单", type: 3 },
+    { name: "成交", type: 4 },
+])
   const handleChangeTab=()=>{
 
   }
@@ -49,10 +41,9 @@ const showScrollBar=()=>{
       onChangeTab={handleChangeTab}
       renderTabBar={() => <NFTDefaultTabBar  activeTextColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} inactiveTextColor={'#383838'} textStyle={{fontSize:pxToSp(28)}}/>}
     >
-        <OrderList tabLabel='我的出价'></OrderList>
-        <OrderList tabLabel='收到的出价'></OrderList>
-        <OrderList tabLabel='挂单'></OrderList>
-        <OrderList tabLabel='成交'></OrderList>
+      {tabsInfo?.map((item: any, index: number) => (
+                <OrderList key={`${item?.name}_${index}`} tabLabel={ item?.name } type={item?.type} />
+            ))}
       </ScrollableTabView>
   )
 }

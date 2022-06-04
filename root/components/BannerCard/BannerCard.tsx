@@ -16,10 +16,12 @@ import Ripple from "react-native-material-ripple";
 import { UIELEMENTS } from "@/constants/index";
 import { Navigate } from "@/utils/index";
 import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia, ShineOverlay } from "rn-placeholder";
+import NtfButton from "../NtfButton/NtfButton";
 export enum CardStyle {
   PUBLISH_STYLE = 1, //发行
   HOTCOLLECTION_STYLE = 2, //热门合集
-  HOTNTF_STYLE = 3, //热门合集
+  HOTNTF_STYLE = 3, //热门NFT
+
 }
 type BannerCardProps = {
   style?: StyleProp<ViewStyle>;
@@ -30,40 +32,40 @@ type BannerCardProps = {
   borderRadius?: number;
 };
 const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
-  const { data, style, cardStyle, onTap, borderRadius = pxToDp(10),isFromMy=false } = props;
-const [imageEnd, setimageEnd] = useState(true);
-const [imageError, setimageError] = useState(false);
-const renderHotNtf = () =>{
-  console.log('================'+JSON.stringify(data))
- return (
-    <View style={[{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
-      {data?.map((item: any, index: number) => (
-        item_one(item, index)
-      ))}
-    </View>
-  );  
-}
-const pushCard=(item:any)=>{
-  if(isFromMy)Navigate.navigate('NtfDetail', { item: item,isMyDetail: true})
-  else Navigate.navigate('NtfDetail', { item: item })
-}
+  const { data, style, cardStyle, onTap, borderRadius = pxToDp(10), isFromMy = false } = props;
+  const [imageEnd, setimageEnd] = useState(true);
+  const [imageError, setimageError] = useState(false);
+  const renderHotNtf = () => {
+    console.log('================' + JSON.stringify(data))
+    return (
+      <View style={[{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
+        {data?.map((item: any, index: number) => (
+          item_one(item, index)
+        ))}
+      </View>
+    );
+  }
+  const pushCard = (item: any) => {
+    if (isFromMy) Navigate.navigate('NtfDetail', { item: item, isMyDetail: true })
+    else Navigate.navigate('NtfDetail', { item: item })
+  }
   const item_one = (item: any, index: number) => (
 
-    <Ripple onPress={()=>pushCard(item )} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} rippleContainerBorderRadius={borderRadius} key={`${index}`}>
+    <Ripple onPress={() => pushCard(item)} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} rippleContainerBorderRadius={borderRadius} key={`${index}`}>
       <BaseCard style={[{ borderRadius: borderRadius }, { width: pxToDp(326), paddingHorizontal: pxToDp(8) }]}>
-      <FastImage
-                style={imageEnd?[styles.publish_image, { borderRadius: borderRadius ,backgroundColor:'#EEEEEE'}]:[{width:0,height:0}]}
-                resizeMode="cover"
-                source={{ uri: item?.imageUrl }}
-                onLoad={() => {
-                  setimageEnd(true);
-                }}
-                // onError={()=>{
-                //   setimageError(true);
-                  
-                // }}
-                fallback={true}
-              />
+        <FastImage
+          style={imageEnd ? [styles.publish_image, { borderRadius: borderRadius, backgroundColor: '#EEEEEE' }] : [{ width: 0, height: 0 }]}
+          resizeMode="cover"
+          source={{ uri: item?.imageUrl }}
+          onLoad={() => {
+            setimageEnd(true);
+          }}
+          // onError={()=>{
+          //   setimageError(true);
+
+          // }}
+          fallback={true}
+        />
         {imageEnd ?
           (
             <>
@@ -82,14 +84,14 @@ const pushCard=(item:any)=>{
           ) :
           (
             <>
-        <Placeholder Animation={ShineOverlay} >
-              <PlaceholderMedia style={[styles.publish_image, { borderRadius: borderRadius }]} />
-              <View style={{ paddingTop: pxToDp(28), paddingBottom: pxToDp(22), paddingLeft: pxToDp(12), justifyContent: "space-between" }}>
-                <PlaceholderLine style={{ width: pxToDp(50) }} />
-                <PlaceholderLine style={{ marginTop: pxToDp(8), width: pxToDp(194) }} />
-                <PlaceholderLine style={{ marginTop: pxToDp(18), width: pxToDp(194) }} />
-                <PlaceholderLine style={{ marginTop: pxToDp(8), width: pxToDp(194) }} />
-              </View>
+              <Placeholder Animation={ShineOverlay} >
+                <PlaceholderMedia style={[styles.publish_image, { borderRadius: borderRadius }]} />
+                <View style={{ paddingTop: pxToDp(28), paddingBottom: pxToDp(22), paddingLeft: pxToDp(12), justifyContent: "space-between" }}>
+                  <PlaceholderLine style={{ width: pxToDp(50) }} />
+                  <PlaceholderLine style={{ marginTop: pxToDp(8), width: pxToDp(194) }} />
+                  <PlaceholderLine style={{ marginTop: pxToDp(18), width: pxToDp(194) }} />
+                  <PlaceholderLine style={{ marginTop: pxToDp(8), width: pxToDp(194) }} />
+                </View>
               </Placeholder>
             </>
           )
@@ -109,27 +111,29 @@ const pushCard=(item:any)=>{
         resizeMode="cover"
         source={{ uri: data?.imageUrl }}
       />
-          <Text style={{fontSize:pxToSp(44),color:'#383838',fontWeight:'bold'}}>{data?.assetName}</Text>
+      <Text style={{ fontSize: pxToSp(44), color: '#383838', fontWeight: 'bold' }}>{data?.assetName}</Text>
     </BaseCard>
   );
 
-  const renderHot = () =>{
-    console.log('data========'+JSON.stringify(data))
+  const renderHot = () => {
+    console.log('data========' + JSON.stringify(data))
     return (
-    <Ripple onPress={onTap} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}>
-      <BaseCard style={[{ borderRadius: borderRadius }, { padding: 0, width: pxToDp(280) }]}>
-        <View style={{ alignItems: "center" }}>
-          <FastImage
-            style={[styles.hot_image, { borderRadius: borderRadius }]}
-            resizeMode="cover"
-            source={{ uri: data?.banner_image_url }}
-          />
-          <Text style={{fontSize:pxToSp(24),color:'#383838',fontWeight:'bold'}} ellipsizeMode='middle' numberOfLines={1}>{data?.name}</Text>
-        </View>
-      </BaseCard>
-    </Ripple>
-  );}
+      <Ripple onPress={onTap} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}>
+        <BaseCard style={[{ borderRadius: borderRadius }, { padding: 0, width: pxToDp(280) }]}>
+          <View style={{ alignItems: "center" }}>
+            <FastImage
+              style={[styles.hot_image, { borderRadius: borderRadius }]}
+              resizeMode="cover"
+              source={{ uri: data?.banner_image_url }}
+            />
+            <Text style={{ fontSize: pxToSp(24), color: '#383838', fontWeight: 'bold' }} ellipsizeMode='middle' numberOfLines={1}>{data?.name}</Text>
+          </View>
+        </BaseCard>
+      </Ripple>
+    );
+  }
 
+  
   return cardStyle == CardStyle.PUBLISH_STYLE ? renderPublish() : (cardStyle == CardStyle.HOTCOLLECTION_STYLE ? renderHot() : renderHotNtf())
 };
 export default BannerCard;

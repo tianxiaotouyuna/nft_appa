@@ -7,7 +7,7 @@ import { Alert } from "react-native";
  */
 export const getMarketList = async () => {
   const res = await NFTRequest.get("getMarketList/");
-  console.log(JSON.stringify("res===" + JSON.stringify(res)));
+  console.log(JSON.stringify("getMarketList===" + JSON.stringify(res)));
   var new_res = new Array();
   for (var i = 0; i < 10; i++) {
     var sub_arr = new Array();

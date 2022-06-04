@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
         alignItems:"center",
+        paddingHorizontal:UIELEMENTS.PADDING_HORIZONTAL,
         justifyContent:'flex-end'
     },
     btn_icon: {
