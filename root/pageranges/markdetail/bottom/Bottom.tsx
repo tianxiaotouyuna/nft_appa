@@ -18,7 +18,7 @@ const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
     isFromMyDetail ?
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <NtfButton
-          text="转移"
+          text="取消出售"
           width={pxToDp(220)}
           heigh={pxToDp(84)}
           borderRadius={pxToDp(12)}
@@ -29,7 +29,7 @@ const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
           {" "}
         </NtfButton>
         <NtfButton
-          text="出售"
+          text="降低价格"
           width={pxToDp(220)}
           heigh={pxToDp(84)}
           textColor="white"

@@ -116,7 +116,7 @@ const Buy: FunctionComponent = () => {
 
 
 
-      <Modal isVisible={wallet?.buyResult} style={styles.centerModal}
+      <Modal isVisible={wallet?.buyResult||false} style={styles.centerModal}
         hideModalContentWhileAnimating={true}
         animationIn='bounce'
         useNativeDriverForBackdrop={true}

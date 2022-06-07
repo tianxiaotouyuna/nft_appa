@@ -3,7 +3,7 @@ import { View, Button, Platform, Alert, ImageStore, Pressable, Image, Text } fro
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "@/styles/pages/asset/loginout";
+import styles from "@/styles/pages/order/order-list";
 import { walletActions } from "@/action/walletActions";
 import { wallet } from "@/reducers/walletReducer";
 import NtfButton from "@/components/NtfButton/NtfButton";
@@ -15,6 +15,9 @@ import GDataList from "@/components/GDataList";
 import { OrderService } from "@/services/index";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
 import OrderCard from "@/components/OrderCard/OrderCard";
+import { Navigate } from "@/utils/index";
+import Modal from "react-native-modal";
+import OrderPop, { OrderPopStyle } from "@/components/OrderPop/OrderPop";
 type OrderListProps = {
   type?: number
   [key: string]: any
@@ -23,6 +26,10 @@ type OrderListProps = {
 const OrderList: FunctionComponent<OrderListProps> = (props) => {
   const dispatch = useDispatch();
   const connector = useWalletConnect(); // valid
+  const [showCancleOffer, setshowCancleOffer] = useState(false);
+  const [showCancleOrder, setshowCancleOrder] = useState(false);
+  const [showDownPrice, setshowDownPrice] = useState(false);
+  const [showAccept, setshowAccept] = useState(false);
   const {type}=props;
   const login = () => {
     dispatch(walletActions.connect(connector));
@@ -46,16 +53,30 @@ const OrderList: FunctionComponent<OrderListProps> = (props) => {
       <OrderCard
         data={item}
         cardStyle={type}
-      ></OrderCard>
+        onTap={ ()=>Navigate.navigate('NtfDetail', { item: item, isMyDetail: (type==1||type==4)?false:true})}
+        onCancleOffer={()=>setshowCancleOffer(true)}
+        onDownPriceOrder={()=>setshowDownPrice(true)}
+        onCancleOrder={()=>setshowCancleOrder(true)}
+        ></OrderCard>
     );
   };
+
+  const closeCancleOfferModal=()=>{
+    setshowCancleOffer(false)
+  }
+  const closeCancleOrderModal=()=>{
+    setshowCancleOrder(false)
+  }
+  const closeDownPriceModal=()=>{
+    setshowDownPrice(false)
+  }
   const renderView = () => {
     return (
       <GDataList
       style={{width:
   '100%'}}
         requestMethod={OrderService.selectOfferList}
-        requestParams={{path:'',params:{type:type,accountAddress:'0x71190f09775a2af79c1ce08fc9d3a58352f89155'}}}
+        requestParams={{path:'',params:{type:1,accountAddress:'0x71190f09775a2af79c1ce08fc9d3a58352f89155'}}}
         defaultPageSize={10}
         noDeaultPageName={true}
         renderItem={renderItem}
@@ -69,6 +90,32 @@ const OrderList: FunctionComponent<OrderListProps> = (props) => {
   return (
     <View style={[styles.container, { marginBottom: 100 + useSafeAreaInsets().bottom }, { alignItems: "center", justifyContent: "center" }]}>
         {renderView()}
+      <Modal isVisible={showCancleOffer} style={styles.bottomModal}
+        hideModalContentWhileAnimating={true}
+        useNativeDriverForBackdrop={true}
+        animationOutTiming={600}
+      >
+        <OrderPop cancle_press={closeCancleOfferModal} popStyle={OrderPopStyle.CANCEL_OFFER_STYLE}></OrderPop>
+      </Modal>
+
+
+      <Modal isVisible={showDownPrice} style={styles.bottomModal}
+        hideModalContentWhileAnimating={true}
+        useNativeDriverForBackdrop={true}
+        animationOutTiming={600}
+      >
+        <OrderPop cancle_press={closeDownPriceModal} popStyle={OrderPopStyle.DOWNPRICE_ORDER_STYLE}></OrderPop>
+      </Modal>
+
+      <Modal isVisible={showCancleOrder} style={styles.bottomModal}
+        hideModalContentWhileAnimating={true}
+        useNativeDriverForBackdrop={true}
+        animationOutTiming={600}
+      >
+        <OrderPop cancle_press={closeCancleOrderModal} popStyle={OrderPopStyle.CANCEL_ORDER_STYLE}></OrderPop>
+      </Modal>
+
+      
       {/* {connector.connected ?
         renderView() :
         <View style={{ justifyContent: "center", alignItems: "center" }}>

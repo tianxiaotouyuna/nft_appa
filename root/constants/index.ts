@@ -11,8 +11,6 @@ const envParams = isReleaseEnvironment ? ({
   WX_ORIFINAL_ID: 'gh_a37574691154', // 昆仑能量站
   /** 微信小程序类型 0:正式版 1:开发版 2:体验版 */
   WX_MINIPROGRAM_TYPE: 0, // 昆仑能量站
-  /** JAVA HOST */
-  BASE_JAVA_HOST: 'https://apps.wosongjiu.com', // 正式环境
   /** PHP HOST */
   PHP_HOST: 'https://renren.didi315.com', // 正式环境
 }) : ({
@@ -46,6 +44,7 @@ const doctorPartnerKey = "08f50000a22b00a6";
 
 
 const BASE_HOST='http://43.155.94.122:8080/api/nftMarket'// 线上测试环境
+const BASE_OPENSEA='http://192.168.1.105:3000/nftapi'// 线上测试环境
 // const BASE_HOST='http://192.168.1.103:8080/api/nftMarket'// 测试环境
 /** 商家标识 */
 /**
@@ -75,4 +74,5 @@ export default {
   BASE_HOST,
   isReleaseEnvironment,
   doctorPartnerKey,
+  BASE_OPENSEA
 };

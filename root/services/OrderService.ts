@@ -10,8 +10,7 @@ export const selectOfferList =  async ( data?:any ) => {
   const path=data?.path
   const params=data?.params
 
-  const api = `selectOfferList/${!!path ? `${jquery.path(path)}` : ""}`;
+  const api = `order/selectOfferList/${!!path ? `${jquery.path(path)}` : ""}`;
   const res = await NFTRequest.get(api, params);
-  // Alert.alert(JSON.stringify(res))
   return res;
 };

@@ -1,17 +1,18 @@
 import { windowHeight } from '@/utils/system';
 import { assign, clone, merge } from 'lodash';
 import React, { Component, ReactNode } from 'react'
-import { StyleSheet, View, FlatList, FlatListProps, ListRenderItemInfo, ListRenderItem, StyleProp, ViewStyle } from 'react-native'
+import { StyleSheet, View, FlatList, FlatListProps, ListRenderItemInfo, ListRenderItem, StyleProp, ViewStyle, Alert } from 'react-native'
 
 export interface GDataListProps {
     style?: StyleProp<ViewStyle>
-    noDeaultPageName?: boolean
+    isOpenseaStructure?: boolean
     requestParams?: { [key: string]: any }
     defaultPageSize?: number
     keyExtractor?: (item: any, index: number) => string;
     requestBeforeFun?: () => boolean
     // requestMethod: (params: object) => Promise<{ list: any[], isListEnd: boolean, total: number }>
-    requestMethod: (params: object) => Promise<{ data: any[], msg: string, code: number }>
+    requestMethod: (params: object) => Promise< any>
+    // requestMethod: (params: object) => Promise<{ data: any[], msg: string, code: number }>
     renderItem: ListRenderItem<any> | null | undefined
     getItemLayout?: (data: any, index: number,) => { length: number; offset: number; index: number };
     handleDataList?: (list: any[]) => Promise<any[]>;
@@ -33,6 +34,7 @@ interface GDataListState {
     isRefreshing: boolean
     isPageLoading: boolean
     total: number
+    currentCursor: string
 }
 
 export default class dGDataList extends Component<GDataListProps, GDataListState> {
@@ -58,6 +60,7 @@ export default class dGDataList extends Component<GDataListProps, GDataListState
             isRefreshing: false,
             isPageLoading: true,
             total: 0,
+            currentCursor:''
         }
     }
 
@@ -88,25 +91,36 @@ export default class dGDataList extends Component<GDataListProps, GDataListState
     refreshData = () => this._onRefresh();
 
     private _getList = async () => {
-        let { pageNumber, dataList } = this.state;
-        let { defaultPageSize, requestMethod, requestParams, requestBeforeFun, handleDataList, noDeaultPageName } = this.props;
+        let { pageNumber, dataList ,currentCursor} = this.state;
+        let { defaultPageSize, requestMethod, requestParams, requestBeforeFun, handleDataList, isOpenseaStructure } = this.props;
         // if (this.state.isListEnd) return Promise.resolve(true);
         // if (this.state.isRefreshing) return Promise.resolve(true);
         if (!(requestBeforeFun?.() ?? true)) return Promise.resolve(true);
-        let params;
-        if (noDeaultPageName == false) params = assign({}, requestParams, { page: pageNumber, pageSize: defaultPageSize });
-        else params = assign({}, requestParams, { pageNumber: pageNumber, pageSize: defaultPageSize });
-        this._adjustParams = params;
         await this.$setState({ isRefreshing: true });
-        const {data } = await requestMethod(params);
-        const newList = !!handleDataList ? await handleDataList(data) : data;
+        let data_handler;
+        if (isOpenseaStructure) {
+            const params_ = assign({}, requestParams?.params, { cursor: currentCursor, limit: defaultPageSize });
+            const params_data={path:requestParams?.path,params:params_}
+            this._adjustParams = params_data;
+            const { data ,cursor} = await requestMethod(params_data);
+            // Alert.alert(JSON.stringify(params_data))
+            data_handler = data;
+            currentCursor=cursor
+}
+        else {
+            const params = assign({}, requestParams, { pageNumber: pageNumber, pageSize: defaultPageSize });
+            this._adjustParams = params;
+            const { rows } = await requestMethod(params);
+            data_handler = rows;
+        }
+        const newList = !!handleDataList ? await handleDataList(data_handler) : data_handler;
         dataList = pageNumber === 1 ? newList : dataList.concat(newList);
-        await this.$setState({ dataList,  pageNumber: ++pageNumber, isRefreshing: false});
+        await this.$setState({ dataList, pageNumber: ++pageNumber, isRefreshing: false,currentCursor });
         return Promise.resolve(true);
     }
 
     private _onRefresh = async () => {
-        await this.$setState({ pageNumber: 1, isListEnd: false });
+        await this.$setState({ pageNumber: 1, isListEnd: false,currentCursor:'' });
         await this._getList();
     }
 

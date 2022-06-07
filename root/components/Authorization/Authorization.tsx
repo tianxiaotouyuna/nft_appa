@@ -17,6 +17,7 @@ import { CacheKeys } from "@/constants/index";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { useDispatch } from "react-redux";
 import { walletActions } from "@/action/walletActions";
+import { OpenSeaService } from "@/services/index";
 export enum CardStyle {
   LOGINOUT_STYLE = 1, //退出登录
 }
@@ -44,7 +45,7 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
     console.log('info==========' + JSON.stringify(info))
     console.log('data==========' + JSON.stringify(data))
   }
-  const buy = () => {
+  const buy = async () => {
     const param = {
       "data": data?.creatorAddress,
       "from": wallet?.accounts[0],//20字节，发送方地址
@@ -63,7 +64,18 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
       "value": "0x9184e72a"
     }))
     dispatch(walletActions.buy(connector, param));
-
+   const res=await OpenSeaService.createBuyOrder({path:'',params:{
+      asset: {
+        tokenId: data?.tokenId,
+        tokenAddress: data?.creatorAddress,
+        name: data?.assetName,
+        schemaName: data?.schemaName
+    },
+    accountAddress: wallet?.accounts[0],
+    startAmount: 1,
+    }})
+    Alert.alert(JSON.stringify(res))
+    
   }
   const renderLoginOut = () => {
     return (

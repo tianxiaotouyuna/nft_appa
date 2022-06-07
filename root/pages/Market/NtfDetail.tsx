@@ -18,7 +18,8 @@ import Centerheader from "@/pageranges/markdetail/centerheader/Centerheader";
 const NtfDetail: FunctionComponent = () => {
   const params: any = useRoute().params?.item ?? {};
   const isMyDetail: boolean = useRoute().params?.isMyDetail ??false;
-
+  const orderListType: boolean = useRoute().params?.orderListType ??null;
+  
   const [data, setdata] = useState({});
   const [buyData, setbuyData] = useState(null);
   const [sellData, setsellData] = useState(null);

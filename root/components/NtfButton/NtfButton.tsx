@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode, useState } from "react";
 import FastImage from "react-native-fast-image";
-import { View, StyleProp, ViewStyle, Pressable, Text, Image } from "react-native";
+import { View, StyleProp, ViewStyle, Pressable, Text, Image, Touchable } from "react-native";
 import styles from "./ntf-button";
 import { UIELEMENTS } from "@/constants/index";
 import Ripple from "react-native-material-ripple";

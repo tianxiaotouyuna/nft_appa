@@ -83,8 +83,9 @@ const Market: FunctionComponent = () => {
       <GDataList
         requestMethod={MarketService.getMarketList}
         requestParams={{}}
-        defaultPageSize={10}
+        defaultPageSize={20}
         noDeaultPageName={true}
+        isOpenseaStructure={true}
         renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={{ height: pxToDp(20) }}></View>}
         ListEmptyComponent={() => (
