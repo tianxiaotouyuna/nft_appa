@@ -17,6 +17,7 @@ import { Navigate } from "@/utils/index";
 import { connected } from "process";
 import { MarketService } from "@/services/index";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Asset: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
@@ -95,14 +96,16 @@ const renderBottom=()=>{
   const showButton = () => {
     if (connector.connected==false) {
       return (
-        <>
+        <View style={{flex:1,justifyContent:"space-between",alignItems:"center"}}>
+        <View style={{alignItems:"center"}}>
           <Image
             style={styles.btn_icon}
             source={require("@/resources/nolinkedwallet.png")}
           />
           <Text style={styles.btn_text}>您还没有链接钱包</Text>
-          <AssetBtnWraps />
-        </>
+          </View>
+          <AssetBtnWraps style={{marginBottom:pxToDp(84)}}/>
+        </View>
       );
     } else {
       return (
@@ -149,7 +152,7 @@ const renderBottom=()=>{
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingBottom: 100 + useSafeAreaInsets().bottom }]}>
       {showButton()}
 
       <Modal isVisible={showLoginout} style={styles.bottomModal} 

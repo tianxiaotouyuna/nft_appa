@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     container: {
         justifyContent:"space-between",
         alignItems:"center",
-        height:pxToDp(400),
         
     },
 })
