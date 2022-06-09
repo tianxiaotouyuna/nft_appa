@@ -29,7 +29,7 @@ const HomeGirdle: FunctionComponent<HomeGirdleProps> = (props) => {
         </View>
     )
     const renderItem = (item: any,index: number) => (
-    <Ripple rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} onPress={() => { Navigate.navigate('Category', {}) }} style={[styles.ripple, { width: itemWidth, height: itemWidth }]} key={`${index}`}>
+    <Ripple rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} onPress={() => { Navigate.navigate('Category', {title:item?.text}) }} style={[styles.ripple, { width: itemWidth, height: itemWidth }]} key={`${index}`}>
             <Image style={{ width: pxToDp(124), height: pxToDp(124) }} source={item?.source} />
             <Text style={styles.text}>{item?.text}</Text>
         </Ripple>

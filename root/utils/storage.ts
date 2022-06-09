@@ -2,6 +2,7 @@ import Storage, { LoadParams } from 'react-native-storage';
 import { Platform } from 'react-native';
 import { CacheKeys } from '../constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { gd } from '@/pages/Asset/WalletTest/pglobal'
 
 let storage: Storage
 
@@ -22,6 +23,7 @@ const init = () => {
         });
 
         storage.sync = {
+            [CacheKeys.OURWALLETINFOCHAINNAME]: () => gd.chainName,
             [CacheKeys.WALLETINFO]: () => null,
             [CacheKeys.NAVIGATION_STATE]: () => undefined,
             [CacheKeys.HISTORT_LIST]: () => undefined,

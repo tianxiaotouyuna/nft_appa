@@ -130,18 +130,6 @@ const Home: FunctionComponent = () => {
   
 
   ]);
-  const [hotData, sethotData] = useState([
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-6251efa3014f2d0f7ce0d1accc95ff21_1440w.jpg%3Fsource%3D172ae18b&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=8faa71fc0de2752a60dcae21ea1a2c6a', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F13050014876%2F641&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655400210&t=ce7ef1afa03c07ff217cd3a63d54549b', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
-    { 'head': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fen.pimg.jp%2F014%2F428%2F054%2F1%2F14428054.jpg&refer=http%3A%2F%2Fen.pimg.jp&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655434302&t=6fb858fcb2690dd20f893f7a21894f74', 'thumb': 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.ccvalue.cn%2Fupload%2F2021%2F0825%2Fb32c02a54678449b600bc7033b8105cb.jpg&refer=http%3A%2F%2Fwww.ccvalue.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655393917&t=42e2cd3a553f361db24bbf6798e03ca5', 'name': 'NFT藏品' },
-  ]);
 
   const [hotNft, sethotNft] = useState(  [{
     "id": 440821077,
@@ -177,8 +165,8 @@ const Home: FunctionComponent = () => {
     <BannerCard
       data={item['item']}
       cardStyle={CardStyle.HOTCOLLECTION_STYLE}
-      onTap={() => { Navigate.navigate('Search', {}) }}
-      borderRadius={pxToDp(28)}
+      onTap={() => { Navigate.navigate('CollectionDetail', {item:item['item']}) }}
+        borderRadius={pxToDp(28)}
     />
   )
 
@@ -276,7 +264,6 @@ const Home: FunctionComponent = () => {
         inactiveSlideOpacity={1}
         firstItem={0}
         scrollEndDragDebounceValue={40}
-
       />
 
 

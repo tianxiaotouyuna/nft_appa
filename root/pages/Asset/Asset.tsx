@@ -13,11 +13,12 @@ import NtfButton from "@/components/NtfButton/NtfButton";
 import { walletActions } from "@/action/walletActions";
 import PopBtn from "@/components/LoginOutBtn/PopBtn";
 import { useNavigation } from "@react-navigation/native";
-import { Navigate } from "@/utils/index";
+import { Navigate, Storage } from "@/utils/index";
 import { connected } from "process";
 import { MarketService } from "@/services/index";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { CacheKeys } from "@/constants/";
 
 const Asset: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid

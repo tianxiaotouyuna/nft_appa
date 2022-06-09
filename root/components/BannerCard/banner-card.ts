@@ -18,11 +18,19 @@ const styles = StyleSheet.create({
         height:pxToDp(200),
         backgroundColor:UIELEMENTS.DEFAULT_IMAGEBACKGROUND_COLOR
     },
+    hot_image_double: {
+        width:pxToDp(320),
+        height:pxToDp(200),
+        backgroundColor:UIELEMENTS.DEFAULT_IMAGEBACKGROUND_COLOR
+    },
     hot_head: {
         width:pxToDp(88),
         height:pxToDp(88),
         borderRadius: 100,
-        marginTop:-pxToDp(44)
+        borderColor:'white',
+        borderWidth:pxToDp(4),
+        marginTop:-pxToDp(44),
+        backgroundColor:UIELEMENTS.DEFAULT_IMAGEBACKGROUND_COLOR
     },
     spacing1: {
         margin: 12 

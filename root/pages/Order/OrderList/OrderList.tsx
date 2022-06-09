@@ -11,7 +11,7 @@ import { pxToDp } from "@/utils/system";
 import useNavigationOptions from "@/hooks/useNavigationOptions";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { UIELEMENTS } from "@/constants/index";
-import GDataList from "@/components/GDataList";
+import GDataList, { WHERELIST } from "@/components/GDataList";
 import { OrderService } from "@/services/index";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
 import OrderCard from "@/components/OrderCard/OrderCard";
@@ -78,7 +78,7 @@ const OrderList: FunctionComponent<OrderListProps> = (props) => {
         requestMethod={OrderService.selectOfferList}
         requestParams={{path:'',params:{type:1,accountAddress:'0x71190f09775a2af79c1ce08fc9d3a58352f89155'}}}
         defaultPageSize={10}
-        noDeaultPageName={true}
+        whereList={WHERELIST.ORDER_LIST}
         renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={{ height: pxToDp(20) }}></View>}
         ListEmptyComponent={() => (

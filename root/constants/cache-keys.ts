@@ -3,6 +3,8 @@ export const NAVIGATION_STATE = "NAVIGATIONSTATE";
 export const USERINFO = "USERINFO";
 
 export const WALLETINFO = "WALLETINFO";
+export const OURWALLETINFO = "OURWALLETINFO";
+export const OURWALLETINFOCHAINNAME = "OURWALLETINFOCHAINNAME";
 
 export const HISTORT_LIST = "historyList";
 

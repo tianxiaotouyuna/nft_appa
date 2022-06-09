@@ -11,8 +11,6 @@ import {
   Alert,
   ImageBackground,
 } from "react-native";
-import { white } from "react-native-paper/lib/typescript/styles/colors";
-import { useSelector } from "react-redux";
 import styles from "./asset-style";
 const AssetTopBg: FunctionComponent = (props) => {
   const [wallet, setwallet] = useState();

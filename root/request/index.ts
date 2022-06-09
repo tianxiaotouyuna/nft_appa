@@ -1,7 +1,7 @@
 import * as NFTRequest from "@/request/NFTRequest";
-import * as OpenseRequest from "@/request/OpenseRequest";
+import * as ImitateRequest from "@/request/ImitateRequest";
 
 export {
     NFTRequest,
-    OpenseRequest
+    ImitateRequest
 }

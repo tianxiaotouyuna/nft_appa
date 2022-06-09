@@ -13,7 +13,8 @@ type this_props={
     tabUnderlineWidth?:number
     oneBarstyle?: StyleProp<TextStyle>,
     allBarStyle?: StyleProp<TextStyle>,
-    tabUnderlineScaleX?:number
+    tabUnderlineScaleX?:number,
+    jiafen?:number
   
 }
 // type propTypes= {
@@ -37,9 +38,9 @@ const NFTDefaultTabBar: FunctionComponent<this_props> = (props:TabBarProps) => {
 // ,tabStyle,renderTab,underlineStyle,name,page,isTabActive,onPressHandler}=props
 
 const {goToPage , scrollValue=0, activeTab,tabs=[],containerWidth=0,textStyle,activeTextColor, inactiveTextColor
-,oneBarstyle,tabBarUnderlineStyle,tabUnderlineWidth,allBarStyle,tabUnderlineScaleX
+,oneBarstyle,tabBarUnderlineStyle,tabUnderlineWidth,allBarStyle,tabUnderlineScaleX,jiafen
 } = props;
-    const numberOfTabs = tabs.length;
+    const numberOfTabs = jiafen||tabs.length;
 
     const translateX = scrollValue.interpolate({
       inputRange: [0, 1],
@@ -67,8 +68,8 @@ const {goToPage , scrollValue=0, activeTab,tabs=[],containerWidth=0,textStyle,ac
 
 
    const _renderUnderline=()=> {
-      const numberOfTabs = tabs.length;
-      const underlineWidth = tabUnderlineWidth ? tabUnderlineWidth : containerWidth / (numberOfTabs * 2);
+    const numberOfTabs = jiafen||tabs.length;
+    const underlineWidth = tabUnderlineWidth ? tabUnderlineWidth : containerWidth / (numberOfTabs * 2);
       const scale = tabUnderlineScaleX ? tabUnderlineScaleX : 3;
       const deLen = (containerWidth / numberOfTabs - underlineWidth ) / 2;
       const tabUnderlineStyle = {

@@ -9,8 +9,6 @@ const styles = StyleSheet.create({
         paddingTop:UIELEMENTS.PADDING_TOP,
         paddingHorizontal:UIELEMENTS.PADDING_HORIZONTAL,
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
-        alignItems:"center",
-        justifyContent:"flex-start"
     },
     modalContent: {
       backgroundColor: 'white',

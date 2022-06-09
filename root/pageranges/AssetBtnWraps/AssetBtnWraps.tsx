@@ -10,6 +10,7 @@ import { pxToDp } from "@/utils/system";
 import { walletActions } from "@/action/walletActions";
 import { useDispatch } from "react-redux";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { Navigate } from "@/utils/";
 type AssetBtnWrapsProps = {
   onPress_1?: () => void;
   onPress_2?: () => void;
@@ -17,15 +18,25 @@ type AssetBtnWrapsProps = {
   style?: StyleProp<ViewStyle>;
 };
 const AssetBtnWraps: FunctionComponent<AssetBtnWrapsProps> = (props) => {
-  const{style}=props;
+  const { style } = props;
   const dispatch = useDispatch();
   const connector = useWalletConnect(); // valid
   const login = () => {
     dispatch(walletActions.connect(connector));
   };
+
   return (
-    <View style={[styles.container,style]}>
-      {/* <NtfButton
+    <View style={[styles.container, style]}>
+       {/* <NtfButton
+        width={pxToDp(590)}
+        heigh={pxToDp(100)}
+        onPress={ login}
+        text={"Metamask"}
+        imageSource={require("@/resources/位图1.png")}
+        borderRadius={pxToDp(12)}
+      /> */}
+      {/* 
+      <NtfButton
         width={pxToDp(590)}
         heigh={pxToDp(100)}
         onPress={ login}
@@ -52,24 +63,25 @@ const AssetBtnWraps: FunctionComponent<AssetBtnWrapsProps> = (props) => {
         borderRadius={pxToDp(12)}
       /> */}
 
-<NtfButton
+      <NtfButton
         width={pxToDp(590)}
         heigh={pxToDp(100)}
-        onPress={login}
+        onPress={()=>Navigate.navigate("CenterWallet", {})}
         text={"创建中心钱包"}
         imageSource={require("@/resources/add.png")}
         borderRadius={pxToDp(12)}
+        style={{ marginTop: pxToDp(60) }}
       />
 
 
-<NtfButton
+      <NtfButton
         width={pxToDp(590)}
         heigh={pxToDp(100)}
-        onPress={login}
+        onPress={()=>Navigate.navigate("TestHome", {})}
         text={"创建非中心钱包"}
         imageSource={require("@/resources/add.png")}
         borderRadius={pxToDp(12)}
-        style={{marginTop:pxToDp(60)}}
+        style={{ marginTop: pxToDp(60) }}
       />
     </View>
   );

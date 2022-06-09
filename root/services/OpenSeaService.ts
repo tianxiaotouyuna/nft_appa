@@ -1,5 +1,6 @@
-import { NFTRequest, OpenseRequest } from "@/request/index";
+import { NFTRequest, ImitateRequest } from "@/request/index";
 import jquery from "@/utils/jquery";
+import { Alert } from "react-native";
 
 /**
  * 获取NFT详情
@@ -8,8 +9,9 @@ export const createBuyOrder =  async ( data?:any ) => {
   // path?: any, params: any
   const path=data?.path
   const params=data?.params
+  Alert.alert(JSON.stringify(data))
 
   const api = `createBuyOrder/${!!path ? `${jquery.path(path)}` : ""}`;
-  const res = await OpenseRequest.get(api, params);
+  const res = await ImitateRequest.get(api, params);
   return res;
 };

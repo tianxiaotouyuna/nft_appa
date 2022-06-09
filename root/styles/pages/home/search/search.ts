@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
-        paddingHorizontal: pxToDp(40),
         paddingVertical: pxToDp(24),
     },
     spacing1: {

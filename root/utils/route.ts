@@ -12,7 +12,14 @@ export const SCREEN = {
     NtfDetail:"NtfDetail",
     Buy:"Buy",
     Sell:"Sell",
-    Category:"Category"
+    Category:"Category",
+    TestHome:"TestHome",
+    CoinTypeManage:"CoinTypeManage",
+    CreatWallet:"CreatWallet",
+    InsertWallet:"InsertWallet",
+    TransferCoin:"TransferCoin",
+    CenterWallet:"CenterWallet",
+    CollectionDetail:"CollectionDetail",
 }
 
 /**
@@ -32,4 +39,11 @@ export const authRoutes = [
     SCREEN.Buy,
     SCREEN.Sell,
     SCREEN.Category,
+    SCREEN.TestHome,
+    SCREEN.CoinTypeManage,
+    SCREEN.CreatWallet,
+    SCREEN.InsertWallet,
+    SCREEN.TransferCoin,
+    SCREEN.CenterWallet,
+    SCREEN.CollectionDetail,
 ]

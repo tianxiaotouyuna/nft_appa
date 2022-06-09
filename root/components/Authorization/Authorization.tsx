@@ -63,7 +63,7 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
       "to": data?.creatorAddress,//20字节，接收方地址，当为空时，为创建合约交易；
       "value": "0x9184e72a"
     }))
-    dispatch(walletActions.buy(connector, param));
+    // dispatch(walletActions.buy(connector, param));
    const res=await OpenSeaService.createBuyOrder({path:'',params:{
       asset: {
         tokenId: data?.tokenId,
@@ -71,7 +71,7 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
         name: data?.assetName,
         schemaName: data?.schemaName
     },
-    accountAddress: wallet?.accounts[0],
+    accountAddress: '0x658004c7E5Ef8EfC4E22A5F19359f8BB27AFfce7',
     startAmount: 1,
     }})
     Alert.alert(JSON.stringify(res))

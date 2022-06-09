@@ -32,7 +32,6 @@ const Offer: FunctionComponent<PopProps> = (props) => {
   const [wallet, setwallet] = useState();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
-  console.log(JSON.stringify("priceCardStyle===" + JSON.stringify(data)));
 
   const [items, setItems] = useState([
     {

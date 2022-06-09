@@ -2,18 +2,15 @@ import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { View, Button, Platform, Alert, Image, Pressable, TabBarIOSItem } from "react-native";
 
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import Ripple from "react-native-material-ripple";
 import { ActivityIndicator, Colors, Searchbar, Text } from "react-native-paper";
 import { ReduxToken, UIELEMENTS } from "@/constants/index";
 import styles from "@/styles/pages/market/market";
 import useInitScreen from "@/hooks/useInitScreen";
-import { Navigate } from "@/utils/index";
 import { pxToDp, pxToSp, tabBarHeight } from "@/utils/system";
-import { LargeList } from "react-native-largelist";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MarketService } from "@/services/index";
-import GDataList from "@/components/GDataList";
+import GDataList, { WHERELIST } from "@/components/GDataList";
 const Market: FunctionComponent = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -82,10 +79,9 @@ const Market: FunctionComponent = () => {
     <View style={[styles.container, { paddingBottom: 100 + bottomPadding }]}>
       <GDataList
         requestMethod={MarketService.getMarketList}
-        requestParams={{}}
+        requestParams={{path:'',params:{include_orders:true}}}
         defaultPageSize={20}
-        noDeaultPageName={true}
-        isOpenseaStructure={true}
+        whereList={WHERELIST.MARKET_LIST}
         renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={{ height: pxToDp(20) }}></View>}
         ListEmptyComponent={() => (

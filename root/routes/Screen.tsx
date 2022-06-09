@@ -11,6 +11,13 @@ import NtfDetail from "@/pages/Market/NtfDetail";
 import Buy from "@/pages/Market/Buy/Buy";
 import Sell from "@/pages/Asset/Sell/Sell";
 import Category from "@/pages/Home/Category/Category";
+import TestHome from "@/pages/Asset/WalletTest/TestHome";
+import CoinTypeManage from "@/pages/Asset/WalletTest/CoinTypeManage";
+import CreatWallet from "@/pages/Asset/WalletTest/CreatWallet";
+import InsertWallet from "@/pages/Asset/WalletTest/InsertWallet";
+import TransferCoin from "@/pages/Asset/WalletTest/TransferCoin";
+import CenterWallet from "@/pages/Asset/CenterWallet/CenterWallet";
+import CollectionDetail from "@/pages/Home/CollectionDetail/CollectionDetail";
 const ScreenStack = createStackNavigator();
 
 const Screen: FunctionComponent = () => {
@@ -24,7 +31,14 @@ const Screen: FunctionComponent = () => {
             <ScreenStack.Screen name={Route.SCREEN.Buy} component={Buy}/>
             <ScreenStack.Screen name={Route.SCREEN.Sell} component={Sell}/>
             <ScreenStack.Screen name={Route.SCREEN.Category} component={Category}/>
-
+            <ScreenStack.Screen name={Route.SCREEN.TestHome} component={TestHome}/>
+            <ScreenStack.Screen name={Route.SCREEN.CoinTypeManage} component={CoinTypeManage}/>
+            <ScreenStack.Screen name={Route.SCREEN.CreatWallet} component={CreatWallet}/>
+            <ScreenStack.Screen name={Route.SCREEN.TransferCoin} component={TransferCoin}/>
+            <ScreenStack.Screen name={Route.SCREEN.InsertWallet} component={InsertWallet}/>
+            <ScreenStack.Screen name={Route.SCREEN.CenterWallet} component={CenterWallet}/>
+            <ScreenStack.Screen name={Route.SCREEN.CollectionDetail} component={CollectionDetail}/>
+            
         </ScreenStack.Navigator>
     )
 }

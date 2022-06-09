@@ -21,6 +21,8 @@ export enum CardStyle {
   PUBLISH_STYLE = 1, //发行
   HOTCOLLECTION_STYLE = 2, //热门合集
   HOTNTF_STYLE = 3, //热门NFT
+  HOTCOLLECTION_DOUBLE_STYLE = 4, //热门合集2列
+  HOTCOLLECTION_DOUBLE_USENTF_STYLE = 5, //热门合集2列
 
 }
 type BannerCardProps = {
@@ -124,7 +126,12 @@ const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
             <FastImage
               style={[styles.hot_image, { borderRadius: borderRadius }]}
               resizeMode="cover"
-              source={{ uri: data?.banner_image_url }}
+              source={{ uri: data?.image_url }}
+            />
+            <FastImage
+              style={[styles.hot_head, ]}
+              resizeMode="cover"
+              source={{ uri: data?.image_url }}
             />
             <Text style={{ fontSize: pxToSp(24), color: '#383838', fontWeight: 'bold' }} ellipsizeMode='middle' numberOfLines={1}>{data?.name}</Text>
           </View>
@@ -132,8 +139,104 @@ const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
       </Ripple>
     );
   }
+  const renderCollectsDouble = () => {
+    console.log('data========' + JSON.stringify(data))
+    return (
+      <View style={[{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
+        {data?.map((item: any, index: number) => (
+          item_one_collections(item, index)
+        ))}
+      </View>
+    );
+  }
+  const item_one_collections=(item:any, index:number)=>{
+    return(
+      <Ripple onPress={() => { Navigate.navigate('CollectionDetail', {item:item}) } } rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}>
+        <BaseCard style={[{ borderRadius: borderRadius }, { padding: 0, width: pxToDp(320) }]}>
+          <View style={{ alignItems: "center" }}>
+            <FastImage
+              style={[styles.hot_image_double, { borderRadius: borderRadius }]}
+              resizeMode="cover"
+              source={{ uri: item?.image_url }}
+            />
+            <FastImage
+              style={[styles.hot_head, ]}
+              resizeMode="cover"
+              source={{ uri: item?.image_url }}
+            />
+            <Text style={{ fontSize: pxToSp(24), color: '#383838', fontWeight: 'bold' ,marginTop:pxToDp(32)}} ellipsizeMode='middle' numberOfLines={1}>{item?.name}</Text>
+            <Text style={{ fontSize: pxToSp(24), color: '#383838', fontWeight: 'bold'  ,marginTop:pxToDp(16), marginBottom:pxToDp(20)}} ellipsizeMode='middle' numberOfLines={1}>{item?.created_date}</Text>
+          </View>
+        </BaseCard>
+      </Ripple>
+    )
+  }
 
+
+  const renderCollectsDouble_USENftStyle = () => {
+    console.log('================' + JSON.stringify(data))
+    return (
+      <View style={[{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
+        {data?.map((item: any, index: number) => (
+          item_one_USENftStyle(item, index)
+        ))}
+      </View>
+    );
+  }
+  const item_one_USENftStyle = (item: any, index: number) => (
+
+    <Ripple onPress={() => pushCard(item)} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE} rippleContainerBorderRadius={borderRadius} key={`${index}`}>
+      <BaseCard style={[{ borderRadius: borderRadius }, { width: pxToDp(326), paddingHorizontal: pxToDp(8) }]}>
+        <FastImage
+          style={imageEnd ? [styles.publish_image, { borderRadius: borderRadius, backgroundColor: '#EEEEEE' }] : [{ width: 0, height: 0 }]}
+          resizeMode="cover"
+          source={{ uri: item?.image_url }}
+          onLoad={() => {
+            setimageEnd(true);
+          }}
+          // onError={()=>{
+          //   setimageError(true);
+
+          // }}
+          fallback={true}
+        />
+        {imageEnd ?
+          (
+            <>
+              {/* <FastImage
+                style={[styles.publish_image, { borderRadius: borderRadius ,backgroundColor:'#EEEEEE'}]}
+                resizeMode="cover"
+                source={{ uri: item?.imageUrl }}
+              /> */}
+              <View style={{ paddingTop: pxToDp(28), paddingBottom: pxToDp(22), paddingLeft: pxToDp(20), justifyContent: "space-between" }}>
+                <Text style={{ color: '#707A83', fontSize: pxToDp(20) }}>{item?.assetName}</Text>
+                <Text style={{ color: '#383838', fontSize: pxToDp(24), marginTop: pxToDp(8), fontWeight: 'bold', width: pxToDp(194) }} numberOfLines={2}>{item?.name}</Text>
+                <Text style={{ color: '#707A83', fontSize: pxToDp(20), marginTop: pxToDp(18) }}>价格</Text>
+                <Text style={{ color: '#383838', fontSize: pxToDp(24), marginTop: pxToDp(8), fontWeight: 'bold' }}>{item?.opensea_seller_fee_basis_points}</Text>
+              </View>
+            </>
+          ) :
+          (
+            <>
+              <Placeholder Animation={ShineOverlay} >
+                <PlaceholderMedia style={[styles.publish_image, { borderRadius: borderRadius }]} />
+                <View style={{ paddingTop: pxToDp(28), paddingBottom: pxToDp(22), paddingLeft: pxToDp(12), justifyContent: "space-between" }}>
+                  <PlaceholderLine style={{ width: pxToDp(50) }} />
+                  <PlaceholderLine style={{ marginTop: pxToDp(8), width: pxToDp(194) }} />
+                  <PlaceholderLine style={{ marginTop: pxToDp(18), width: pxToDp(194) }} />
+                  <PlaceholderLine style={{ marginTop: pxToDp(8), width: pxToDp(194) }} />
+                </View>
+              </Placeholder>
+            </>
+          )
+        }
+
+
+
+      </BaseCard>
+    </Ripple>
+  )
   
-  return cardStyle == CardStyle.PUBLISH_STYLE ? renderPublish() : (cardStyle == CardStyle.HOTCOLLECTION_STYLE ? renderHot() : renderHotNtf())
+  return cardStyle == CardStyle.PUBLISH_STYLE ? renderPublish() : (cardStyle == CardStyle.HOTCOLLECTION_STYLE ? renderHot() : (cardStyle==CardStyle.HOTNTF_STYLE?renderHotNtf():(cardStyle==CardStyle.HOTCOLLECTION_DOUBLE_STYLE?renderCollectsDouble():renderCollectsDouble_USENftStyle())))
 };
 export default BannerCard;
