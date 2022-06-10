@@ -41,7 +41,7 @@ const TopInfo: FunctionComponent<AssetBtnWrapsProps> = (props) => {
           </View>
 
           <View style={{alignItems:"center"}}>
-            <Text style={styles.text1}>{data?.floor_price||'123'}</Text>
+            <Text style={styles.text1}>{data?.floor_price}</Text>
             <Text style={styles.text2}>最近成交价</Text>
           </View>
 

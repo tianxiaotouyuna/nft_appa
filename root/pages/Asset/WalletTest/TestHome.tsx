@@ -141,7 +141,7 @@ const changeChain=async (name:string,index:number)=>{
     else if(index==1)
     gd.public_provider=new ethers.providers.JsonRpcProvider("https://data-seed-prebsc-1-s1.binance.org:8545/")//BNB
     else
-    gd.public_provider=new ethers.providers.JsonRpcProvider("http://192.168.1.107:8545")//local
+    gd.public_provider=new ethers.providers.JsonRpcProvider("http://192.168.1.104:8545")//local
 
     refresh_assets()
 }

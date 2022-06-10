@@ -18,6 +18,9 @@ import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { useDispatch } from "react-redux";
 import { walletActions } from "@/action/walletActions";
 import { OpenSeaService } from "@/services/index";
+import { gd } from "@/pages/Asset/WalletTest/pglobal";
+import storage from '@/pages/Asset/WalletTest/pstorage';
+import { ethers } from "ethers";
 export enum CardStyle {
   LOGINOUT_STYLE = 1, //退出登录
 }
@@ -63,19 +66,77 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
       "to": data?.creatorAddress,//20字节，接收方地址，当为空时，为创建合约交易；
       "value": "0x9184e72a"
     }))
+   // 付款
+   // 1:第三方钱包
     // dispatch(walletActions.buy(connector, param));
-   const res=await OpenSeaService.createBuyOrder({path:'',params:{
-      asset: {
-        tokenId: data?.tokenId,
-        tokenAddress: data?.creatorAddress,
-        name: data?.assetName,
-        schemaName: data?.schemaName
-    },
-    accountAddress: '0x658004c7E5Ef8EfC4E22A5F19359f8BB27AFfce7',
-    startAmount: 1,
-    }})
-    Alert.alert(JSON.stringify(res))
+    //2:自己钱包
+
+
+    //合约交互
+    //1:opensea 合约购买
+    //2:自己合约
+  //  const res=await OpenSeaService.createBuyOrder({path:'',params:{
+  //     asset: {
+  //       tokenId: data?.tokenId,
+  //       tokenAddress: data?.creatorAddress,
+  //       name: data?.assetName,
+  //       schemaName: data?.schemaName
+  //   },
+  //   accountAddress: '0x658004c7E5Ef8EfC4E22A5F19359f8BB27AFfce7',
+  //   startAmount: 1,
+  //   }})
+    // Alert.alert(JSON.stringify(res))
+
+    //自己钱包购买
+
+//  activeWallet.sendTransaction({
+//             to: targetAddress,
+//             value: amountWei,
+//             gasPrice: activeWallet.provider.getGasPrice(),
+//             gasLimit: 21000,
+//         }).then(function(tx) {
+//         });
+        payMoney(data?.creatorAddress,'0x9184e72a')
     
+    
+  }
+
+  const payMoney=async (toAdress:string,amount:string)=>{
+    Alert.alert('1')
+    const walAddr = await Storage.load(CacheKeys.OURWALLETINFO);
+    const prov = gd.public_provider;
+    let mod_wallet = await storage.wallet(walAddr); 
+      let wallet = await ethers.Wallet.fromEncryptedJson(mod_wallet.keyStore, '3881219a');
+    
+    let connect_wallet =  wallet.connect(prov);
+    connect_wallet.sendTransaction({
+            to: toAdress,
+            value: amount,
+            gasPrice: connect_wallet.provider.getGasPrice(),
+            gasLimit: 21000,
+        }).then(function(tx) {
+         console.log("tx:"+JSON.stringify(tx));
+
+        });
+
+      //  let nonce =await prov.getTransactionCount(walAddr);
+      //  console.log("nonce:"+nonce);
+      // //  Alert.alert('nonce==='+JSON.stringify(nonce));
+
+      //    var transaction = {
+      //        nonce: nonce,
+      //        to: toAdress,
+      //        value: ethers.utils.parseEther(amount),
+      //        //data: "0x",
+      //        //chainId: Vue.prototype.eth_provider.chainId
+      //    };
+
+      //    var signedTransaction = connect_wallet.signTransaction(transaction);
+      //    let tx = await prov.sendTransaction(signedTransaction);
+
+      //    await tx.wait();
+
+         console.log("connect_wallet:"+JSON.stringify(connect_wallet));
   }
   const renderLoginOut = () => {
     return (
@@ -157,7 +218,7 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
             <NtfButton text="拒绝" width={pxToDp(310)} heigh={pxToDp(84)} borderRadius={pxToDp(12)} textColor='#3352DB' borderColor='#3352DB' onPress={cancle_press}>
               {" "}
             </NtfButton>
-            <NtfButton text="确定" width={pxToDp(310)} heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={buy} loadingUse={true}>
+            <NtfButton text="确定" width={pxToDp(310)} heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={sure_press} loadingUse={true}>
               {" "}
             </NtfButton>
           </View>

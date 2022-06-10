@@ -38,7 +38,7 @@ const Buy: FunctionComponent = () => {
     },
   });
   const wallet = useSelector((state: any) => state);
-    
+
   //   useEffect(() => {
   //   AppState.addEventListener("change", _handleAppStateChange);
 
@@ -50,19 +50,19 @@ const Buy: FunctionComponent = () => {
   const _handleAppStateChange = async (nextAppState: any) => {
     if (appState === "active" && nextAppState === "background") {
       setappState('background')
-        // this condition calls when app goes in background mode
+      // this condition calls when app goes in background mode
       // here you can detect application is in background, and you can pause your video
 
-  } else if (appState === "background" && nextAppState === "active") {
-    setappState('active')
-    // showResultToast()
-    // Alert.alert(JSON.stringify(wallet))
-  
+    } else if (appState === "background" && nextAppState === "active") {
+      setappState('active')
+      // showResultToast()
+      // Alert.alert(JSON.stringify(wallet))
+
       // this condition calls when app is in foreground mode
       // here you can detect application is in active state again, 
       // and if you want you can resume your video
 
-  }
+    }
   }
 
   const showAuthPop = () => {
@@ -83,7 +83,7 @@ const Buy: FunctionComponent = () => {
   const showResultToast = () => {
     setshowResult(true)
   }
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const closeResultToast = () => {
     setshowResult(false)
     dispatch(walletActions.resetResult(null));
@@ -106,24 +106,16 @@ const Buy: FunctionComponent = () => {
         showAuthPop()
       }} />
 
+
       <Modal isVisible={auth} style={styles.bottomModal}
         hideModalContentWhileAnimating={true}
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
       >
-        <Authorization cancle_press={() => setauth(false)} sure_press={() => { }} data={data}></Authorization>
+        <Authorization cancle_press={() => setauth(false)} sure_press={() => setshowSign(true)} data={data}></Authorization>
       </Modal>
 
 
-
-      <Modal isVisible={wallet?.buyResult||false} style={styles.centerModal}
-        hideModalContentWhileAnimating={true}
-        animationIn='bounce'
-        useNativeDriverForBackdrop={true}
-        animationOutTiming={600}
-      >
-        <ResultToast data={wallet?.buyResult} onOk={closeResultToast} resultToastStyle={ResultToastStyle.BUY_STYLE} title='购买成功' sub_title="='恭喜您已成功拥有此NTF"/>
-      </Modal>
 
 
 
@@ -149,6 +141,16 @@ const Buy: FunctionComponent = () => {
         animationOutTiming={600}
       >
         <WalletInput cancle_press={() => setshowInput(false)} sure_press={() => { }}></WalletInput>
+      </Modal>
+
+
+      <Modal isVisible={wallet?.buyResult || false} style={styles.centerModal}
+        hideModalContentWhileAnimating={true}
+        animationIn='bounce'
+        useNativeDriverForBackdrop={true}
+        animationOutTiming={600}
+      >
+        <ResultToast data={wallet?.buyResult} onOk={closeResultToast} resultToastStyle={ResultToastStyle.BUY_STYLE} title='购买成功' sub_title="='恭喜您已成功拥有此NTF" />
       </Modal>
     </View>
   );
