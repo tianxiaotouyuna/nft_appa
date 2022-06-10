@@ -16,6 +16,10 @@ import Authorization from "@/components/Authorization/Authorization";
 import ResultToast, { ResultToastStyle } from "@/components/ResultToast/ResultToast";
 import { useDispatch, useSelector } from "react-redux";
 import { walletActions } from "@/action/walletActions";
+import { Storage } from "@/utils/index";
+import { CacheKeys } from "@/constants/index";
+import { gd } from "@/pages/Asset/WalletTest/pglobal";
+import { ethers } from "ethers";
 const Buy: FunctionComponent = () => {
   // const [data, setdata] = useState({});
   const data: any = useRoute().params?.data ?? {};
@@ -26,6 +30,8 @@ const Buy: FunctionComponent = () => {
   const [showInput, setshowInput] = useState(false);
   const [showResult, setshowResult] = useState(false);
   const [appState, setappState] = useState('active');
+  const [balance, setBalance] = useState('');
+  const [chainName, setchainName] = useState();
   console.log('data======' + JSON.stringify(useRoute().params))
   useInitScreen({
     navigationOptions: {
@@ -39,13 +45,10 @@ const Buy: FunctionComponent = () => {
   });
   const wallet = useSelector((state: any) => state);
 
-  //   useEffect(() => {
-  //   AppState.addEventListener("change", _handleAppStateChange);
-
-  //   return () => {
-  //      AppState.remove("change", _handleAppStateChange);
-  //   };
-  // }, [])
+    useEffect(() => {
+      getChainName()
+    getBalances()
+  }, [])
 
   const _handleAppStateChange = async (nextAppState: any) => {
     if (appState === "active" && nextAppState === "background") {
@@ -66,7 +69,8 @@ const Buy: FunctionComponent = () => {
   }
 
   const showAuthPop = () => {
-    setauth(true)
+    setshowSign(true)
+    // setauth(true)
   }
   const showSginPop = () => {
     setshowSign(true)
@@ -88,6 +92,29 @@ const Buy: FunctionComponent = () => {
     setshowResult(false)
     dispatch(walletActions.resetResult(null));
   }
+  const getChainName = async () => {
+
+    const wallet_net = await Storage.load(CacheKeys.OURWALLETINFOCHAINNAME);
+    setchainName(wallet_net)
+  }
+  const getBalances = async () => {
+
+    try {
+    const walAddr = await Storage.load(CacheKeys.OURWALLETINFO);
+    const prov = gd.public_provider;
+
+      let big_balance = await prov.getBalance(walAddr);
+
+        big_balance = ethers.utils.formatEther(big_balance);
+      if (big_balance) {
+        setBalance(big_balance.toString());
+      }
+      // Alert.alert('balance_succes:'+JSON.stringify(big_balance))
+    }
+    catch{
+      Alert.alert('获取余额失败')
+    }
+  }
   return (
     <View style={[styles.container]}>
       <View style={{ flexDirection: "row" }}>
@@ -104,7 +131,7 @@ const Buy: FunctionComponent = () => {
       </View>
       <Bottom onPress_1={() => {
         showAuthPop()
-      }} />
+      }}  data={data} chainName={chainName} balance={balance}/>
 
 
       <Modal isVisible={auth} style={styles.bottomModal}
@@ -112,7 +139,7 @@ const Buy: FunctionComponent = () => {
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
       >
-        <Authorization cancle_press={() => setauth(false)} sure_press={() => setshowSign(true)} data={data}></Authorization>
+        <Authorization cancle_press={() => setauth(false)} sure_press={() => { }} data={data}></Authorization>
       </Modal>
 
 
@@ -140,7 +167,7 @@ const Buy: FunctionComponent = () => {
         useNativeDriverForBackdrop={true}
         animationOutTiming={600}
       >
-        <WalletInput cancle_press={() => setshowInput(false)} sure_press={() => { }}></WalletInput>
+        <WalletInput data={data} cancle_press={() => setshowInput(false)} sure_press={() => {}}></WalletInput>
       </Modal>
 
 

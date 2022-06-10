@@ -132,13 +132,13 @@ const Home: FunctionComponent = () => {
   ]);
 
   const [hotNft, sethotNft] = useState(  [{
-    "id": 440821077,
-    "imageUrl": 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd20220225s%2F99%2Fw400h499%2F20220225%2F88e8-4189a62eb588fa8ef89c28e098807c3f.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1655886949&t=993b49b1b7609a6e20fbc1453fc8a5f0',
-    "tokenId": "3873",
+    "id": 388523083,
+    'imageUrl':'https://lh3.googleusercontent.com/TkvnH_P8vnydBEPZF4fLB_iBfH8cUMWO3SpnkR2edsXz1-M5-B8uG0Q7_MaCXyWauD0PN_6-G9DELnetiSu_zzTDglyh_j6BEF3F',
+    "tokenId": "51155626847932538964005676839147869416091349697233307241626733179541737439233",
     "assetName": null,
-    "assetAddress": "0xc784b6b8c8f8b7263689138ab9d5f400440f02cc",
-    "collectionName": "THE TATTOO ARTIST",
-    "salePrice": '0.1131 ETH'
+    "assetAddress": "0x495f947276749ce646f68ac8c248420045cb7b5e",
+    "collectionName": "Futura Ape Jars Club",
+    "salePrice": '0.52 ETH'
   },
   {
     "id": 440821076,
@@ -241,7 +241,6 @@ const Home: FunctionComponent = () => {
         inactiveSlideScale={1}
         inactiveSlideOpacity={1}
         firstItem={0}
-
       />
 
 

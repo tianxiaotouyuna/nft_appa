@@ -14,7 +14,7 @@ import { Navigate, Storage } from "@/utils/index";
 import PopBtn from "../LoginOutBtn/PopBtn";
 import NtfButton from "../NtfButton/NtfButton";
 import { pxToDp, pxToSp } from "@/utils/system";
-import { CacheKeys } from "@/constants/";
+import { CacheKeys } from "@/constants/index";
 export enum CardStyle {
   LOGINOUT_STYLE = 1, //退出登录
 }
@@ -29,15 +29,16 @@ type PopProps = {
 const ContractInteraction: FunctionComponent<PopProps> = (props) => {
   const { style, data, sure_press, cancle_press } = props;
   const [wallet, setwallet] = useState();
-
+const [wallet_net, setwallet_net] = useState('');
   useEffect(() => {
     get_storageInfo();
 }, [])
   
   const get_storageInfo =async ()=>{
-   let info = await Storage.load(CacheKeys.WALLETINFO);
-   setwallet(info)
-   console.log('info=========='+JSON.stringify(info))
+   let info = await Storage.load(CacheKeys.OURWALLETINFO);
+    const wallet_net = await Storage.load(CacheKeys.OURWALLETINFOCHAINNAME);
+    setwallet(info)
+    setwallet_net(wallet_net)
   }
 
   const renderLoginOut = () => {
@@ -69,12 +70,12 @@ const ContractInteraction: FunctionComponent<PopProps> = (props) => {
         />
         <View style={{ flexDirection: "row",  justifyContent: "space-between", width: '100%', paddingVertical: pxToDp(20) }}>
           <Text style={{ color: '#707A83', fontSize: pxToSp(28) }}>钱包</Text>
-          <Text style={{ color: '#383838', fontSize: pxToSp(24) }}>MetaMask</Text>
+          <Text style={{ color: '#383838', fontSize: pxToSp(24) }}>非中心钱包</Text>
         </View>
 
         <View style={{ flexDirection: "row",  justifyContent: "space-between", width: '100%', paddingVertical: pxToDp(20) }}>
           <Text style={{ color: '#707A83', fontSize: pxToSp(28) }}>发送地址</Text>
-        <Text style={{ color: '#383838', fontSize: pxToSp(24) ,maxWidth:pxToDp(230)}} numberOfLines={1} ellipsizeMode='middle'>{wallet?.accounts[0]}</Text>
+        <Text style={{ color: '#383838', fontSize: pxToSp(24) ,maxWidth:pxToDp(230)}} numberOfLines={1} ellipsizeMode='middle'>{wallet}</Text>
         </View>
 
         <View style={{ flexDirection: "row",  justifyContent: "space-between", width: '100%', paddingVertical: pxToDp(20) }}>
@@ -91,7 +92,7 @@ const ContractInteraction: FunctionComponent<PopProps> = (props) => {
         />
         <View style={{ flexDirection: "row",  justifyContent: "space-between", width: '100%', paddingVertical: pxToDp(20) }}>
           <Text style={{ color: '#707A83', fontSize: pxToSp(28) }}>网络</Text>
-          <Text style={{ color: '#383838', fontSize: pxToSp(24) }}>BSD</Text>
+          <Text style={{ color: '#383838', fontSize: pxToSp(24) }}>{wallet_net}</Text>
         </View>
 
 

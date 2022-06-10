@@ -40,7 +40,6 @@ export const getUrl = (api: string, data?: any) => {
 const json = async (api: string, data: any = {}, config?: AxiosRequestConfig) => {
     console.log('url======'+getUrl(api,data))
     const resp: any = await instance.get(getUrl(api,data), config);
-    console.log('resp======'+JSON.stringify(resp))
     if (resp?.status === 200) {
         // Alert.alert(JSON.stringify(resp?.data))
         return Promise.resolve(resp?.data);

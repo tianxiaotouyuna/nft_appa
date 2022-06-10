@@ -102,7 +102,6 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
   }
 
   const payMoney=async (toAdress:string,amount:string)=>{
-    Alert.alert('1')
     const walAddr = await Storage.load(CacheKeys.OURWALLETINFO);
     const prov = gd.public_provider;
     let mod_wallet = await storage.wallet(walAddr); 
@@ -218,7 +217,7 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
             <NtfButton text="拒绝" width={pxToDp(310)} heigh={pxToDp(84)} borderRadius={pxToDp(12)} textColor='#3352DB' borderColor='#3352DB' onPress={cancle_press}>
               {" "}
             </NtfButton>
-            <NtfButton text="确定" width={pxToDp(310)} heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={sure_press} loadingUse={true}>
+            <NtfButton text="确定" width={pxToDp(310)} heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={buy} loadingUse={true}>
               {" "}
             </NtfButton>
           </View>

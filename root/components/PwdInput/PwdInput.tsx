@@ -11,6 +11,7 @@ type butonProps = {
   width?: number;
   heigh?: number;
   onsecretIconTap?: () => void;
+  onChangePWdText?: (text: string) => void;
   children?: ReactNode;
   text?: string;
   textColor?: string;
@@ -23,13 +24,13 @@ type butonProps = {
 const PwdInput: FunctionComponent<butonProps> = (props) => {
   const [value, setvalue] = useState();
   const [isSecret, setisSecret] = useState(true);
-  const { width, heigh, onsecretIconTap, font, style, text, textColor = UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE, borderRadius = 1000, borderColor = UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE, backgroundColor = 'white' } =
+  const { width, heigh, onsecretIconTap, font, style, text, textColor = UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE, borderRadius = 1000, borderColor = UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE, backgroundColor = 'white', onChangePWdText } =
     props;
   const onChangeText = (text: string) => {
-
+    onChangePWdText(text)
   }
-  const onsecretIcon = () => {
-    setisSecret(!isSecret)
+  function onsecretIcon() {
+    setisSecret(!isSecret);
   }
   return (
     <View style={[styles.base, style]}>
@@ -46,7 +47,7 @@ const PwdInput: FunctionComponent<butonProps> = (props) => {
       <Pressable onPress={onsecretIcon}>
         <Image
           style={styles.image}
-          source={isSecret?require("@/resources/m_hide.png"):require("@/resources/m_hide_s.png")}
+          source={isSecret ? require("@/resources/m_hide.png") : require("@/resources/m_hide_s.png")}
         />
       </Pressable>
     </View>

@@ -105,7 +105,7 @@ const NtfDetail: FunctionComponent = () => {
 
   const getData = async () => {
 
-    const order = await MarketService.getAssetsOneInfo({ 'AssetContractAddress': params?.assetAddress, 'tokenId': params?.tokenId }, {});
+    const order = await MarketService.getAssetsOneInfo({ 'AssetContractAddress': params?.assetAddress, 'tokenId': params?.tokenId }, {include_orders:true});
     setdata(order?.data)
   }
   // const queryBidOffersList = async () => {

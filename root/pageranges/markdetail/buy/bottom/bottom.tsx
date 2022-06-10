@@ -7,9 +7,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 type AssetBtnWrapsProps = {
     onPress_1?: () => void;
     bottom?: number;
+    data?:any;
+    balance?:string;
+    chainName?:string
 };
 const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
-  const { onPress_1,data } = props;
+  const { onPress_1,data ,balance,chainName} = props;
+  console.log('asdasd123'+JSON.stringify(data))
+  
   return (
         <View style={styles.container} >
 
@@ -19,7 +24,7 @@ const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
                         价格
                     </Text>
                     <View style={{ alignItems: "center" }}>
-                        <Text style={{ color: "#383838", fontSize: pxToDp(28), fontWeight: 'bold' }}>{data?.sellOrders?.current_price}</Text>
+                        <Text style={{ color: "#383838", fontSize: pxToDp(28), fontWeight: 'bold' }}>0.05</Text>
                         {/* <Text style={{ color: "#707A83", fontSize: pxToDp(24), marginTop: pxToDp(10) }}>123</Text> */}
                         {/* <Text style={{ color: "#707A83", fontSize: pxToDp(24), marginTop: pxToDp(10) }}>123</Text> */}
                     </View>
@@ -35,11 +40,12 @@ const Bottom: FunctionComponent<AssetBtnWrapsProps> = (props) => {
 
                 <View style={{ flexDirection: "row" , justifyContent: "space-between",paddingVertical:pxToDp(46)}}>
                     <Text style={{ color: "#383838", fontSize: pxToDp(28) }}>
-                        钱包
+                    钱包
                     </Text>
-                    <View style={{ alignItems: "center" }}>
-                        <Text style={{ color: "#383838", fontSize: pxToDp(28), fontWeight: 'bold' }}>钱包</Text>
-                        <Text style={{ color: "#707A83", fontSize: pxToDp(24), marginTop: pxToDp(10) }}>BNB 余额 ：0.094</Text>
+                    <View style={{ alignItems:  'flex-end'}}>
+                        
+                        <Text style={{ color: "#383838", fontSize: pxToDp(28), fontWeight: 'bold' }}>{chainName||'未知'}</Text>
+                        <Text style={{ color: "#707A83", fontSize: pxToDp(24), marginTop: pxToDp(10) }}>余额 ：{balance||0}</Text>
                     </View>
                 </View>
 

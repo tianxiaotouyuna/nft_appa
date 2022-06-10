@@ -25,7 +25,7 @@ export const getMarketList =  async ( data?:any ) => {
   const path=data?.path
   const params=data?.params
   const api = `getMarketList/${!!path ? `${jquery.path(path)}` : ""}`;
-  console.log(JSON.stringify("getMarketList===" + JSON.stringify(params)));
+  console.log(JSON.stringify("===" + JSON.stringify(params)));
   const res = await NFTRequest.get(api,params);
   var new_res = new Array();
   for (var i = 0; i < 10; i++) {
@@ -62,7 +62,6 @@ export const getMarketList_my = async () => {
   }
   res.data = new_res;
 
-  console.log(JSON.stringify("getMarketList_my===" + JSON.stringify(new_res)));
   return res;
 };
 
@@ -73,7 +72,6 @@ export const queryBidOffersList = (path?: any, data: any) => {
 
 export const querySellerList = (path?: any, data: any) => {
   const api = `querySellerList/${!!path ? `${jquery.path(path)}` : ""}`;
-  console.log(JSON.stringify("apiapir===" + JSON.stringify(api)));
   return NFTRequest.get(api, data);
 };
 

@@ -58,7 +58,7 @@ async wallet (address:any) {
 	let ret_wallets =await AsyncStorage.getItem("wallets");
 
 	let arr_wallets = [];
-	Alert.alert(JSON.stringify(ret_wallets))
+	// Alert.alert(JSON.stringify(ret_wallets))
 
 	if(ret_wallets){
 

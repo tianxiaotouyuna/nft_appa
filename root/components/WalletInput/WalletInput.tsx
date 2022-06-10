@@ -17,7 +17,10 @@ import NtfButton from "../NtfButton/NtfButton";
 import { pxToDp, pxToSp } from "@/utils/system";
 import PwdInput from "../PwdInput/PwdInput";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { CacheKeys } from "@/constants/";
+import { CacheKeys } from "@/constants/index";
+import { gd } from "@/pages/Asset/WalletTest/pglobal";
+import storage from '@/pages/Asset/WalletTest/pstorage';
+import { ethers } from "ethers";
 export enum CardStyle {
   LOGINOUT_STYLE = 1, //退出登录
 }
@@ -26,75 +29,135 @@ type PopProps = {
   cardStyle?: CardStyle;
   sure_press?: () => void;
   cancle_press?: () => void;
+  data?: any
 };
 
 const WalletInput: FunctionComponent<PopProps> = (props) => {
-  const { style, cardStyle, sure_press, cancle_press } = props;
+  const { style, cardStyle, sure_press, cancle_press, data } = props;
   const connector = useWalletConnect(); // valid
   const [wallet, setwallet] = useState();
-  
+  const [pwd, setpwd] = useState('');
   useEffect(() => {
     get_storageInfo();
-}, [])
-  
-  const get_storageInfo =async ()=>{
-   let info = await Storage.load(CacheKeys.WALLETINFO);
-   setwallet(info)
-   console.log('info=========='+JSON.stringify(info))
+  }, [])
+
+  const get_storageInfo = async () => {
+    let info = await Storage.load(CacheKeys.WALLETINFO);
+    setwallet(info)
   }
-  const buy=()=>{
-  //   {
-  //     "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
-  //     "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-  //     "gas": "0x76c0",
-  //     "gasPrice": "0x9184e72a000",
-  //     "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-  //     "value": "0x9184e72a"
-  // }
-      connector.signPersonalMessage({
-        "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
-        "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",//20字节，发送方地址
-        "gas": "0x76c0",
-        "gasPrice": "0x9184e72a000",
-        "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",//20字节，接收方地址，当为空时，为创建合约交易；
-        "value": "0x9184e72a"
-    }).then(async function (result: any) {
-          console.log("成功：" + JSON.stringify(result));
-          Alert.alert('1')
-        })
-        .catch(function (error: any) {
-          console.log("失败：" + error);
-          Alert.alert('2')
-        });
+
+  const buy = async () => {
+    const param = {
+      "data": data?.creatorAddress,
+      "from": wallet?.accounts[0],//20字节，发送方地址
+      "gas": "0x76c0",
+      "gasPrice": "0x9184e72a000",
+      "to": data?.creatorAddress,//20字节，接收方地址，当为空时，为创建合约交易；
+      // "value": "0x9184e72a"
+      "value": "0x99184e7"
+    }
+    console.log('signPersonalMessage==========' + JSON.stringify({
+      "data": data?.creatorAddress,
+      "from": '0x306Ed1Fc004A69298D730F876F178A679fAdC084',//20字节，发送方地址
+      "gas": "0x76c0",
+      "gasPrice": "0x9184e72a000",
+      "to": data?.creatorAddress,//20字节，接收方地址，当为空时，为创建合约交易；
+      "value": "0x9184e72a"
+    }))
+    // 付款
+    // 1:第三方钱包
+    // dispatch(walletActions.buy(connector, param));
+    //2:自己钱包
+
+
+    //合约交互
+    //1:opensea 合约购买
+    //2:自己合约
+    //  const res=await OpenSeaService.createBuyOrder({path:'',params:{
+    //     asset: {
+    //       tokenId: data?.tokenId,
+    //       tokenAddress: data?.creatorAddress,
+    //       name: data?.assetName,
+    //       schemaName: data?.schemaName
+    //   },
+    //   accountAddress: '0x658004c7E5Ef8EfC4E22A5F19359f8BB27AFfce7',
+    //   startAmount: 1,
+    //   }})
+    // Alert.alert(JSON.stringify(res))
+
+    //自己钱包购买
+
+    //  activeWallet.sendTransaction({
+    //             to: targetAddress,
+    //             value: amountWei,
+    //             gasPrice: activeWallet.provider.getGasPrice(),
+    //             gasLimit: 21000,
+    //         }).then(function(tx) {
+    //         });
+    payMoney(data?.creatorAddress, data?.sellOrders?.current_price)
+
+
   }
-  const renderLoginOut=()=>{
-    return(
+
+  const payMoney = async (toAdress: string, amount: string) => {
+    if(pwd.length==0){Alert.alert('请输入密码');return}
+
+    const walAddr = await Storage.load(CacheKeys.OURWALLETINFO);
+    const prov = gd.public_provider;
+    let mod_wallet = await storage.wallet(walAddr);
+    let wallet = await ethers.Wallet.fromEncryptedJson(mod_wallet.keyStore, pwd);
+
+    let connect_wallet = wallet.connect(prov);
+
+    const params = {
+      to: toAdress,
+      // value: ethers.utils.parseEther(amount),
+      value:'0x9184e72a',
+      // value:ethers.utils.tonu,
+      gasPrice: connect_wallet.provider.getGasPrice(),
+      gasLimit: 21000,
+    }
+    console.log("tx---------------------params:" + JSON.stringify(params));
+
+    connect_wallet.sendTransaction(params).then( (tx) =>{
+      console.log("tx:" + JSON.stringify(tx));
+      Alert.alert(JSON.stringify(tx))
+
+    }).catch((error)=>{
+      Alert.alert(JSON.stringify(error))
+    });
+
+
+    console.log("connect_wallet:" + JSON.stringify(connect_wallet));
+  }
+  const renderLoginOut = () => {
+    return (
 
       <View style={[styles.modalContent, style]}>
-      <View style={{ flexDirection: "row", width: '100%', alignItems: "center",justifyContent:"space-between" }}>
-    
-        <Text style={{ fontSize: pxToSp(32) ,fontWeight:"bold",marginLeft:pxToDp(10)}}>钱包密码</Text>
-       <Pressable onPress={cancle_press}>
+        <View style={{ flexDirection: "row", width: '100%', alignItems: "center", justifyContent: "space-between" }}>
 
-        <Image
-        style={styles.image}
-        source={require("@/resources/closure.png")}
-      />
-       </Pressable>
-      </View>
+          <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>钱包密码</Text>
+          <Pressable onPress={cancle_press}>
 
-      <PwdInput style={{width:pxToDp(606),height:pxToDp(84),marginTop:pxToDp(44),borderRadius:pxToDp(16),borderWidth:pxToDp(2),borderColor:'#E8E8E8'}}></PwdInput>
-      <Text style={{ fontSize: pxToSp(24) ,color:'#3352DB',alignSelf:"flex-end",marginTop:pxToDp(12)}}>忘记密码</Text>
-    
-      <View style={{justifyContent: "center", alignItems: "center" ,width:'100%',marginTop:pxToDp(40)}}>
+            <Image
+              style={styles.image}
+              source={require("@/resources/closure.png")}
+            />
+          </Pressable>
+        </View>
+
+        <PwdInput onChangePWdText={(text:string)=>{setpwd(text)}} style={{ width: pxToDp(606), height: pxToDp(84), marginTop: pxToDp(44), borderRadius: pxToDp(16), borderWidth: pxToDp(2), borderColor: '#E8E8E8' }}></PwdInput>
+        <Text style={{ fontSize: pxToSp(24), color: '#3352DB', alignSelf: "flex-end", marginTop: pxToDp(12) }}>忘记密码</Text>
+
+        <View style={{ justifyContent: "center", alignItems: "center", width: '100%', marginTop: pxToDp(40) }}>
           <NtfButton loadingUse={true} text="确定" width={pxToDp(492)} heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={buy} >
             {" "}
           </NtfButton>
-      </View>
+        </View>
 
-    </View>
-  )
-    }
+      </View>
+    )
+  }
   return (
     renderLoginOut()
   );
