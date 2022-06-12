@@ -45,8 +45,6 @@ const Authorization: FunctionComponent<PopProps> = (props) => {
   const get_storageInfo = async () => {
     let info = await Storage.load(CacheKeys.WALLETINFO);
     setwallet(info)
-    console.log('info==========' + JSON.stringify(info))
-    console.log('data==========' + JSON.stringify(data))
   }
   const buy = async () => {
     const param = {

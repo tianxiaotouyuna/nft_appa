@@ -35,7 +35,7 @@ const PwdInput: FunctionComponent<butonProps> = (props) => {
   return (
     <View style={[styles.base, style]}>
       <TextInput
-        style={{ height: 40 }}
+        style={{ height: 40 ,width:'80%'}}
         onChangeText={text => onChangeText(text)}
         value={value}
         placeholderTextColor='#AAAAAA'

@@ -22,6 +22,7 @@ import { Alert } from "react-native";
 // };
 export const getMarketList =  async ( data?:any ) => {
   // path?: any, params: any
+  
   const path=data?.path
   const params=data?.params
   const api = `getMarketList/${!!path ? `${jquery.path(path)}` : ""}`;
@@ -39,6 +40,30 @@ export const getMarketList =  async ( data?:any ) => {
   res.data = new_res;
   return res;
 };
+
+
+/**
+ * 测试链NFT列表
+ */
+
+ export const getMarketList_test =  async (data?:any ) => {
+  const res = await NFTRequest.test_hotNft('https://testnets-api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=20&include_orders=false', data);
+  var new_res = new Array();
+  for (var i = 0; i < 10; i++) {
+    var sub_arr = new Array();
+    for (var j = 0; j < 2; j++) {
+      var new_dic= res.data.assets[i * 2 + j];
+      new_dic.imageUrl=new_dic.image_url;
+      sub_arr.push(new_dic);
+    }
+    new_res.push(sub_arr);
+  }
+  res.cursor=res.data.next
+  res.data = new_res;
+console.log('data1234'+res)
+  return res;
+};
+
 /**
  * 获取NFT详情
  */

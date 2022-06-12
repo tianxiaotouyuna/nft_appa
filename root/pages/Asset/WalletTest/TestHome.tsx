@@ -140,9 +140,10 @@ const changeChain=async (name:string,index:number)=>{
     gd.public_provider=new providers.InfuraProvider(ethers.providers.getNetwork("ropsten"),"11a4f41ed7074cb6bb93a88d3fc421b0")//主链
     else if(index==1)
     gd.public_provider=new ethers.providers.JsonRpcProvider("https://data-seed-prebsc-1-s1.binance.org:8545/")//BNB
-    else
+    else if(index==2)
     gd.public_provider=new ethers.providers.JsonRpcProvider("http://192.168.1.104:8545")//local
-
+    else 
+    gd.public_provider=new providers.InfuraProvider(ethers.providers.getNetwork("rinkeby"),"11a4f41ed7074cb6bb93a88d3fc421b0")//主链
     refresh_assets()
 }
   const renderView = () => {
@@ -169,6 +170,13 @@ const changeChain=async (name:string,index:number)=>{
             heigh={pxToDp(40)}
             onPress={() => changeChain('本地链',2)}
             text={"私有链"}
+            borderRadius={pxToDp(12)}
+          />
+          <NtfButton
+            width={pxToDp(150)}
+            heigh={pxToDp(40)}
+            onPress={() => changeChain('本地链',3)}
+            text={"RINKEYBY"}
             borderRadius={pxToDp(12)}
           />
           </View>

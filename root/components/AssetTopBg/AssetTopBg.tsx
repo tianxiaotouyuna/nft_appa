@@ -19,7 +19,6 @@ const AssetTopBg: FunctionComponent = (props) => {
   
   const get_storageInfo =async ()=>{
    const info = await Storage.load(CacheKeys.WALLETINFO);
-   console.log('asd======='+info)
    setwallet(info)
   }
   useEffect(() => {

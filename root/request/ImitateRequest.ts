@@ -36,7 +36,7 @@ const json = async (api: string, data: any = {}, config?: AxiosRequestConfig) =>
 
 
 export const get = (api: string, data?: any, config?: AxiosRequestConfig) => {
-    return json(api, data, config);
+  return json(api, data, config);
 }
 export const post = (api: string, data?: any, config?: AxiosRequestConfig) => {
     return json(api, data, config);

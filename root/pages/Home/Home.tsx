@@ -131,15 +131,16 @@ const Home: FunctionComponent = () => {
 
   ]);
 
-  const [hotNft, sethotNft] = useState(  [{
-    "id": 388523083,
-    'imageUrl':'https://lh3.googleusercontent.com/TkvnH_P8vnydBEPZF4fLB_iBfH8cUMWO3SpnkR2edsXz1-M5-B8uG0Q7_MaCXyWauD0PN_6-G9DELnetiSu_zzTDglyh_j6BEF3F',
-    "tokenId": "51155626847932538964005676839147869416091349697233307241626733179541737439233",
-    "assetName": null,
-    "assetAddress": "0x495f947276749ce646f68ac8c248420045cb7b5e",
-    "collectionName": "Futura Ape Jars Club",
-    "salePrice": '0.52 ETH'
-  },
+  const [hotNft, sethotNft] = useState(  [{"tokenId":"0",
+  "tokenAddress":"0xe2e3253105ccc59121b96e3864cce1fdf86ebc36",
+  "name":"Sample token",
+  "description":"This is my first token",
+  "owner":{"user":null,"profile_img_url":"https://storage.googleapis.com/opensea-static/opensea-profile/15.png",
+  "address":"0xe2cd5e6831d08a1b134d3aee9e0f974ad832dd41","config":""},
+  "assetContract":{"name":"MyToken","description":null,"type":"non-fungible","schemaName":"ERC721","address":"0xe2e3253105ccc59121b96e3864cce1fdf86ebc36","tokenSymbol":"MTK","buyerFeeBasisPoints":0,"sellerFeeBasisPoints":250,"openseaBuyerFeeBasisPoints":0,"openseaSellerFeeBasisPoints":250,"devBuyerFeeBasisPoints":0,"devSellerFeeBasisPoints":0,"imageUrl":null,"externalLink":null},"collection":{"createdDate":"2022-06-12T13:49:49.027Z","name":"MyToken - l1ilv5kgdt","description":null,"slug":"mytoken-l1ilv5kgdt","hidden":false,"featured":false,"featuredImageUrl":null,"displayData":{"card_display_style":"contain","images":[]},"paymentTokens":[{"name":null,"symbol":"ETH","decimals":18,
+  "address":"0x0000000000000000000000000000000000000000",
+  "imageUrl":"https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg",
+  "ethPrice":1,"usdPrice":405.65},{"name":"","symbol":"WETH","decimals":18,"address":"0xc778417e063141139fce010982780140aa0cd5ab","imageUrl":"https://openseauserdata.com/files/accae6b6fb3888cbff27a013729c22dc.svg","ethPrice":1,"usdPrice":1452.58}],"openseaBuyerFeeBasisPoints":0,"openseaSellerFeeBasisPoints":250,"devBuyerFeeBasisPoints":0,"devSellerFeeBasisPoints":0,"payoutAddress":null,"imageUrl":null,"largeImageUrl":null,"stats":{"one_day_volume":0,"one_day_change":0,"one_day_sales":0,"one_day_average_price":0,"seven_day_volume":0,"seven_day_change":0,"seven_day_sales":0,"seven_day_average_price":0,"thirty_day_volume":0,"thirty_day_change":0,"thirty_day_sales":0,"thirty_day_average_price":0,"total_volume":0,"total_sales":0,"total_supply":1,"count":1,"num_owners":1,"average_price":0,"num_reports":0,"market_cap":0,"floor_price":0},"traitStats":{},"externalLink":null,"wikiLink":null},"orders":null,"sellOrders":null,"buyOrders":null,"isPresale":false,"imageUrl":"https://lh3.googleusercontent.com/xgYVoyFp1zFZQyXi3uGpAyMMtkDvwahiK1FWEbNuObmjixWOY1eXkdoqhsRahOgueivhZNs6XxRGFTp8LR84PuU99g68Z23C4nIQAQ=s250","imagePreviewUrl":"https://lh3.googleusercontent.com/xgYVoyFp1zFZQyXi3uGpAyMMtkDvwahiK1FWEbNuObmjixWOY1eXkdoqhsRahOgueivhZNs6XxRGFTp8LR84PuU99g68Z23C4nIQAQ=s250","imageUrlOriginal":"https://opensea.mypinata.cloud/ipfs/QmSzg2cKcwX8zoNX8WMVAbMbhCt8dtKZkNKKM8G4ek7YHw","imageUrlThumbnail":"https://lh3.googleusercontent.com/xgYVoyFp1zFZQyXi3uGpAyMMtkDvwahiK1FWEbNuObmjixWOY1eXkdoqhsRahOgueivhZNs6XxRGFTp8LR84PuU99g68Z23C4nIQAQ=s128","externalLink":null,"openseaLink":"https://testnets.opensea.io/assets/rinkeby/0xe2e3253105ccc59121b96e3864cce1fdf86ebc36/0","traits":[],"numSales":0,"lastSale":null,"backgroundColor":null,"transferFee":null,"transferFeePaymentToken":null},
   {
     "id": 440821076,
     "imageUrl": 'https://img0.baidu.com/it/u=590006338,1231462113&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',

@@ -21,6 +21,7 @@ import { CacheKeys } from "@/constants/index";
 import { gd } from "@/pages/Asset/WalletTest/pglobal";
 import storage from '@/pages/Asset/WalletTest/pstorage';
 import { ethers } from "ethers";
+import { OpenSeaService } from "@/services/index";
 export enum CardStyle {
   LOGINOUT_STYLE = 1, //退出登录
 }
@@ -37,6 +38,7 @@ const WalletInput: FunctionComponent<PopProps> = (props) => {
   const connector = useWalletConnect(); // valid
   const [wallet, setwallet] = useState();
   const [pwd, setpwd] = useState('');
+  const [txGoOn, settxGoOn] = useState(false);
   useEffect(() => {
     get_storageInfo();
   }, [])
@@ -100,19 +102,23 @@ const WalletInput: FunctionComponent<PopProps> = (props) => {
   }
 
   const payMoney = async (toAdress: string, amount: string) => {
-    if(pwd.length==0){Alert.alert('请输入密码');return}
+    // if(pwd.length==0){Alert.alert('请输入密码');return}
 
+
+    
     const walAddr = await Storage.load(CacheKeys.OURWALLETINFO);
     const prov = gd.public_provider;
     let mod_wallet = await storage.wallet(walAddr);
     let wallet = await ethers.Wallet.fromEncryptedJson(mod_wallet.keyStore, pwd);
 
     let connect_wallet = wallet.connect(prov);
-
+    // const value= ethers.utils.formatUnits(amount)
+    const value= '0x9184e72a'
     const params = {
-      to: toAdress,
+      to: '0x381748c76f2b8871afbbe4578781cd24df34ae0d',
+      // to: toAdress,
       // value: ethers.utils.parseEther(amount),
-      value:'0x9184e72a',
+      value:value,
       // value:ethers.utils.tonu,
       gasPrice: connect_wallet.provider.getGasPrice(),
       gasLimit: 21000,
@@ -122,13 +128,48 @@ const WalletInput: FunctionComponent<PopProps> = (props) => {
     connect_wallet.sendTransaction(params).then( (tx) =>{
       console.log("tx:" + JSON.stringify(tx));
       Alert.alert(JSON.stringify(tx))
-
+      heyueExchange(walAddr)
     }).catch((error)=>{
       Alert.alert(JSON.stringify(error))
+      console.log("tx_error:" + JSON.stringify(error));
+      heyueExchange(walAddr)
     });
 
 
     console.log("connect_wallet:" + JSON.stringify(connect_wallet));
+  }
+
+  const heyueExchange=(walAddr:string)=>{
+    const params={
+      asset:{
+        // tokenId:data?.tokenId,
+        // tokenAddress:data?.tokenAddress,
+        // schemaName:data?.schemaName,
+        tokenId:'0',
+        tokenAddress:'0x381748c76f2b8871afbbe4578781cd24df34ae0d',
+        schemaName:'OpenSea Creature Sale',
+      },
+      accountAddress:walAddr,
+      // Value of the offer, in units of the payment token (or wrapped ETH if none is specified):
+      startAmount: 1.2
+    }
+    console.log("createBuyOrder---------------------params:" + JSON.stringify(params));
+    OpenSeaService.createBuyOrder({path:{},params:params}).then((res)=>{
+      Alert.alert(JSON.stringify(res))
+    }).catch((error)=>{
+      Alert.alert(JSON.stringify(error))
+    })
+  }
+  const closeInput=()=>{
+    if(txGoOn==true)return
+    cancle_press()
+  }
+  const txGo=()=>{
+    settxGoOn(true)
+    buy()
+    setTimeout(() => {
+      settxGoOn(false)
+    }, 3000);
   }
   const renderLoginOut = () => {
     return (
@@ -137,7 +178,7 @@ const WalletInput: FunctionComponent<PopProps> = (props) => {
         <View style={{ flexDirection: "row", width: '100%', alignItems: "center", justifyContent: "space-between" }}>
 
           <Text style={{ fontSize: pxToSp(32), fontWeight: "bold", marginLeft: pxToDp(10) }}>钱包密码</Text>
-          <Pressable onPress={cancle_press}>
+          <Pressable onPress={closeInput}>
 
             <Image
               style={styles.image}
@@ -150,7 +191,7 @@ const WalletInput: FunctionComponent<PopProps> = (props) => {
         <Text style={{ fontSize: pxToSp(24), color: '#3352DB', alignSelf: "flex-end", marginTop: pxToDp(12) }}>忘记密码</Text>
 
         <View style={{ justifyContent: "center", alignItems: "center", width: '100%', marginTop: pxToDp(40) }}>
-          <NtfButton loadingUse={true} text="确定" width={pxToDp(492)} heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={buy} >
+          <NtfButton loadingUse={true} text="确定" width={pxToDp(492)} heigh={pxToDp(84)} textColor='white' borderRadius={pxToDp(12)} backgroundColor='#3352DB' borderColor='#3352DB' onPress={txGo} >
             {" "}
           </NtfButton>
         </View>

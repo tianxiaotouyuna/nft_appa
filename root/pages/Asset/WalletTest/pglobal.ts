@@ -7,7 +7,6 @@ import { Alert } from "react-native";
 const provider = new ethers.providers.JsonRpcProvider("https://data-seed-prebsc-1-s1.binance.org:8545/"); //BNB
 // const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545")//local
 
-console.log("33===" + JSON.stringify(provider));
 export const gd = {
   chainName: 'BNB链',
   public_provider: provider,

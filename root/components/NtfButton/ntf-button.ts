@@ -37,7 +37,10 @@ const styles = StyleSheet.create({
         marginLeft:pxToDp(10),
         fontSize:pxToSp(28),
         color:UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE ,fontWeight:"bold"
-    }
+    },
+    spinner: {
+       marginLeft: pxToDp(10)
+     },
 })
 
 export default styles;

@@ -38,7 +38,6 @@ const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
   const [imageEnd, setimageEnd] = useState(true);
   const [imageError, setimageError] = useState(false);
   const renderHotNtf = () => {
-    console.log('================' + JSON.stringify(data))
     return (
       <View style={[{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
         {data?.map((item: any, index: number) => (
@@ -118,7 +117,6 @@ const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
   );
 
   const renderHot = () => {
-    console.log('data========' + JSON.stringify(data))
     return (
       <Ripple onPress={onTap} rippleColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}>
         <BaseCard style={[{ borderRadius: borderRadius }, { padding: 0, width: pxToDp(280) }]}>
@@ -140,7 +138,6 @@ const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
     );
   }
   const renderCollectsDouble = () => {
-    console.log('data========' + JSON.stringify(data))
     return (
       <View style={[{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
         {data?.map((item: any, index: number) => (
@@ -174,7 +171,6 @@ const BannerCard: FunctionComponent<BannerCardProps> = (props) => {
 
 
   const renderCollectsDouble_USENftStyle = () => {
-    console.log('================' + JSON.stringify(data))
     return (
       <View style={[{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }]}>
         {data?.map((item: any, index: number) => (

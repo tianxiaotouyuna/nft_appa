@@ -77,6 +77,7 @@ const Market: FunctionComponent = () => {
   return (
     /* render something */
     <View style={[styles.container, { paddingBottom: 100 + bottomPadding }]}>
+      {/* <Text style={{fontSize:40,fontWeight:'bold'}}>测试环境</Text> */}
       <GDataList
         requestMethod={MarketService.getMarketList}
         requestParams={{path:'',params:{include_orders:true}}}
