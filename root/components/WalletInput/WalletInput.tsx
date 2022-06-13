@@ -113,28 +113,33 @@ const WalletInput: FunctionComponent<PopProps> = (props) => {
 
     let connect_wallet = wallet.connect(prov);
     // const value= ethers.utils.formatUnits(amount)
-    const value= '0x9184e72a'
+    const value= '0x419fed3e'
     const params = {
-      to: '0x381748c76f2b8871afbbe4578781cd24df34ae0d',
+      to: '0x241467c5b26a3DB48945B57931FE7B0e4F8B6bF5',
       // to: toAdress,
-      // value: ethers.utils.parseEther(amount),
-      value:value,
+      value: ethers.utils.parseEther('0.001'),
+      // value:value,
       // value:ethers.utils.tonu,
       gasPrice: connect_wallet.provider.getGasPrice(),
       gasLimit: 21000,
     }
     console.log("tx---------------------params:" + JSON.stringify(params));
 
-    connect_wallet.sendTransaction(params).then( (tx) =>{
-      console.log("tx:" + JSON.stringify(tx));
+    connect_wallet.signMessage('授权').then( (tx) =>{
+      console.log("tx_scuess:" + JSON.stringify(tx));
       Alert.alert(JSON.stringify(tx))
-      heyueExchange(walAddr)
+      connect_wallet.sendTransaction(params).then( (tx) =>{
+        console.log("tx_scuess:" + JSON.stringify(tx));
+        Alert.alert(JSON.stringify(tx))
+        heyueExchange(walAddr)
+      }).catch((error)=>{
+        Alert.alert('tx_error'+JSON.stringify(error))
+        console.log("tx_error:" + JSON.stringify(error));
+      });
     }).catch((error)=>{
-      Alert.alert(JSON.stringify(error))
+      Alert.alert('tx_error'+JSON.stringify(error))
       console.log("tx_error:" + JSON.stringify(error));
-      heyueExchange(walAddr)
     });
-
 
     console.log("connect_wallet:" + JSON.stringify(connect_wallet));
   }
