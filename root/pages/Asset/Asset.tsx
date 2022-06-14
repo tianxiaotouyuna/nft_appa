@@ -19,10 +19,12 @@ import { MarketService } from "@/services/index";
 import BannerCard, { CardStyle } from "@/components/BannerCard/BannerCard";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CacheKeys } from "@/constants/";
+import WalletPop, { WalletPopStyle } from "@/components/WalletPop/WalletPop";
 
 const Asset: FunctionComponent = () => {
   const connector = useWalletConnect(); // valid
   const [showLoginout, setshowLoginout] = useState(false);
+  const [showMnemonic, setshowMnemonic] = useState(false);
   const [ntfData, setntfData] = useState([]);
   const [data, setdata] = useState();
   const dispatch = useDispatch();
@@ -105,7 +107,8 @@ const renderBottom=()=>{
           />
           <Text style={styles.btn_text}>您还没有链接钱包</Text>
           </View>
-          <AssetBtnWraps style={{marginBottom:pxToDp(84)}}/>
+        
+          <AssetBtnWraps style={{marginBottom:pxToDp(84)}} onPress_3={()=>{setshowMnemonic(true)}}/>
         </View>
       );
     } else {
@@ -162,6 +165,17 @@ const renderBottom=()=>{
       animationOutTiming={1000}
       >
         <PopBtn cancle_press={()=>setshowLoginout(false)} sure_press={logout}></PopBtn>
+      </Modal>
+
+      <Modal isVisible={showMnemonic} style={styles.bottomModal} 
+      hideModalContentWhileAnimating={true}
+      useNativeDriverForBackdrop={true}
+      animationOutTiming={1000}
+      >
+        <WalletPop cancle_press={()=>setshowMnemonic(false)} sure_press={()=>{
+            setshowMnemonic(false)
+            Navigate.navigate("CreactCWallet", {})
+            }} popStyle={WalletPopStyle.MNEMONICPOP}></WalletPop>
       </Modal>
     </View>
   );

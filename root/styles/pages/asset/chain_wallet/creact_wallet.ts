@@ -5,16 +5,27 @@ import { color } from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop:pxToDp(26),
         flex: 1,
-        backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
-        alignItems:"center",
+        paddingTop:UIELEMENTS.PADDING_TOP,
         paddingHorizontal:UIELEMENTS.PADDING_HORIZONTAL,
+        backgroundColor: UIELEMENTS.DEFAULT_BACKGROUND_COLOR,
+    },
+    modalContent: {
+      backgroundColor: 'white',
+      padding: 22,
+      height:pxToDp(400),
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 4,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    bottomModal: {
+      justifyContent: 'flex-end',
+      margin: 0,
     },
     btn_icon: {
-        marginTop:pxToDp(84),
-        width:pxToDp(300),
-        height:pxToDp(300)
+        width:pxToDp(40),
+        height:pxToDp(40)
     },
     img_active: {
         width:pxToDp(24),

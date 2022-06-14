@@ -24,6 +24,18 @@ const styles = StyleSheet.create({
         fontSize:pxToSp(24),
         color:'#383838'
     },
+    text_mnioc: {
+        fontSize:pxToSp(36),
+        color:'#333333',
+        fontWeight:"bold"
+    },
+    text_index: {
+        position:"absolute",
+        right:pxToDp(20),
+        top:pxToDp(20),
+        color:'#333333'
+
+    },
 })
 
 export default styles;

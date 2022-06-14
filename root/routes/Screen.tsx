@@ -18,6 +18,10 @@ import InsertWallet from "@/pages/Asset/WalletTest/InsertWallet";
 import TransferCoin from "@/pages/Asset/WalletTest/TransferCoin";
 import CenterWallet from "@/pages/Asset/CenterWallet/CenterWallet";
 import CollectionDetail from "@/pages/Home/CollectionDetail/CollectionDetail";
+import MnemonicPage from "@/pages/Asset/MnemonicPage/MnemonicPage";
+import CreactCWallet from "@/pages/Asset/ChainWallet/CreactCWallet/CreactCWallet";
+import MnemonicPage2 from "@/pages/Asset/MnemonicPage/MnemonicPage2";
+import MnemonicPage3 from "@/pages/Asset/MnemonicPage/MnemonicPage3";
 const ScreenStack = createStackNavigator();
 
 const Screen: FunctionComponent = () => {
@@ -37,7 +41,10 @@ const Screen: FunctionComponent = () => {
             <ScreenStack.Screen name={Route.SCREEN.TransferCoin} component={TransferCoin}/>
             <ScreenStack.Screen name={Route.SCREEN.InsertWallet} component={InsertWallet}/>
             <ScreenStack.Screen name={Route.SCREEN.CenterWallet} component={CenterWallet}/>
-            <ScreenStack.Screen name={Route.SCREEN.CollectionDetail} component={CollectionDetail}/>
+            <ScreenStack.Screen name={Route.SCREEN.MnemonicPage} component={MnemonicPage}/>
+            <ScreenStack.Screen name={Route.SCREEN.CreactCWallet} component={CreactCWallet}/>
+            <ScreenStack.Screen name={Route.SCREEN.MnemonicPage2} component={MnemonicPage2}/>
+            <ScreenStack.Screen name={Route.SCREEN.MnemonicPage3} component={MnemonicPage3}/>
             
         </ScreenStack.Navigator>
     )

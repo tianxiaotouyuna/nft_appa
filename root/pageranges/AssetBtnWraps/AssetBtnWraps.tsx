@@ -10,15 +10,17 @@ import { pxToDp } from "@/utils/system";
 import { walletActions } from "@/action/walletActions";
 import { useDispatch } from "react-redux";
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { Navigate } from "@/utils/";
+import { Navigate } from "@/utils/index";
+import { UIELEMENTS } from "@/constants/index";
 type AssetBtnWrapsProps = {
   onPress_1?: () => void;
   onPress_2?: () => void;
   onPress_3?: () => void;
+  nextPress?: () => void;
   style?: StyleProp<ViewStyle>;
 };
 const AssetBtnWraps: FunctionComponent<AssetBtnWrapsProps> = (props) => {
-  const { style } = props;
+  const { style ,onPress_3,nextPress} = props;
   const dispatch = useDispatch();
   const connector = useWalletConnect(); // valid
   const login = () => {
@@ -66,19 +68,31 @@ const AssetBtnWraps: FunctionComponent<AssetBtnWrapsProps> = (props) => {
       <NtfButton
         width={pxToDp(590)}
         heigh={pxToDp(100)}
-        onPress={()=>Navigate.navigate("CenterWallet", {})}
-        text={"创建中心钱包"}
-        imageSource={require("@/resources/add.png")}
+        // onPress={()=>Navigate.navigate("MnemonicPage", {})}
+        onPress={onPress_3}
+        text={"创建钱包"}
+        textColor={'white'}
+        backgroundColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}
         borderRadius={pxToDp(12)}
         style={{ marginTop: pxToDp(60) }}
       />
 
+<NtfButton
+        width={pxToDp(590)}
+        heigh={pxToDp(100)}
+        onPress={()=>Navigate.navigate("CenterWallet", {})}
+        text={"导入钱包"}
+        textColor={'white'}
+        backgroundColor={UIELEMENTS.DEFAULT_HEADER_COLOR_ACTIVE}
+        borderRadius={pxToDp(12)}
+        style={{ marginTop: pxToDp(60) }}
+      />
 
       <NtfButton
         width={pxToDp(590)}
         heigh={pxToDp(100)}
-        onPress={()=>Navigate.navigate("TestHome", {})}
-        text={"创建非中心钱包"}
+        onPress={()=>Navigate.navigate("CenterWallet", {})}
+        text={"创建中心钱包"}
         imageSource={require("@/resources/add.png")}
         borderRadius={pxToDp(12)}
         style={{ marginTop: pxToDp(60) }}

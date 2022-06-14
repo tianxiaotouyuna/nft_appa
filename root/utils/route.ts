@@ -20,6 +20,10 @@ export const SCREEN = {
     TransferCoin:"TransferCoin",
     CenterWallet:"CenterWallet",
     CollectionDetail:"CollectionDetail",
+    MnemonicPage:"MnemonicPage",
+    CreactCWallet:"CreactCWallet",
+    MnemonicPage2:"MnemonicPage2",
+    MnemonicPage3:"MnemonicPage3",
 }
 
 /**
@@ -46,4 +50,8 @@ export const authRoutes = [
     SCREEN.TransferCoin,
     SCREEN.CenterWallet,
     SCREEN.CollectionDetail,
+    SCREEN.MnemonicPage,
+    SCREEN.CreactCWallet,
+    SCREEN.MnemonicPage2,
+    SCREEN.MnemonicPage3,
 ]
